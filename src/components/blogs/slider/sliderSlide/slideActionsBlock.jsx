@@ -1,12 +1,29 @@
-import colors from "../../../../../constants/colors";
+import colors from "../../../../constants/colors";
 import { useState } from "preact/hooks";
-import icons from "../../../../../constants/icons";
+import icons from "../../../../constants/icons";
+import { useKeenSlider } from "keen-slider/react";
 import { Image } from "@unpic/preact";
-import UserBadge from "../../../../common/ui/userBadge";
+import "keen-slider/keen-slider.min.css";
+import UserBadge from "../../../common/ui/userBadge";
+import MutationPlugin from "../../../../utils/observerMutation";
+import ActionsBlockReaction from "./actionsBlockReaction";
 
-const SlideActionsBlock = () => {
+export default function ({ reactions }) {
 	const [isCommentsActive, setIsCommentsActive] = useState(false);
 	const [isReactionsActive, setIsReactionsActive] = useState(false);
+
+	const [reactionSliderRef] = useKeenSlider(
+		{
+			rubberband: false,
+			loop: false,
+			mode: "free",
+			slides: {
+				spacing: 10,
+				perView: "auto",
+			},
+		},
+		[MutationPlugin]
+	);
 	return (
 		<div className='w-full p-[1.125rem] pr-0 gap-4 flex'>
 			<button onClick={() => setIsReactionsActive(!isReactionsActive)} style={{ backgroundColor: isReactionsActive ? "#fff" : colors.semiTransparentBackground }} className='rounded-full duration-150 p-2'>
@@ -19,18 +36,13 @@ const SlideActionsBlock = () => {
 					<path fill-rule='evenodd' clip-rule='evenodd' d={icons["message"]} />
 				</svg>
 			</button>
-			<div className='w-full overflow-scroll flex gap-4'>
-				<button style={{ backgroundColor: colors.semiTransparentBackground }} className='rounded-full flex items-center gap-2 text-sm text-white font-medium duration-150 px-[1.15rem] p-[0.625rem]'>
-					<Image src='emojis/emoji_230xw.png' width={64} height={64} style={{ width: "1.625rem", height: "1.625rem" }} />
-					2.23K
-				</button>
-				<button style={{ backgroundColor: colors.semiTransparentBackground }} className='rounded-full flex items-center gap-2 text-sm text-white font-medium duration-150 px-[1.15rem] p-[0.625rem]'>
-					<Image src='emojis/emoji_230xw.png' width={64} height={64} style={{ width: "1.625rem", height: "1.625rem" }} />
-					2.23K
-				</button>
+			<div ref={reactionSliderRef} className='keen-slider w-full flex'>
+				{reactions?.map((reaction, index) => (
+					<div key={index} className='keen-slider__slide !min-w-fit !w-fit !max-w-fit'>
+						<ActionsBlockReaction emoji={reaction.name} count={reaction.count} />
+					</div>
+				))}
 			</div>
 		</div>
 	);
-};
-
-export default SlideActionsBlock;
+}

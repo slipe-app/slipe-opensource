@@ -1,10 +1,10 @@
 import { useLocation } from "preact-iso";
 import colors from "../../../constants/colors";
 import icons from "../../../constants/icons";
-import { useContext } from "preact/hooks";
+import StatesRender from "./states";
 import { PostsTypeContext } from "../contexts/postsTypeContext";
 
-const Header = () => {
+export default function Header() {
 	const { url } = useLocation();
 
 	return (
@@ -23,27 +23,3 @@ const Header = () => {
 		</header>
 	);
 };
-
-const StatesRender = url => {
-	const { type, setType } = useContext(PostsTypeContext);
-
-	switch (url) {
-		case "/":
-			return (
-				<div className='w-full flex font-semibold text-lg'>
-					<button onClick={() => setType("foryou")} className='w-full text-center duration-150' style={{ color: type == "foryou" ? colors.text : colors.textPrimaryTransparent }}>
-						For you
-					</button>
-					<button onClick={() => setType("followed")} className='w-full text-center duration-150' style={{ color: type == "followed" ? colors.text : colors.textPrimaryTransparent }}>
-						Followed
-					</button>
-				</div>
-			);
-		case "/search":
-			return <>2</>;
-		case "/profile":
-			return <>3</>;
-	}
-};
-
-export default Header;

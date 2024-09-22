@@ -1,19 +1,28 @@
 import { Image } from "@unpic/preact";
 import useSWR from "swr";
 import fetcher from "../utils/fetcher";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import Slider from "../components/blogs/slider/blogsSlider";
 
-const Blogs = () => {
+export default function Blogs() {
+	const { data: startData, error, isLoading } = useSWR("/post/get?after=0", fetcher);
 
-	// const startPosts = useSWR('/post/get?after=0', fetcher);
-	// const [users, setUsers] = useState(Object.keys(startPosts?.data?.success));
+	const [users, setUsers] = useState([]);
+	const [blogs, setBlogs] = useState([]);
 
-	// console.log(users)
-	
-	return (
-        <Slider/>
-	);
-};
+	useEffect(() => {
+		if (!isLoading && startData?.success) {
+			const users = Object.keys(startData.success);
+			setUsers(users);
 
-export default Blogs;
+			const allBlogs = users.flatMap(username => {
+				const user = startData.success[username];
+				return user?.posts?.map(post => ({ ...post, author: user.author })) || [];
+			});
+
+			setBlogs(allBlogs);
+		}
+	}, [startData, isLoading, error]);
+
+	return <Slider users={users} blogs={blogs} />;
+}

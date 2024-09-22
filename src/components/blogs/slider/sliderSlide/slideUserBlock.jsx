@@ -1,21 +1,21 @@
 import { Image } from "@unpic/preact";
-import colors from "../../../../../constants/colors";
+import colors from "../../../../constants/colors";
 import { useState } from "preact/hooks";
-import icons from "../../../../../constants/icons";
-import UserBadge from "../../../../common/ui/userBadge";
+import icons from "../../../../constants/icons";
+import UserBadge from "../../../common/ui/userBadge";
 
-const SlideUserBlock = () => {
+export default function SlideUserBlock({name, avatar, badge, date}) {
 	const [isDropdownActive, setIsDropdownActive] = useState(false);
 	return (
 		<div className='w-full p-[1.125rem] gap-4 flex bg-gradient-to-b from-black/25 to-transparent'>
 			<div className='w-full flex gap-[0.625rem] items-center overflow-hidden'>
-				<Image width={46} height={46} className='rounded-full' src='./postsExamples/france.jpg' />
+				<Image width={46} height={46} className='rounded-full' src={avatar} />
 				<div className='flex flex-col w-full overflow-hidden'>
 					<div className='w-full flex gap-1'>
-						<div className='grow whitespace-nowrap overflow-hidden text-ellipsis font-medium text-white'>Pavel Durov arrested nigga</div>
+						<div className='grow whitespace-nowrap overflow-hidden max-w-fit text-ellipsis font-medium text-white'>{name}</div>
 						<UserBadge badgeSize='1.5rem' />
 					</div>
-					<span className='text-sm text-white/75'>2 days ago</span>
+					<span className='text-sm text-white/75'>{date} {badge}</span>
 				</div>
 			</div>
 			<div className='relative'>
@@ -28,5 +28,3 @@ const SlideUserBlock = () => {
 		</div>
 	);
 };
-
-export default SlideUserBlock;

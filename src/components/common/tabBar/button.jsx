@@ -1,6 +1,7 @@
 import { Image } from "@unpic/preact";
+import colors from "../../../constants/colors";
 
-const TabBarButton = ({ url, avatar, icon, currentUrl, color, label }) => {
+export default function TabBarButton({ url, avatar, icon, currentUrl, color, label }) {
 	return (
 		<a href={url} style={{ opacity: currentUrl === url ? 1 : 0.25 }} className='w-full flex items-center duration-150 flex-col pb-4 pt-2'>
 			{avatar ? (
@@ -25,5 +26,3 @@ const TabBarButton = ({ url, avatar, icon, currentUrl, color, label }) => {
 		</a>
 	);
 };
-
-export default TabBarButton;

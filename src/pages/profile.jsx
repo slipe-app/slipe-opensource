@@ -1,7 +1,5 @@
-const Profile = () =>{
+export default function Profile() {
     return(
         <></>
     )
 }
-
-export default Profile

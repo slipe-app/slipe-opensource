@@ -3,7 +3,7 @@ import colors from "../../../constants/colors";
 import { useLocation } from "preact-iso";
 import TabBarButton from "./button";
 
-const TabBar = () => {
+export default function TabBar() {
 	const { url } = useLocation();
 	return (
 		<div style={{ backgroundColor: colors.navigationBackground }} className='w-screen fixed flex bottom-0 backdrop-blur-3xl z-10'>
@@ -13,5 +13,3 @@ const TabBar = () => {
 		</div>
 	);
 };
-
-export default TabBar
