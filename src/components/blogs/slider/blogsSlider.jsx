@@ -16,7 +16,7 @@ export default function SliderWrapper({ users, blogs }) {
 	return (
 		<div ref={slider3Ref} className='keen-slider first !w-full !flex-nowrap !flex-col !h-full'>
 			{users?.map((user, index) => (
-				<div key={index} className='keen-slider__slide user__slides py-28'>
+				<div key={index} className='keen-slider__slide user__slides py-32'>
 					<UsersBlogsSlider user={user} blogs={blogs} />
 				</div>
 			))}

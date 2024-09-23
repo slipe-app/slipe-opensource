@@ -9,11 +9,13 @@ import fetcher from "../../../utils/fetcher";
 const images = ["/postsExamples/banana.jpg", "/postsExamples/popKybi.jpeg", "/postsExamples/s&m.png", "/postsExamples/skibidi.jpg"];
 
 export default function UsersBlogsSlider({ user, blogs }) {
+	const postCounts = Number(blogs[0]?.author?.postsCount);
+	const slidesPerView = postCounts >= 5 ? 5 : postCounts;
 	const [userBlogs, setUserBlogs] = useState(blogs.filter(blog => blog?.author?.username === user));
 	const [details, setDetails] = useState(null);
 	const [loadMoreTrigger, setLoadMoreTrigger] = useState(null);
 	const userBlogsRef = useRef(userBlogs);
-	
+
 	const { data: moreUserBlogs, error, isLoading } = useSWR(loadMoreTrigger ? `/post/get?after=${loadMoreTrigger.id}&user=${loadMoreTrigger.author.id}` : null, fetcher);
 
 	useEffect(() => {
@@ -29,24 +31,33 @@ export default function UsersBlogsSlider({ user, blogs }) {
 	const [sliderRef] = useKeenSlider(
 		{
 			detailsChanged(s) {
-				setDetails(s.track.details);
+				setDetails(s.track.details.slides);
 			},
 			slideChanged(slide) {
 				const currentSlideIndex = slide.track.details.abs;
 				const greatestBlogsIndex = userBlogsRef.current.length - 1;
 				const lastBlog = userBlogsRef.current[greatestBlogsIndex];
 				const author = lastBlog?.author;
+				console.log("sex", currentSlideIndex, greatestBlogsIndex);
 
-				if (currentSlideIndex === greatestBlogsIndex) {
+				if (currentSlideIndex === greatestBlogsIndex - 1) {
 					setLoadMoreTrigger(lastBlog);
 				}
 			},
-
+			loop: {
+				min: 0,
+				max: userBlogs.length - 1,
+			},
+			range: {
+				min: 0,
+				max: userBlogs.length - 1,
+			},
 			selector: ".users__slider > .user__slide",
 			slides: {
 				perView: 1.125,
 				origin: "center",
 				spacing: -10,
+				number: slidesPerView,
 			},
 		},
 		[MutationPlugin]
@@ -54,7 +65,7 @@ export default function UsersBlogsSlider({ user, blogs }) {
 
 	const scaleStyle = idx => {
 		if (!details) return {};
-		const progress = details.slides[idx];
+		const progress = details[idx];
 		const scale_size = 0.14;
 		const opacity_size = 0.6;
 		const scale = 1 - (scale_size - scale_size * progress?.portion);
@@ -67,12 +78,18 @@ export default function UsersBlogsSlider({ user, blogs }) {
 	};
 
 	return (
-		<div ref={sliderRef} className='keen-slider users__slider perspective-[1000px] h-full'>
-			{userBlogs?.map((blog, index) => (
-				<div key={index} className='keen-slider__slide user__slide'>
-					<SliderSlide style={scaleStyle(index)} blog={blog} key={index} author={blog.author} />
+		<>
+			{userBlogs ? (
+				<div ref={sliderRef} className='keen-slider users__slider perspective-[1000px] h-full'>
+					{[...Array(slidesPerView).keys()].map(idx => (
+						<>
+							<div key={idx} id={idx} className='keen-slider__slide user__slide'>
+								{details ? <SliderSlide style={scaleStyle(idx)} blog={userBlogs[details[idx]?.abs]} key={idx} author={userBlogs[details[idx]?.abs]?.author} /> : null}
+							</div>
+						</>
+					))}
 				</div>
-			))}
-		</div>
+			) : null}
+		</>
 	);
 }
