@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@unpic/preact": "^0.0.44",
 		"keen-slider": "^6.8.6",
+		"motion": "^10.18.0",
 		"preact": "^10.22.1",
 		"preact-iso": "^2.6.3",
 		"react-virtual": "^2.10.4",

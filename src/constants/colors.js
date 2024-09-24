@@ -25,4 +25,4 @@ const colors = {
     }
 }
 
-export default colors['light']
+export default colors['dark']

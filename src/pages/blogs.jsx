@@ -3,6 +3,7 @@ import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 import { useState, useEffect } from "preact/hooks";
 import Slider from "../components/blogs/slider/blogsSlider";
+import readLocaleFile from "../utils/locales/read";
 
 export default function Blogs() {
 	const { data: startData, error, isLoading } = useSWR("/post/get?after=0", fetcher);

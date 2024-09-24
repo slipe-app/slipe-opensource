@@ -3,6 +3,7 @@ import "keen-slider/keen-slider.min.css";
 import SlideUserBlock from "./slideUserBlock";
 import SlideActionsBlock from "./slideActionsBlock";
 import cdn_url from "../../../../constants/cdn_url";
+import { useEffect } from "preact/hooks";
 
 export default function SliderSlide({ style, key, author, blog }) {
 	return (

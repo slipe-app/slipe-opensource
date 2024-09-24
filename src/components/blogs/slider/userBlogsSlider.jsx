@@ -38,7 +38,6 @@ export default function UsersBlogsSlider({ user, blogs }) {
 				const greatestBlogsIndex = userBlogsRef.current.length - 1;
 				const lastBlog = userBlogsRef.current[greatestBlogsIndex];
 				const author = lastBlog?.author;
-				console.log("sex", currentSlideIndex, greatestBlogsIndex);
 
 				if (currentSlideIndex === greatestBlogsIndex - 1) {
 					setLoadMoreTrigger(lastBlog);

@@ -9,6 +9,7 @@
 
 		/* Preact Config */
 		"jsx": "react-jsx",
+		"strict": true,
 		"jsxImportSource": "preact",
 		"skipLibCheck": true,
 		"paths": {
