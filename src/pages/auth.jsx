@@ -20,7 +20,7 @@ export default function Auth(){
     return(
         <>
         <AuthBackgroundCounter currentStage={currentStage} stagesArray={[1, 2, 3, 4, 5, 6]}/>
-        <AuthMainScreenWrapper currentStage={}/>
+        <AuthMainScreenWrapper currentStage={currentStage}/>
         </>
     )
 }
