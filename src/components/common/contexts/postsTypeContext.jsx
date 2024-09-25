@@ -4,10 +4,10 @@ import { createContext } from "preact";
 export const PostsTypeContext = createContext(null);
 
 const PostsTypeContextProvider = ({ children }) => {
-	const [type, setType] = useState("foryou");
+	const [activeTab, setActiveTab] = useState("forYou");
 
 	return (
-		<PostsTypeContext.Provider value={{ type, setType }}>
+		<PostsTypeContext.Provider value={{ activeTab, setActiveTab }}>
 			{children}
 		</PostsTypeContext.Provider>
 	);
