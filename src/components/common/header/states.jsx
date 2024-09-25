@@ -9,11 +9,11 @@ export default function StatesRender(url) {
 	const locales = readLocaleFile("en");
 
 	useEffect(() => {
-		console.log(1)
+		console.log(1);
 		if (url == "/") {
 			animate(".active-bg", { left: activeTab === "forYou" ? "0.25rem" : "50%" }, { easing: "ease", duration: 0.2 });
 		} else {
-			setActiveTab("forYou")
+			setActiveTab("forYou");
 		}
 	});
 	switch (url) {
