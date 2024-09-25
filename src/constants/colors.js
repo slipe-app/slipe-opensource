@@ -6,10 +6,13 @@ const colors = {
         textPrimaryTransparent: "#ffffff40",
         modalsBackground: "#161616",
         modalsBackdrop: "#0000001a",
-        audioCallPopupBackground: "#17171740",
-        buttonInactiveBackground: '#ffffff14',
-        semiTransparentBackground: "#00000052",
+        buttonInactiveBg: '#ffffff14',
+        semiTransparentBg: "#00000052",
         navigationBackground: "#000000cc",
+        nonTransparentButtonBg: "#141414",
+        green: "#22C55E",
+        red: "#FF4B41",
+        blue: "#0070F3",
     },
     light: {
         background: "#fff",
@@ -19,9 +22,13 @@ const colors = {
         modalsBackground: "#fff",
         modalsBackdrop: "#0000001a",
         audioCallPopupBackground: "#ffffff40",
-        buttonInactiveBackground: '#00000014',
-        semiTransparentBackground: "#00000052",
+        buttonInactiveBg: '#00000014',
+        semiTransparentBg: "#00000052",
         navigationBackground: "#ffffffcc",
+        nonTransparentButtonBg: "#D8D8D8",
+        green: "#22C55E",
+        red: "#FF4B41",
+        blue: "#0070F3"
     }
 }
 

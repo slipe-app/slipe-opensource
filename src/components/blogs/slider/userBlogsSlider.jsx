@@ -82,7 +82,7 @@ export default function UsersBlogsSlider({ user, blogs }) {
 				<div ref={sliderRef} className='keen-slider users__slider perspective-[1000px] h-full'>
 					{[...Array(slidesPerView).keys()].map(idx => (
 						<>
-							<div key={idx} id={idx} className='keen-slider__slide user__slide'>
+							<div key={idx} id={idx} className='keen-slider__slide animate-[fadeIn_0.2s_ease] user__slide'>
 								{details ? <SliderSlide style={scaleStyle(idx)} blog={userBlogs[details[idx]?.abs]} key={idx} author={userBlogs[details[idx]?.abs]?.author} /> : null}
 							</div>
 						</>

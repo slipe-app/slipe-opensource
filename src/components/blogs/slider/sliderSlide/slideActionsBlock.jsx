@@ -8,7 +8,7 @@ import UserBadge from "../../../common/ui/userBadge";
 import MutationPlugin from "../../../../utils/observerMutation";
 import ActionsBlockReaction from "./actionsBlockReaction";
 
-export default function ({ reactions }) {
+export default function ReactionsBlock({ reactions }) {
 	const [isCommentsActive, setIsCommentsActive] = useState(false);
 	const [isReactionsActive, setIsReactionsActive] = useState(false);
 
@@ -26,13 +26,13 @@ export default function ({ reactions }) {
 	);
 	return (
 		<div className='w-full p-[1.125rem] pr-0 gap-4 flex'>
-			<button onClick={() => setIsReactionsActive(!isReactionsActive)} style={{ backgroundColor: isReactionsActive ? "#fff" : colors.semiTransparentBackground }} className='rounded-full duration-150 p-2'>
-				<svg width='30' height='30' style={{ color: isReactionsActive ? "#000" : "#fff" }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+			<button onClick={() => setIsReactionsActive(!isReactionsActive)} style={{ backgroundColor: isReactionsActive ? "#fff" : colors.semiTransparentBg }} className='rounded-full duration-150 p-[0.625rem]'>
+				<svg width='28' height='28' style={{ color: isReactionsActive ? "#000" : "#fff" }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 					<path fill-rule='evenodd' clip-rule='evenodd' d={icons["smile"]} />
 				</svg>
 			</button>
-			<button onClick={() => setIsCommentsActive(!isCommentsActive)} style={{ backgroundColor: isCommentsActive ? "#fff" : colors.semiTransparentBackground }} className='rounded-full duration-150 p-2'>
-				<svg width='30' height='30' style={{ color: isCommentsActive ? "#000" : "#fff" }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+			<button onClick={() => setIsCommentsActive(!isCommentsActive)} style={{ backgroundColor: isCommentsActive ? "#fff" : colors.semiTransparentBg }} className='rounded-full duration-150 p-[0.625rem]'>
+				<svg width='28' height='28' style={{ color: isCommentsActive ? "#000" : "#fff" }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 					<path fill-rule='evenodd' clip-rule='evenodd' d={icons["message"]} />
 				</svg>
 			</button>

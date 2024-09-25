@@ -9,17 +9,19 @@ import Header from "./components/common/header/header.jsx";
 import PostsTypeContextProvider from "./components/common/contexts/postsTypeContext.jsx";
 import TabBar from "./components/common/tabBar/tabBar.jsx";
 import colors from "./constants/colors.js";
+import Auth from "./pages/auth.jsx";
 
 export function App() {
 	return (
 		<PostsTypeContextProvider>
 			<LocationProvider>
 				<Header />
-				<main style={{ background: colors.background}} className='w-screen h-screen absolute top-0'>
+				<main style={{ background: colors.background}} className='w-screen fixed h-screen top-0'>
 					<Router>
 						<Route path='/' component={Blogs} />
 						<Route path='/profile' component={Profile} />
 						<Route path='/search' component={Search} />
+						<Route path='/auth' component={Auth} />
 					</Router>
 				</main>
 				<TabBar />

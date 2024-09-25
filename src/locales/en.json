@@ -1,1 +1,13 @@
-{}
+{
+    "header": {
+        "switcher": {
+            "for_you": "For You",
+            "follows": "Follows"
+        }
+    },
+    "navigation": {
+        "blogs": "Blogs",
+        "create": "Create blog",
+        "profile": "My profile"
+    }
+}

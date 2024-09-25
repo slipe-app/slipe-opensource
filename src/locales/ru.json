@@ -1,1 +1,13 @@
-{}
+{
+    "header": {
+        "switcher": {
+            "for_you": "Для вас",
+            "follows": "Подписки"
+        }
+    },
+    "navigation": {
+        "blogs": "Блоги",
+        "create": "Создать блог",
+        "profile": "Мой профиль"
+    }
+}
