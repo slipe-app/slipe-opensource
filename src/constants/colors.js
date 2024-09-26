@@ -25,11 +25,11 @@ const colors = {
 		buttonInactiveBg: "#00000014",
 		semiTransparentBg: "#00000052",
 		navigationBackground: "#ffffffcc",
-		nonTransparentButtonBg: "#D8D8D8",
+		nonTransparentButtonBg: "#EBEBEB",
 		green: "#22C55E",
 		red: "#FF4B41",
 		blue: "#0070F3",
 	},
 };
 
-export default colors["dark"];
+export default colors["light"];
