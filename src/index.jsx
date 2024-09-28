@@ -10,23 +10,26 @@ import PostsTypeContextProvider from "./components/common/contexts/postsTypeCont
 import TabBar from "./components/common/tabBar/tabBar.jsx";
 import colors from "./constants/colors.js";
 import Auth from "./pages/auth.jsx";
+import LanguageContextProvider from "./components/common/contexts/languageContext.jsx";
 
 export function App() {
 	return (
-		<PostsTypeContextProvider>
-			<LocationProvider>
-				<Header />
-				<main style={{ background: colors.background}} className='w-screen fixed h-screen top-0'>
-					<Router>
-						<Route path='/' component={Blogs} />
-						<Route path='/profile' component={Profile} />
-						<Route path='/search' component={Search} />
-						<Route path='/auth' component={Auth} />
-					</Router>
-				</main>
-				<TabBar />
-			</LocationProvider>
-		</PostsTypeContextProvider>
+		<LanguageContextProvider>
+			<PostsTypeContextProvider>
+				<LocationProvider>
+					<Header />
+					<main style={{ background: colors.background }} className='w-screen fixed h-screen top-0'>
+						<Router>
+							<Route path='/' component={Blogs} />
+							<Route path='/profile' component={Profile} />
+							<Route path='/search' component={Search} />
+							<Route path='/auth' component={Auth} />
+						</Router>
+					</main>
+					<TabBar />
+				</LocationProvider>
+			</PostsTypeContextProvider>
+		</LanguageContextProvider>
 	);
 }
 

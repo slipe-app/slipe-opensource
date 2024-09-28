@@ -38,7 +38,7 @@ export default function AuthBackgroundCounter({ stagesArray = [0], selectedColor
 	};
 
 	return (
-		<div ref={sliderRef} className='keen-slider first opacity-60 !w-full !flex-nowrap !flex-col !h-full'>
+		<div ref={sliderRef} className='keen-slider first opacity-50 !w-full !flex-nowrap !flex-col !h-full'>
 			{stagesArray?.map((stage, idx) => (
 				<div style={opacityStyle(idx)} id={idx} key={idx} className='keen-slider__slide user__slides items-center flex justify-center'>
 					<svg width='200' height='200' style={{ color: colors.text }} className='animate-[fadeIn_0.2s_ease]' viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>

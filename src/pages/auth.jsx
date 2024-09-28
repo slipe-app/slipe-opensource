@@ -8,18 +8,18 @@ export default function Auth() {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setCurrentStage(prevStage => {
-				if (prevStage === 5) {
+				if (prevStage === 4) {
 					return 0;
 				} else {
 					return prevStage + 1;
 				}
 			});
-		}, 5000);
+		}, 6000);
 		return () => clearInterval(interval);
 	}, []);
 	return (
 		<>
-			<AuthBackgroundCounter currentStage={currentStage} stagesArray={[1, 2, 3, 4, 5, 6]} />
+			<AuthBackgroundCounter currentStage={currentStage} stagesArray={[1, 2, 3, 4, 5]} />
 			<AuthMainScreenWrapper currentStage={currentStage} />
 		</>
 	);

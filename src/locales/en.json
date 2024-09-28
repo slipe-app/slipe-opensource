@@ -9,5 +9,14 @@
         "blogs": "Blogs",
         "create": "Create blog",
         "profile": "My profile"
+    },
+    "auth": {
+        "main_screen": {
+            "log_in": "Log in to account",
+            "sign_up": "Sign up for free"
+        },
+        "sign_up": {
+            "next_action_password": "Next > Create password"
+        }
     }
 }

@@ -3,15 +3,18 @@ import colors from "../../../constants/colors";
 import { animate, spring } from "motion";
 import { PostsTypeContext } from "../contexts/postsTypeContext";
 import readLocaleFile from "../../../utils/locales/read";
+import { LanguageContext } from "../contexts/languageContext";
 
 export default function StatesRender(url) {
+	const { language, setLanguage } = useContext(LanguageContext);
 	const { activeTab, setActiveTab } = useContext(PostsTypeContext);
-	const locales = readLocaleFile("en");
+
+	const locales = readLocaleFile(language);
 
 	useEffect(() => {
 		console.log(1);
 		if (url == "/") {
-			animate(".active-bg", { left: activeTab === "forYou" ? "0.25rem" : "50%" }, { easing: "ease", duration: 0.2 });
+			animate(".active-bg", { left: activeTab === "forYou" ? "0.25rem" : "50%" }, { easing: "ease", duration: 0.15 });
 		} else {
 			setActiveTab("forYou");
 		}

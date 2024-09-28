@@ -9,5 +9,14 @@
         "blogs": "Блоги",
         "create": "Создать блог",
         "profile": "Мой профиль"
+    },
+    "auth": {
+        "main_screen": {
+            "log_in": "Войти в аккаунт",
+            "sign_up": "Создать аккаунт"
+        },
+        "sign_up": {
+            "next_action_password": "Далее > Указать пароль"
+        }
     }
 }

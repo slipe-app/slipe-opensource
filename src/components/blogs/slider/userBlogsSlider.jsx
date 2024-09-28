@@ -10,7 +10,7 @@ const images = ["/postsExamples/banana.jpg", "/postsExamples/popKybi.jpeg", "/po
 
 export default function UsersBlogsSlider({ user, blogs }) {
 	const postCounts = Number(blogs[0]?.author?.postsCount);
-	const slidesPerView = postCounts >= 5 ? 5 : postCounts;
+	const slidesPerView = postCounts >= 3 ? 3 : postCounts;
 	const [userBlogs, setUserBlogs] = useState(blogs.filter(blog => blog?.author?.username === user));
 	const [details, setDetails] = useState(null);
 	const [loadMoreTrigger, setLoadMoreTrigger] = useState(null);
@@ -39,7 +39,7 @@ export default function UsersBlogsSlider({ user, blogs }) {
 				const lastBlog = userBlogsRef.current[greatestBlogsIndex];
 				const author = lastBlog?.author;
 
-				if (currentSlideIndex === greatestBlogsIndex - 2) {
+				if (currentSlideIndex === greatestBlogsIndex) {
 					setLoadMoreTrigger(lastBlog);
 				}
 			},
