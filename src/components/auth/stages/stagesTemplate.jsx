@@ -27,7 +27,7 @@ export default function AuthStageTemplate({ icon, text, primaryText }) {
 				<span id='text' style={{ color: colors.text }} className='font-semibold text-[2.15rem] text-center'>
 					{text}
 				</span>
-				<p style={{ color: colors.textPrimaryTransparent }} className='font-medium text-[1.15rem] text-center'>
+				<p style={{ color: colors.textPrimaryTransparent }} className='text-[1.15rem] text-center'>
 					{primaryText}
 				</p>
 			</div>

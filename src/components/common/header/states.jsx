@@ -12,7 +12,6 @@ export default function StatesRender(url) {
 	const locales = readLocaleFile(language);
 
 	useEffect(() => {
-		console.log(1);
 		if (url == "/") {
 			animate(".active-bg", { left: activeTab === "forYou" ? "0.25rem" : "50%" }, { easing: "ease", duration: 0.15 });
 		} else {

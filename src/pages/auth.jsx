@@ -4,9 +4,11 @@ import AuthMainScreenWrapper from "../components/auth/common/mainScreenWrapper";
 
 export default function Auth() {
 	const [currentStage, setCurrentStage] = useState(0);
+	const [screenType, setScreenType] = useState("main");
+	let interval;
 
 	useEffect(() => {
-		const interval = setInterval(() => {
+		interval = setInterval(() => {
 			setCurrentStage(prevStage => {
 				if (prevStage === 4) {
 					return 0;
@@ -15,12 +17,19 @@ export default function Auth() {
 				}
 			});
 		}, 6000);
-		return () => clearInterval(interval);
 	}, []);
+
+	useEffect(() => {
+		if (screenType !== "main") {
+			setCurrentStage(0);
+			clearInterval(interval);
+		}
+		return () => clearInterval(interval);
+	}, [screenType]);
 	return (
 		<>
-			<AuthBackgroundCounter currentStage={currentStage} stagesArray={[1, 2, 3, 4, 5]} />
-			<AuthMainScreenWrapper currentStage={currentStage} />
+			<AuthBackgroundCounter screenType={screenType} currentStage={currentStage} stagesArray={screenType === "main" ? [1, 2, 3, 4, 5] : screenType === "signUp" ? [1, 2, 3, 4, 5, 6] : [1]} />
+			<AuthMainScreenWrapper setCurrentStage={setCurrentStage} screenType={screenType} setScreenType={setScreenType} currentStage={currentStage} />
 		</>
 	);
 }

@@ -11,12 +11,56 @@
         "profile": "My profile"
     },
     "auth": {
+        "already_have_account": "Already have account?",
+        "log_in": "Log in",
         "main_screen": {
             "log_in": "Log in to account",
-            "sign_up": "Sign up for free"
+            "sign_up": "Sign up for free",
+            "stages": {
+                "slipe": {
+                    "main": "Slipe blogging app",
+                    "primary": "Start blogging, or follow other people's blogs, because it can be done here"
+                },
+                "blogs": {
+                    "main": "Handy post swiping",
+                    "primary": "Enjoy browsing through the posts thanks to our post review system"
+                },
+                "smile": {
+                    "main": "Reactions, not likes",
+                    "primary": "Now instead of likes, you can better express your feelings about the blog"
+                },
+                "paint": {
+                    "main": "The Dream Editor",
+                    "primary": "Create truly breathtaking posts with our intuitively simple editor"
+                },
+                "terminal": {
+                    "main": "Code transparency",
+                    "primary": "All the client code is on an open and you can create your own client!"
+                }
+            }
         },
         "sign_up": {
-            "next_action_password": "Next > Create password"
+            "next_action_password": "Next > Password",
+            "next_action_username": "Next > Username",
+            "next_action_confirm": "Next > Email confirm",
+            "next_action_avatar": "Next > Avatar",
+            "next_action_categories": "Next > Recommendations",
+            "next_action_blogging": "Next > Start blogging",
+            "stages": {
+                "email_stage": {
+                    "text": "Enter your email",
+                    "primaryText": "We need your e-mail to contact you and send a confirmation letter",
+                    "placeholder": "Your email here"
+                },
+                "password_stage": {
+                    "text": "Create a password",
+                    "primaryText": "Come up with a strong and memorable password for your account"
+                },
+                "username_stage": {
+                    "text": "Your username is",
+                    "primaryText": "Write a unique and beautiful username, you can change it at any time"
+                }
+            }
         }
     }
 }

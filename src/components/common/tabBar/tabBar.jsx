@@ -6,7 +6,7 @@ import readLocaleFile from "../../../utils/locales/read";
 
 export default function TabBar() {
 	const { url } = useLocation();
-	const locales = readLocaleFile("ru");
+	const locales = readLocaleFile("en");
 
 	return (
 		<>

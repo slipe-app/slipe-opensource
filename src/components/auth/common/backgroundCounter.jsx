@@ -5,7 +5,7 @@ import MutationPlugin from "../../../utils/observerMutation";
 import { useEffect, useState } from "preact/hooks";
 import icons from "../../../constants/icons";
 
-export default function AuthBackgroundCounter({ stagesArray = [0], selectedColor = colors.text, currentStage = 0 }) {
+export default function AuthBackgroundCounter({ stagesArray = [0], selectedColor = colors.text, currentStage = 0, screenType = "main" }) {
 	const [details, setDetails] = useState(null);
 
 	const [sliderRef, slider] = useKeenSlider(

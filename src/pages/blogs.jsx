@@ -6,7 +6,7 @@ import Slider from "../components/blogs/slider/blogsSlider";
 import readLocaleFile from "../utils/locales/read";
 
 export default function Blogs() {
-	const { data: startData, error, isLoading } = useSWR("/post/get?after=0", fetcher);
+	const { data: startData, error, isLoading } = useSWR("/post/get?after=0&region=english", fetcher);
 
 	const [users, setUsers] = useState([]);
 	const [blogs, setBlogs] = useState([]);
