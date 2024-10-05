@@ -51,7 +51,7 @@ export default function AuthMainScreenWrapper({ currentStage = 0, setScreenType,
 	return (
 		<section className='w-screen animate-[fadeIn_0.15s_ease] absolute none top-0 h-screen flex flex-col gap-5 py-5 px-4'>
 			<AuthStageProgress stages={[1, 2, 3, 4, 5]} currentStage={timedCurrentStage} />
-			<div id='stages' className='h-full flex flex-col gap-4 items-center justify-center'>
+			<div id='stages' className='h-full flex flex-col items-center justify-center'>
 				{screenType === "main" ? (
 					<AuthStageTemplate text={stagesTexts[`${timedCurrentStage}`].main} primaryText={stagesTexts[`${timedCurrentStage}`].primary} icon={stagesTexts[`${timedCurrentStage}`].icon} />
 				) : (

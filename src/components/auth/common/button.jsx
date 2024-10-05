@@ -9,7 +9,7 @@ export default function AuthButton({ text, type, callBack, id }) {
 		setTimeout(() => {
 			setCurrentText(text);
 			animate(`#text-${id}`, { opacity: 1 }, { duration: 0.15, easing: "ease-out" });
-		}, 200);
+		}, 150);
 	}, [text]);
 	return (
 		<button

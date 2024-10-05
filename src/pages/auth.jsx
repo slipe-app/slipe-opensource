@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import AuthBackgroundCounter from "../components/auth/common/backgroundCounter";
 import AuthMainScreenWrapper from "../components/auth/common/mainScreenWrapper";
+import GameOfLife from "../components/auth/common/gameOfLife";
 
 export default function Auth() {
 	const [currentStage, setCurrentStage] = useState(0);
@@ -28,7 +28,7 @@ export default function Auth() {
 	}, [screenType]);
 	return (
 		<>
-			<AuthBackgroundCounter screenType={screenType} currentStage={currentStage} stagesArray={screenType === "main" ? [1, 2, 3, 4, 5] : screenType === "signUp" ? [1, 2, 3, 4, 5, 6] : [1]} />
+			<GameOfLife/>
 			<AuthMainScreenWrapper setCurrentStage={setCurrentStage} screenType={screenType} setScreenType={setScreenType} currentStage={currentStage} />
 		</>
 	);

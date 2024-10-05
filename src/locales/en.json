@@ -54,11 +54,21 @@
                 },
                 "password_stage": {
                     "text": "Create a password",
-                    "primaryText": "Come up with a strong and memorable password for your account"
+                    "primaryText": "Come up with a strong and memorable password for your account",
+                    "placeholder": "Your password here",
+                    "conditions": {
+                        "lengthValid": "Length from 8 to 32 characters",
+                        "hasLetters": "Must contain a-Z letters",
+                        "hasSpecialChar": "Must contain characters _ - @"
+                    }
                 },
                 "username_stage": {
                     "text": "Your username is",
-                    "primaryText": "Write a unique and beautiful username, you can change it at any time"
+                    "primaryText": "Write a unique and beautiful username, you can change it at any time",
+                    "placeholder": "username",
+                    "conditions": {
+                        "unique": "Username must be unique"
+                    }
                 }
             }
         }
