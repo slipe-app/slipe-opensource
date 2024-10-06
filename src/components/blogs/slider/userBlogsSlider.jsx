@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "preact/hooks";
 import { useKeenSlider } from "keen-slider/react";
 import SliderSlide from "./sliderSlide/sliderSlide";
+import "keen-slider/keen-slider.min.css";
 import cdn_url from "../../../constants/cdn_url";
 import MutationPlugin from "../../../utils/observerMutation";
 import useSWR from "swr";
 import fetcher from "../../../utils/fetcher";
 
-const images = ["/postsExamples/banana.jpg", "/postsExamples/popKybi.jpeg", "/postsExamples/s&m.png", "/postsExamples/skibidi.jpg"];
 
 export default function UsersBlogsSlider({ user, blogs }) {
 	const postCounts = Number(blogs[0]?.author?.postsCount);
