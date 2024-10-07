@@ -1,6 +1,6 @@
 import { useState, useEffect } from "preact/hooks";
 import AuthButton from "./button";
-import AuthStagesSlider from "../stages/stagesSlider"; 
+import AuthStagesSlider from "../stages/stagesSlider";
 import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
 
@@ -16,7 +16,7 @@ export default function AuthMainScreenWrapper() {
 	const [stagesType, setStagesType] = useState("main");
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [userData, setUserData] = useState({ username: "", avatar: "", displayname: "", password: "" });
-	const [isContinue, setIsContinue] = useState(false);
+	const [isContinue, setIsContinue] = useState(true);
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
 
@@ -29,23 +29,47 @@ export default function AuthMainScreenWrapper() {
 		if (stagesType === "main") {
 			setStagesType("signUp");
 		} else if (stagesType === "signUp") {
-			console.log(hasStringByPass(userData.password), userData.password)
-			// if ()
-			if (hasStringByPass(userData.password)) {
-				const result = await fetcher(`/auth/register/v2`, "post", {});
+			if (currentSlide === 1 && userData.password) {
+				setIsContinue(false);
 
-				console.log(result);
+				const result = await fetcher(`/auth/register/v2`, "post", JSON.stringify({
+					username: userData?.username,
+					password: userData?.password
+				}), { 'Content-Type': 'application/json' });
+				console.log(result)
+
+				if (result?.token) {
+					console.log(result.token) // дикуля бери
+
+					setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"))
+				} else {
+					console.log(result?.code); // это код самой ошибки для проверки к какому инпуту относится ошибка дикуля
+					console.log(result?.description_code); // это код локализации ошибки дикуля
+					setIsContinue(true);
+				}
+			} else {
+				currentSlide === 0 ? accountChecking() : setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"));
 			}
-
-			currentSlide === 0 ? accountChecking() : setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"));
 		} else {
 			console.log("you logged in to gucci fish");
 		}
 	};
 
 	useEffect(() => {
-		if (username.length )
-	}, [username, password])
+		if (stagesType === "signUp") {
+			setIsContinue(false);
+
+			const isUsernameCorrect = userData?.username?.length >= 2;
+			const isPasswordCorrect = !hasStringByPass(userData?.password);
+
+			if (isUsernameCorrect && currentSlide === 0) setIsContinue(true);
+			else if (isPasswordCorrect && currentSlide === 1) setIsContinue(true);
+		}
+	}, [userData, currentSlide, stagesType]);
+
+	useEffect(() => {
+		console.log(isContinue)
+	}, [isContinue]);
 
 	return (
 		<section className='w-screen animate-[fadeIn_0.15s_ease] absolute top-0 h-screen flex flex-col'>
@@ -73,7 +97,7 @@ export default function AuthMainScreenWrapper() {
 				/>
 				<AuthButton
 					id='mainButton'
-					isActive={stagesType === "signUp" ? (currentSlide === 0 ? userData.username.length >= 2 : userData.password.length >= 8) : true}
+					isActive={isContinue}
 					callBack={handleMainButtonClick}
 					text={stagesType === "main" ? "Start blogging" : stagesType === "logIn" ? "Log in to account" : signUpTexts[currentSlide]}
 				/>
