@@ -1,6 +1,7 @@
 import { Image } from "@unpic/preact";
 
 const UserBadge = ({ badge, badgeSize }) => {
+	//2.6D 61
 	switch (badge) {
 		case "verifed":
 			return <Image src='emojis/emoji_230xw.png' width={64} height={64} className='h-full aspect-square' />;

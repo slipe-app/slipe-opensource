@@ -7,8 +7,8 @@ import icons from "../../../../constants/icons";
 export default function AuthMainEditor() {
 	return (
 		<>
-			<div className='w-full grid grid-cols-3 grid-rows-2 px-5 gap-5'>
-				<div className='h-full flex justify-center items-center aspect-square border-2 brightness-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
+			<div className='w-full grid grid-cols-3 grid-rows-2 gap-5'>
+				<div className='h-full flex justify-center items-center aspect-square border-2 opacity-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
 					<svg width='72' height='72' style={{ color: colors.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["user"]} />
 					</svg>
@@ -18,7 +18,7 @@ export default function AuthMainEditor() {
 						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["smile"]} />
 					</svg>
 				</div>
-                <div className='h-full flex justify-center items-center aspect-square border-2 brightness-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
+                <div className='h-full flex justify-center items-center aspect-square border-2 opacity-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
 					<svg width='72' height='72' style={{ color: colors.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["paint"]} />
 					</svg>
@@ -28,7 +28,7 @@ export default function AuthMainEditor() {
 						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["image"]} />
 					</svg>
 				</div>
-                <div className='h-full flex justify-center items-center aspect-square border-2 brightness-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
+                <div className='h-full flex justify-center items-center aspect-square border-2 opacity-75 rounded-[2rem]' style={{ borderColor: colors.textPrimaryTransparent }}>
 					<svg width='72' height='72' style={{ color: colors.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
 						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["pencil"]} />
 					</svg>
@@ -39,7 +39,7 @@ export default function AuthMainEditor() {
 					</svg>
 				</div>
 			</div>
-			<div className=' flex flex-col gap-2 px-5'>
+			<div className=' flex flex-col gap-2'>
 				<span style={{ color: colors.text }} className='text-center text-3xl font-semibold'>
 					The editor of dream
 				</span>

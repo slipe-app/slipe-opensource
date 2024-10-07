@@ -13,6 +13,7 @@ import Auth from "./pages/auth.jsx";
 import LanguageContextProvider from "./components/common/contexts/languageContext.jsx";
 
 export function App() {
+	// 5.63 69 20
 	return (
 		<LanguageContextProvider>
 			<PostsTypeContextProvider>

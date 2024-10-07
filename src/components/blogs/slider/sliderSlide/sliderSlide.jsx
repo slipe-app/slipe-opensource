@@ -7,6 +7,7 @@ import { useEffect } from "preact/hooks";
 import TimePassedFromDate from "../../../../utils/time/timePassedFromDate";
 
 export default function SliderSlide({ style, key, author, blog }) {
+	// 9.7A
 	return (
 			<div className='h-full relative flex flex-col justify-between rounded-[36px] overflow-hidden' style={style}>
 				<Image width={1000} height={1000} src={cdn_url + "/posts/" + blog?.image} className='w-full -z-10 h-full object-cover  !aspect-auto absolute' alt={`Slide ${key}`} loading='lazy' />

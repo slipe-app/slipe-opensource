@@ -1,4 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
+import colors from "../../../constants/colors";
 
 const createEmptyGrid = (rows, cols) => {
 	const grid = [];
@@ -73,7 +74,7 @@ const GameOfLife = () => {
 		if (!running) return;
 		const interval = setInterval(() => {
 			setGrid(prevGrid => runGameOfLife(prevGrid, rows, cols));
-		}, 200);
+		}, 200);// 7.69 73
 		return () => clearInterval(interval);
 	}, [running, grid, rows, cols]);
 
@@ -100,7 +101,7 @@ const GameOfLife = () => {
 						className='rounded-full w-full aspect-square'
 						key={`${x}-${y}`}
 						style={{
-							backgroundColor: cell ? "white" : "black",
+							backgroundColor: cell ? colors.text : colors.background,
 						}}
 					/>
 				))
