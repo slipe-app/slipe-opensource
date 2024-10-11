@@ -73,7 +73,7 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 						) : currenAuthSlide === 1 ? (
 							<AuthSignUpPassword password={password} setPassword={setPassword} />
 						) : (
-							<AuthSignUpProfile />
+							<AuthSignUpProfile avatar={avatar} setAvatar={setAvatar}/>
 						)}
 					</>
 				) : (

@@ -13,6 +13,13 @@ const updateSlide = (currentSlide, direction) => {
 	return currentSlide;
 };
 
+const getImageBlobById = async src => {
+	const response = await fetch(src, { mode: "cors" });
+	const data = await response.blob();
+
+	return data;
+};
+
 export default function AuthMainScreenWrapper() {
 	const [stagesType, setStagesType] = useState("main");
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -48,8 +55,26 @@ export default function AuthMainScreenWrapper() {
 					console.log(result?.description_code); // это код локализации ошибки дикуля
 					setIsContinue(true);
 				}
+			} else if (currentSlide === 2) {
+				if (userData.avatar || userData.displayname) {
+					console.log(userData.avatar, userData.displayname)
+					// тут в будущем будет запрос
+				} else {
+					console.log(123)
+					//тут код для редиректа на главную но я не фронтендер
+				}
 			} else {
 				currentSlide === 0 ? accountChecking() : setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"));
+			}
+		} else if (stagesType === "logIn") {
+			if (currentSlide === 1 && userData.password) {
+				// started doing login
+				// setIsContinue(false);
+
+				// const result = await fetcher(`/auth/login/v2`, "post", JSON.stringify({
+				// 	username: userData?.username,
+				// 	password: userData?.password
+				// }), { 'Content-Type': 'application/json' });
 			}
 		} else {
 			console.log("you logged in to gucci fish");
