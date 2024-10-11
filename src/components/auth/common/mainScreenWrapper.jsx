@@ -3,6 +3,7 @@ import AuthButton from "./button";
 import AuthStagesSlider from "../stages/stagesSlider";
 import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
+import validateUsername from "../../../utils/auth/usernameChecks";
 
 const signUpTexts = ["Next > Password", "Next > Profile", "Dive into blogging"];
 
@@ -59,11 +60,12 @@ export default function AuthMainScreenWrapper() {
 		if (stagesType === "signUp") {
 			setIsContinue(false);
 
-			const isUsernameCorrect = userData?.username?.length >= 2;
-			const isPasswordCorrect = !hasStringByPass(userData?.password);
+			const isUsernameCorrect = validateUsername(userData?.username)[0];
+			const isPasswordCorrect = hasStringByPass(userData?.password)[0];
 
 			if (isUsernameCorrect && currentSlide === 0) setIsContinue(true);
 			else if (isPasswordCorrect && currentSlide === 1) setIsContinue(true);
+			else if (currentSlide === 2) setIsContinue(true);
 		}
 	}, [userData, currentSlide, stagesType]);
 

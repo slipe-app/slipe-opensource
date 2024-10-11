@@ -37,8 +37,8 @@ export default function AuthButton({ text, type, callBack, id, isActive = true, 
 			) : (
 				<button
 					onClick={callBack}
-					style={{ background: colors.blue, opacity: isActive ? 1 : 0.85, pointerEvents: isActive ? 'auto' : 'none' }}
-					className='text-white w-full origin-center p-[1.125rem] rounded-3xl text-lg font-medium active:!scale-[0.99] active:opacity-90 duration-150'
+					style={{ background: colors.blue, pointerEvents: isActive ? 'auto' : 'none' }}
+					className={`text-white w-full origin-center p-[1.125rem] rounded-3xl text-lg font-medium active:!scale-[0.99] ${isActive ? "active:opacity-90" : "opacity-85"} duration-150`}
 				>
 					<span id={`text-${id}`}>{currentText}</span>
 				</button>

@@ -29,7 +29,7 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 					triggerAnimation("translateY(0px)", 1);
 				}, 200);
 			});
-		}, 5000);
+		}, 55000);
 
 		return () => clearInterval(intervalRef.current);
 	}, []);
@@ -77,7 +77,7 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 						)}
 					</>
 				) : (
-					<AuthLogInMain setStagesType={setType} username={username} setUsername={setUsername} password={password} setPassword={setPassword}/>
+					<AuthLogInMain setStagesType={setType} password={password} setPassword={setPassword}/>
 				)}
 			</div>
 
