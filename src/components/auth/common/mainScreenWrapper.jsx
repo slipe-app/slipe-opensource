@@ -34,6 +34,7 @@ export default function AuthMainScreenWrapper() {
 	};
 
 	const handleMainButtonClick = async () => {
+		console.log(stagesType, currentSlide)
 		if (stagesType === "main") {
 			setStagesType("signUp");
 		} else if (stagesType === "signUp") {
@@ -47,34 +48,44 @@ export default function AuthMainScreenWrapper() {
 				console.log(result)
 
 				if (result?.token) {
-					console.log(result.token) // дикуля бери
+					console.log(result.token) // token
 
 					setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"))
 				} else {
-					console.log(result?.code); // это код самой ошибки для проверки к какому инпуту относится ошибка дикуля
-					console.log(result?.description_code); // это код локализации ошибки дикуля
+					console.log(result?.code); // input
+					console.log(result?.description_code); // localization
 					setIsContinue(true);
 				}
 			} else if (currentSlide === 2) {
 				if (userData.avatar || userData.displayname) {
 					console.log(userData.avatar, userData.displayname)
-					// тут в будущем будет запрос
+					// request
 				} else {
 					console.log(123)
-					//тут код для редиректа на главную но я не фронтендер
+					// redirect
 				}
 			} else {
 				currentSlide === 0 ? accountChecking() : setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"));
 			}
 		} else if (stagesType === "logIn") {
-			if (currentSlide === 1 && userData.password) {
-				// started doing login
-				// setIsContinue(false);
+			if (currentSlide === 0 && userData.password) {
+				setIsContinue(false);
 
-				// const result = await fetcher(`/auth/login/v2`, "post", JSON.stringify({
-				// 	username: userData?.username,
-				// 	password: userData?.password
-				// }), { 'Content-Type': 'application/json' });
+				const result = await fetcher(`/auth/login/v2`, "post", JSON.stringify({
+					username: userData?.username,
+					password: userData?.password
+				}), { 'Content-Type': 'application/json' });
+				console.log(result)
+
+				if (result?.token) {
+					console.log(result.token) //token
+
+					// redirect
+				} else {
+					console.log(result?.code); // input
+					console.log(result?.description_code); // localization
+					setIsContinue(true);
+				}
 			}
 		} else {
 			console.log("you logged in to gucci fish");
@@ -91,6 +102,12 @@ export default function AuthMainScreenWrapper() {
 			if (isUsernameCorrect && currentSlide === 0) setIsContinue(true);
 			else if (isPasswordCorrect && currentSlide === 1) setIsContinue(true);
 			else if (currentSlide === 2) setIsContinue(true);
+		} else if (stagesType === "logIn") {
+			setIsContinue(false);
+
+			const isPasswordCorrect = hasStringByPass(userData?.password)[0];
+
+			if (isPasswordCorrect && currentSlide === 0) setIsContinue(true);
 		}
 	}, [userData, currentSlide, stagesType]);
 
