@@ -25,6 +25,7 @@ export default function AuthMainScreenWrapper() {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [userData, setUserData] = useState({ username: "", avatar: "", displayname: "", password: "" });
 	const [isContinue, setIsContinue] = useState(true);
+	const [error, setError] = useState(null);
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
 
@@ -34,10 +35,8 @@ export default function AuthMainScreenWrapper() {
 	};
 
 	const handleMainButtonClick = async () => {
-		console.log(stagesType, currentSlide)
-		if (stagesType === "main") {
-			setStagesType("signUp");
-		} else if (stagesType === "signUp") {
+		if (stagesType === "main") setStagesType("signUp");
+		else if (stagesType === "signUp") {
 			if (currentSlide === 1 && userData.password) {
 				setIsContinue(false);
 
@@ -52,8 +51,11 @@ export default function AuthMainScreenWrapper() {
 
 					setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"))
 				} else {
+					setError([false, result?.error])
+
 					console.log(result?.code); // input
 					console.log(result?.description_code); // localization
+
 					setIsContinue(true);
 				}
 			} else if (currentSlide === 2) {
@@ -82,38 +84,35 @@ export default function AuthMainScreenWrapper() {
 
 					// redirect
 				} else {
+					setError([false, result?.error])
+
 					console.log(result?.code); // input
 					console.log(result?.description_code); // localization
 					setIsContinue(true);
 				}
 			}
-		} else {
-			console.log("you logged in to gucci fish");
-		}
+		} else console.log("you logged in to gucci fish");
 	};
 
 	useEffect(() => {
-		if (stagesType === "signUp") {
+		if (stagesType === "signUp" || stagesType === "logIn") {
 			setIsContinue(false);
 
-			const isUsernameCorrect = validateUsername(userData?.username)[0];
-			const isPasswordCorrect = hasStringByPass(userData?.password)[0];
-
-			if (isUsernameCorrect && currentSlide === 0) setIsContinue(true);
-			else if (isPasswordCorrect && currentSlide === 1) setIsContinue(true);
+			if (stagesType === "signUp" && validateUsername(userData?.username)[0] && currentSlide === 0) setIsContinue(true);
+			else if (stagesType === "signUp" && hasStringByPass(userData?.password)[0] && currentSlide === 1) setIsContinue(true);
+			else if (stagesType === "logIn" && hasStringByPass(userData?.password)[0] && currentSlide === 0) setIsContinue(true);
 			else if (currentSlide === 2) setIsContinue(true);
-		} else if (stagesType === "logIn") {
-			setIsContinue(false);
-
-			const isPasswordCorrect = hasStringByPass(userData?.password)[0];
-
-			if (isPasswordCorrect && currentSlide === 0) setIsContinue(true);
 		}
 	}, [userData, currentSlide, stagesType]);
 
 	useEffect(() => {
-		console.log(isContinue)
-	}, [isContinue]);
+		if (stagesType === "signUp" && currentSlide === 0 && userData.username.length > 0) setError(validateUsername(userData.username))
+		else if (stagesType === "signUp" && currentSlide === 1 && userData.password.length > 0) setError(hasStringByPass(userData.password))
+		else if (stagesType === "logIn" && currentSlide === 0 && userData.password.length > 0) setError(hasStringByPass(userData.password))
+		else setError(null)
+	}, [userData, currentSlide, stagesType]);
+
+	// useEffect(() => console.log(error), [error])
 
 	return (
 		<section className='w-screen animate-[fadeIn_0.15s_ease] absolute top-0 h-screen flex flex-col'>
@@ -127,6 +126,7 @@ export default function AuthMainScreenWrapper() {
 				setCurrentSlide={setCurrentSlide}
 				type={stagesType}
 				setType={setStagesType}
+				error={error}
 			/>
 			<div className='w-full px-5 flex gap-4 pt-5 pb-8'>
 				<AuthButton

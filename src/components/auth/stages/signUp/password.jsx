@@ -5,9 +5,9 @@ import AuthInput from "../../common/input";
 import { animate } from "motion";
 import hasStringByPass from "../../../../utils/auth/passwordChecks";
 
-export default function AuthSignUpPassword({ password, setPassword }) {
+export default function AuthSignUpPassword({ password, error, setPassword }) {
 	const [isPassword, setIsPassword] = useState(true); // 8.68 20 72 69
-	const [error, setError] = useState([]);
+	// const [error, setError] = useState([]);
 
 	useEffect(() => {
 		animate("#passwordEye", isPassword ? { transform: "translateY(0px) rotateX(0deg)", opacity: 1 } : { transform: "translateY(-16px) rotateX(-32deg)", opacity: 0 }, {
@@ -20,11 +20,11 @@ export default function AuthSignUpPassword({ password, setPassword }) {
 		});
 	}, [isPassword]);
 
-	useEffect(() => {
-		if (password) {
-				setError(hasStringByPass(password));
-		}
-	}, [password]);
+	// useEffect(() => {
+	// 	if (password) {
+	// 			setError(hasStringByPass(password));
+	// 	}
+	// }, [password]);
 
 	return (
 		<>
@@ -55,9 +55,12 @@ export default function AuthSignUpPassword({ password, setPassword }) {
 					</svg>
 				</div>
 			</AuthInput>
-			<span style={{ color: colors.red }} className='w-full text-center text-lg h-0'>
-				{error[1]}
-			</span>
+
+			{error ? (
+				<span style={{ color: colors.red }} className='w-full text-center text-lg h-0'>
+					{error[1]}
+				</span>
+			) : null}
 		</>
 	);
 }

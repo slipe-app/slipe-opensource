@@ -5,9 +5,9 @@ import AuthInput from "../../common/input";
 import { animate } from "motion";
 import validateUsername from "../../../../utils/auth/usernameChecks";
 
-export default function AuthSignUpUsername({ username, setUsername }) {
+export default function AuthSignUpUsername({ username, error, setUsername }) {
 	const [isFocused, setIsFocused] = useState(false);
-	const [error, setError] = useState([]);
+	// const [error, setError] = useState([]);
 
 	useEffect(() => {
 		animate(
@@ -20,11 +20,11 @@ export default function AuthSignUpUsername({ username, setUsername }) {
 		);
 	}, [isFocused]);
 
-	useEffect(() => {
-		if (username) {
-				setError(validateUsername(username));
-		}
-	}, [username]);
+	// useEffect(() => {
+	// 	if (username) {
+	// 			setError(validateUsername(username));
+	// 	}
+	// }, [username]);
 
 	return (
 		<>
@@ -41,9 +41,12 @@ export default function AuthSignUpUsername({ username, setUsername }) {
 					{username.length}/24
 				</span>
 			</AuthInput>
-			<span style={{ color: colors.red }} className='w-full text-center text-lg h-0'>
-				{error[1]}
-			</span>
+			
+			{error ? (
+				<span style={{ color: colors.red }} className='w-full text-center text-lg h-0'>
+					{error[1]}
+				</span>
+			) : null}
 		</>
 	);
 }

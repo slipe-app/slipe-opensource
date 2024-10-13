@@ -4,7 +4,7 @@ import icons from "../../../../constants/icons";
 import AuthInput from "../../common/input";
 import { animate } from "motion";
 
-export default function AuthLogInMain({ password, setPassword, setStagesType }) {
+export default function AuthLogInMain({ password, error, setPassword, setStagesType }) {
 	const [isPassword, setIsPassword] = useState(true); // 8.68 20 72 69
 
 	useEffect(() => {
@@ -54,6 +54,12 @@ export default function AuthLogInMain({ password, setPassword, setStagesType }) 
 					Sign up
 				</span>
 			</p>
+
+			{error ? (
+				<span style={{ color: colors.red }} className='w-full text-center text-lg h-0'>
+					{error[1]}
+				</span>
+			) : null}
 		</>
 	);
 }

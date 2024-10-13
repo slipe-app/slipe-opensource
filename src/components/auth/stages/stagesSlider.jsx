@@ -12,7 +12,7 @@ import AuthSignUpPassword from "./signUp/password";
 import AuthSignUpProfile from "./signUp/profile";
 import AuthLogInMain from "./logIn/auth";
 
-export default function AuthStagesSlider({ type, setType, currentSlide, setCurrentSlide, username, avatar, displayname, password, setUsername, setAvatar, setDisplayname, setPassword }) {
+export default function AuthStagesSlider({ type, setType, currentSlide, setCurrentSlide, username, avatar, displayname, password, error, setUsername, setAvatar, setDisplayname, setPassword }) {
 	const [stagesType, setStagesType] = useState("main");
 	const [currenAuthSlide, setCurrentAuthSlide] = useState(0);
 	const intervalRef = useRef();
@@ -69,15 +69,15 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 				) : stagesType === "signUp" ? (
 					<>
 						{currenAuthSlide === 0 ? (
-							<AuthSignUpUsername username={username} setUsername={setUsername} />
+							<AuthSignUpUsername username={username} setUsername={setUsername} error={error}/>
 						) : currenAuthSlide === 1 ? (
-							<AuthSignUpPassword password={password} setPassword={setPassword} />
+							<AuthSignUpPassword password={password} setPassword={setPassword} error={error}/>
 						) : (
-							<AuthSignUpProfile avatar={avatar} setAvatar={setAvatar}/>
+							<AuthSignUpProfile avatar={avatar} setAvatar={setAvatar} error={error}/>
 						)}
 					</>
 				) : (
-					<AuthLogInMain setStagesType={setType} password={password} setPassword={setPassword}/>
+					<AuthLogInMain setStagesType={setType} password={password} setPassword={setPassword} error={error}/>
 				)}
 			</div>
 

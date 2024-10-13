@@ -5,7 +5,7 @@ import AuthInput from "../../common/input";
 import { animate } from "motion";
 import { Image} from "@unpic/preact";
 
-export default function AuthSignUpProfile({ avatar, setAvatar }) {
+export default function AuthSignUpProfile({ avatar, error, setAvatar }) {
 	const [displayname, setDisplayname] = useState("");
 	const [isFocused, setIsFocused] = useState(false);
 
