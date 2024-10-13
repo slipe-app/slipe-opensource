@@ -26,6 +26,7 @@ export default function AuthMainScreenWrapper() {
 	const [userData, setUserData] = useState({ username: "", avatar: "", displayname: "", password: "" });
 	const [isContinue, setIsContinue] = useState(true);
 	const [error, setError] = useState(null);
+	const [token, setToken] = useState(null);
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
 
@@ -44,14 +45,13 @@ export default function AuthMainScreenWrapper() {
 					username: userData?.username,
 					password: userData?.password
 				}), { 'Content-Type': 'application/json' });
-				console.log(result)
 
 				if (result?.token) {
-					console.log(result.token) // token
+					setToken(result.token);
 
 					setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"))
 				} else {
-					setError([false, result?.error])
+					setError([false, result?.error]);
 
 					console.log(result?.code); // input
 					console.log(result?.description_code); // localization
@@ -60,10 +60,24 @@ export default function AuthMainScreenWrapper() {
 				}
 			} else if (currentSlide === 2) {
 				if (userData.avatar || userData.displayname) {
-					console.log(userData.avatar, userData.displayname)
-					// request
+					const avatar = await fetch(userData.avatar).then(async res => await res.blob())
+
+					const formData = new FormData();
+					formData.append('avatar', new File([avatar], "avatar.png", {
+						type: avatar?.type
+					}));
+					formData.append('username', userData.username);
+					formData.append('nickname', userData.displayname);
+
+					const result = await fetcher(`/settings/profile`, "post", formData, { "Authorization": "Bearer " + token });
+
+					if (result?.error) {
+						// error 
+						console.log(result?.error);
+					} else {
+						// redirect
+					}
 				} else {
-					console.log(123)
 					// redirect
 				}
 			} else {
@@ -112,7 +126,7 @@ export default function AuthMainScreenWrapper() {
 		else setError(null)
 	}, [userData, currentSlide, stagesType]);
 
-	// useEffect(() => console.log(error), [error])
+	useEffect(() => console.log(userData.displayname), [userData])
 
 	return (
 		<section className='w-screen animate-[fadeIn_0.15s_ease] absolute top-0 h-screen flex flex-col'>
