@@ -4,6 +4,8 @@ import AuthStagesSlider from "../stages/stagesSlider";
 import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
 import validateUsername from "../../../utils/auth/usernameChecks";
+import { route } from "preact-router";
+import { useLocation } from 'preact-iso';
 
 const signUpTexts = ["Next > Password", "Next > Profile", "Dive into blogging"];
 
@@ -27,6 +29,7 @@ export default function AuthMainScreenWrapper() {
 	const [isContinue, setIsContinue] = useState(true);
 	const [error, setError] = useState(null);
 	const [token, setToken] = useState(null);
+	const location = useLocation();
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
 
@@ -75,10 +78,13 @@ export default function AuthMainScreenWrapper() {
 						// error 
 						console.log(result?.error);
 					} else {
+						// save session
 						// redirect
+						location.route('/');
 					}
 				} else {
 					// redirect
+					location.route('/');
 				}
 			} else {
 				currentSlide === 0 ? accountChecking() : setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"));
@@ -96,7 +102,9 @@ export default function AuthMainScreenWrapper() {
 				if (result?.token) {
 					console.log(result.token) //token
 
+					// save session
 					// redirect
+					location.route('/');
 				} else {
 					setError([false, result?.error])
 
