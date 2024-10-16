@@ -1,14 +1,9 @@
 {
     "header": {
         "switcher": {
-            "for_you": "Для вас",
+            "for_you": "Блоги",
             "follows": "Подписки"
         }
-    },
-    "navigation": {
-        "blogs": "Блоги",
-        "create": "Создать блог",
-        "profile": "Мой профиль"
     },
     "auth": {
         "already_have_account": "Уже есть аккаунт?",

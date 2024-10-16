@@ -1,14 +1,9 @@
 {
     "header": {
         "switcher": {
-            "for_you": "For You",
+            "for_you": "Blogs",
             "follows": "Follows"
         }
-    },
-    "navigation": {
-        "blogs": "Blogs",
-        "create": "Create blog",
-        "profile": "My profile"
     },
     "auth": {
         "already_have_account": "Already have account?",

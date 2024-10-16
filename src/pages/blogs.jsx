@@ -2,11 +2,12 @@ import { Image } from "@unpic/preact";
 import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 import { useState, useEffect } from "preact/hooks";
-import Slider from "../components/blogs/slider/blogsSlider";
 import readLocaleFile from "../utils/locales/read";
+import BlogsSlider from "../components/blogs/horizontalSlider";
+import UsersSlider from "../components/blogs/verticalSlider";
 
 export default function Blogs() {
-	const { data: startData, error, isLoading } = useSWR("/post/get?after=0&region=english", fetcher);
+	const { data: startData, error, isLoading } = useSWR("/post/get?after=0&region=slavic", fetcher);
 
 	const [users, setUsers] = useState([]);
 	const [blogs, setBlogs] = useState([]);
@@ -25,5 +26,5 @@ export default function Blogs() {
 		}
 	}, [startData, isLoading, error]);
 
-	return <Slider users={users} blogs={blogs} />;
+	return <UsersSlider/>;
 }

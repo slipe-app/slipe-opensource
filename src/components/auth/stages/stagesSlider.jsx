@@ -1,5 +1,4 @@
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
+
 import AuthMainPostSwiping from "./main/postSwiping";
 import AuthMainReactions from "./main/reactions";
 import { useEffect, useState, useRef } from "preact/hooks";

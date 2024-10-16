@@ -1,8 +1,3 @@
-import { Image } from "@unpic/preact";
-import { animate } from "motion";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-import { useEffect, useState } from "preact/hooks";
 import colors from "../../../../constants/colors";
 
 export default function AuthMainReactions() {

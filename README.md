@@ -1,15 +1,7 @@
-# `create-preact`
+# Tauri + Preact
 
-<h2 align="center">
-  <img height="256" width="256" src="./src/assets/preact.svg">
-</h2>
+This template should help get you started developing with Tauri and Preact in Vite.
 
-<h3 align="center">Get started using Preact and Vite!</h3>
+## Recommended IDE Setup
 
-## Getting Started
-
--   `npm run dev` - Starts a dev server at http://localhost:5173/
-
--   `npm run build` - Builds for production, emitting to `dist/`
-
--   `npm run preview` - Starts a server at http://localhost:4173/ to test production build locally
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)

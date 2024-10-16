@@ -21,12 +21,12 @@ export default function StatesRender(url) {
 	switch (url) {
 		case "/":
 			return (
-				<div style={{ background: colors.buttonInactiveBg }} className='relative p-1 flex w-full h-[3.25rem] rounded-full'>
+				<div style={{ background: colors.buttonInactiveBg }} className='relative p-1 flex w-full h-[3.5rem] rounded-full'>
 					<div style={{ background: colors.buttonInactiveBg, left: "0.25rem" }} className='absolute w-[calc(50%-0.25rem)] h-[calc(100%-0.5rem)] rounded-full active-bg'></div>
-					<button style={{ color: activeTab === "forYou" ? colors.text : colors.textPrimaryTransparent }} onClick={() => setActiveTab("forYou")} className='flex-1 z-10 font-semibold text-center transition-colors duration-200'>
+					<button style={{ color: activeTab === "forYou" ? colors.text : colors.textPrimaryTransparent }} onClick={() => setActiveTab("forYou")} className='flex-1 z-10 font-medium text-center transition-colors duration-200'>
 						{locales.header.switcher.for_you}
 					</button>
-					<button style={{ color: activeTab === "follows" ? colors.text : colors.textPrimaryTransparent }} onClick={() => setActiveTab("follows")} className='flex-1 z-10 font-semibold text-center transition-colors duration-200'>
+					<button style={{ color: activeTab === "follows" ? colors.text : colors.textPrimaryTransparent }} onClick={() => setActiveTab("follows")} className='flex-1 z-10 font-medium text-center transition-colors duration-200'>
 						{locales.header.switcher.follows}
 					</button>
 				</div>

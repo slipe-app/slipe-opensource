@@ -7,7 +7,7 @@ import Profile from "./pages/profile.jsx";
 import Search from "./pages/search.jsx";
 import Header from "./components/common/header/header.jsx";
 import PostsTypeContextProvider from "./components/common/contexts/postsTypeContext.jsx";
-import TabBar from "./components/common/tabBar/tabBar.jsx";
+import TabBar from "./components/common/tabBar.jsx";
 import colors from "./constants/colors.js";
 import Auth from "./pages/auth.jsx";
 import LanguageContextProvider from "./components/common/contexts/languageContext.jsx";
