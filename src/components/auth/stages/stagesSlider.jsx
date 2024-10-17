@@ -5,13 +5,14 @@ import { useEffect, useState, useRef } from "preact/hooks";
 import AuthMainEditor from "./main/editor";
 import { animate } from "motion";
 import AuthMainGetStarted from "./main/getStarted";
-import colors from "../../../constants/colors";
 import AuthSignUpUsername from "./signUp/username";
 import AuthSignUpPassword from "./signUp/password";
 import AuthSignUpProfile from "./signUp/profile";
 import AuthLogInMain from "./logIn/auth";
+import { useTheme } from "../../common/contexts/themeContext";
 
 export default function AuthStagesSlider({ type, setType, currentSlide, setCurrentSlide, username, avatar, displayname, password, error, setUsername, setAvatar, setDisplayname, setPassword }) {
+	const { theme } = useTheme();
 	const [stagesType, setStagesType] = useState("main");
 	const [currenAuthSlide, setCurrentAuthSlide] = useState(0);
 	const intervalRef = useRef();
@@ -87,11 +88,11 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 						style={
 							type === "main"
 								? currentSlide === i
-									? { background: colors.text, width: "2.5rem" }
-									: { background: colors.textPrimaryTransparent, width: "0.75rem" }
+									? { background: theme.text, width: "2.5rem" }
+									: { background: theme.textPrimaryTransparent, width: "0.75rem" }
 								: currenAuthSlide === i
-								? { background: colors.text, width: "2.5rem" }
-								: { background: colors.textPrimaryTransparent, width: "0.75rem" }
+								? { background: theme.text, width: "2.5rem" }
+								: { background: theme.textPrimaryTransparent, width: "0.75rem" }
 						}
 						className='rounded-full h-3 duration-150 ease-out'
 					/>

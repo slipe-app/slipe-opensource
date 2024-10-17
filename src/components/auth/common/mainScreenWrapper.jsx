@@ -4,7 +4,6 @@ import AuthStagesSlider from "../stages/stagesSlider";
 import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
 import validateUsername from "../../../utils/auth/usernameChecks";
-import { route } from "preact-router";
 import { useLocation } from 'preact-iso';
 
 const signUpTexts = ["Next > Password", "Next > Profile", "Dive into blogging"];

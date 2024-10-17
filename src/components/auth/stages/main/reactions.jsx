@@ -1,6 +1,7 @@
-import colors from "../../../../constants/colors";
+import { useTheme } from "../../../common/contexts/themeContext";
 
 export default function AuthMainReactions() {
+	const { theme } = useTheme();
 	return (
 		<>
 			<div className='w-full flex gap-5'>
@@ -21,10 +22,10 @@ export default function AuthMainReactions() {
 				</div>
 			</div>
 			<div className=' flex flex-col gap-2'>
-				<span style={{ color: colors.text }} className='text-center text-3xl font-semibold'>
+				<span style={{ color: theme.text }} className='text-center text-3xl font-semibold'>
 					Reactions, not likes
 				</span>
-				<span style={{ color: colors.textPrimaryTransparent }} className='text-center text-lg'>
+				<span style={{ color: theme.textPrimaryTransparent }} className='text-center text-lg'>
 					Now instead of likes, you can better express your feelings about the blog
 				</span>
 			</div>

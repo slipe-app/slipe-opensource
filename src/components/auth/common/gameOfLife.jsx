@@ -1,5 +1,5 @@
 import { useState, useEffect } from "preact/hooks";
-import colors from "../../../constants/colors";
+import { useTheme } from "../../common/contexts/themeContext";
 
 const createEmptyGrid = (rows, cols) => {
 	const grid = [];
@@ -44,6 +44,7 @@ const runGameOfLife = (grid, rows, cols) => {
 };
 
 const GameOfLife = () => {
+	const { theme } = useTheme();
 	const [grid, setGrid] = useState([]);
 	const [rows, setRows] = useState(0);
 	const [cols, setCols] = useState(0);
@@ -101,7 +102,7 @@ const GameOfLife = () => {
 						className='rounded-full w-full aspect-square'
 						key={`${x}-${y}`}
 						style={{
-							backgroundColor: cell ? colors.text : colors.background,
+							backgroundColor: cell ? theme.text : theme.background,
 						}}
 					/>
 				))

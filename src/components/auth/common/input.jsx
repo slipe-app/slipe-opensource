@@ -1,8 +1,9 @@
-import colors from "../../../constants/colors";
+import { useTheme } from "../../common/contexts/themeContext";
 
-export default function AuthInput({ children, placeholder = "", value = "", isFocused, onChange, borderColor = "transparent", textColor = colors.text, maxLength = 24, type = "username" }) {
+export default function AuthInput({ children, placeholder = "", value = "", isFocused, onChange, borderColor = "transparent", textColor = theme.text, maxLength = 24, type = "username" }) {
+	const { theme } = useTheme();
 	return (
-		<div style={{ background: colors.nonTransparentButtonBg, borderColor: borderColor }} className='w-full overflow-hidden flex rounded-3xl duration-200 border-2'>
+		<div style={{ background: theme.nonTransparentButtonBg, borderColor: borderColor }} className='w-full overflow-hidden flex rounded-3xl duration-200 border-2'>
 			{type == "username" ? (
 				<span style={{ color: textColor }} className='p-[1rem] opacity-25 pr-0 text-lg'>
 					slipe.fun/

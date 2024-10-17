@@ -4,7 +4,7 @@ import "swiper/css";
 
 import BlogsSlider from "./horizontalSlider";
 
-export default function UsersSlider() {
+export default function UsersSlider({users, blogs}) {
 	return (
 		<>
 			<Swiper
