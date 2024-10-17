@@ -8,7 +8,7 @@ export default function UIFollowButton({ state = false, isCompact = false, paddi
 			<button
 				style={{
 					padding: `${paddingY} ${paddingX}`,
-					borderColor: state ? theme.inActiveButtonNonTransBorder : "",
+					borderColor: state ? theme.inActiveButtonNonTransBorder : staticColors.blue,
 					fontSize: fontSize,
 					background: state ? theme.inActiveButtonNonTransBg : staticColors.blue,
 					color: staticColors.white,

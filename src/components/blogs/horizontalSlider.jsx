@@ -35,16 +35,20 @@ export default function BlogsSlider({ user, blogs }) {
 					<Image width={1600} height={1600} src='postsExamples/banana.jpg' className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-white' />
 				</SwiperSlide>
 				<SwiperSlide className='px-5'>
-					<Image width={1600} height={1600} src='postsExamples/france.jpg' className='w-full rounded-[2rem] block h-full bg-red-500' />
+        <PostUserBlock/>
+					<Image width={1600} height={1600} src='postsExamples/france.jpg' className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-red-500' />
 				</SwiperSlide>
 				<SwiperSlide className='px-5'>
-					<Image width={1600} height={1600} src='postsExamples/gucciFish.webp' className='w-full rounded-[2rem] block h-full bg-green-500' />
+        <PostUserBlock/>
+					<Image width={1600} height={1600} src='postsExamples/gucciFish.webp' className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-green-500' />
 				</SwiperSlide>
 				<SwiperSlide className='px-5'>
-					<Image width={1600} height={1600} src='postsExamples/popKybi.jpeg' className='w-full rounded-[2rem] block h-full bg-yellow-500' />
+        <PostUserBlock/>
+					<Image width={1600} height={1600} src='postsExamples/popKybi.jpeg' className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-yellow-500' />
 				</SwiperSlide>
 				<SwiperSlide className='px-5'>
-					<Image width={1600} height={1600} src='postsExamples/skibidi.jpg' className='w-full rounded-[2rem] block h-full bg-pink-500' />
+        <PostUserBlock/>
+					<Image width={1600} height={1600} src='postsExamples/skibidi.jpg' className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-pink-500' />
 				</SwiperSlide>
 			</Swiper>
 		</>
