@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-creative";
 
-import { EffectCreative } from "swiper/modules";
+import { EffectCreative, Virtual } from "swiper/modules";
 import { Image } from "@unpic/preact";
 import PostUserBlock from "./post/userBlock";
 import { useState, useEffect } from "preact/hooks";
@@ -18,9 +18,9 @@ export default function BlogsSlider({ blogs }) {
 	useEffect(() => {
 		setBlogs(blogs);
 		setUser(blogs[0]?.author);
-	}, [blogs])
+	}, [blogs]);
 
-	async function onSlideChange (slide) {
+	async function onSlideChange(slide) {
 		const currentSlide = slide.activeIndex;
 		const greatestIndex = allBlogs.length - 1;
 		const lastBlog = allBlogs[greatestIndex];
@@ -35,9 +35,12 @@ export default function BlogsSlider({ blogs }) {
 	return (
 		<>
 			<Swiper
+				slidesPerView={3}
+        centeredSlides={true}
+				modules={[EffectCreative, Virtual]}
 				effect={"creative"}
 				creativeEffect={{
-					limitProgress: 2,
+					limitProgress: 4,
 					prev: {
 						opacity: 0.4,
 						scale: 0.75,
@@ -51,15 +54,15 @@ export default function BlogsSlider({ blogs }) {
 						translate: [75, 0, 0],
 					},
 				}}
-				modules={[EffectCreative]}
 				className='!w-full !h-full py-28'
 				onSlideChange={onSlideChange}
+				virtual
 			>
-				{allBlogs?.map(blog => (
-					<SwiperSlide className='px-5'>
-						<PostUserBlock user={user} date={blog?.date}/>
+				{allBlogs?.map((blog, index) => (
+					<SwiperSlide key={blog?.image} className={`!overflow-visible flex flex-col justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
+						<PostUserBlock user={user} date={blog?.date} />
 						{/* get post's reactions blog.reactions */}
-						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-white' />
+						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(300%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
 					</SwiperSlide>
 				))}
 			</Swiper>

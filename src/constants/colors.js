@@ -4,6 +4,8 @@ export const staticColors = {
 	white: "#fff",
 	black: "#000",
 	blue: "#0070F3",
+	inActiveButtonNonTransBg: '#262626',
+	inActiveButtonNonTransBorder: '#474747',
 }
 
 

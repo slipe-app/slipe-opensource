@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 import BlogsSlider from "./horizontalSlider";
+import { Virtual } from "swiper/modules";
 import { useEffect, useState } from "preact/hooks";
 
 import fetcher from "../../utils/fetcher";
@@ -36,12 +37,14 @@ export default function UsersSlider({ users, blogs }) {
 	return (
 		<>
 			<Swiper
+			slidesPerView={1}
+			modules={[Virtual]}
 				direction='vertical'
 				className='!w-full !h-full'
 				onSlideChange={onSlideChange}
-			>
-				{allUsers?.map(username => (
-					<SwiperSlide className="!w-full !h-full">
+			virtual>
+				{allUsers?.map((username, index) => (
+					<SwiperSlide key={index} virtualIndex={index} className="!w-full !h-full">
 						<BlogsSlider blogs={allBlogs.filter(blog => blog.author.username === username)} />
 					</SwiperSlide>
 				))}

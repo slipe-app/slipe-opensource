@@ -4,7 +4,7 @@
 
 body {
 	font-family: 'Geist';
-    src: url('/font/Geist.ttf') format('truetype');
+    src: url('font/Geist.ttf') format('truetype');
 	width: 100vw;
 	height: 100vh;
 }

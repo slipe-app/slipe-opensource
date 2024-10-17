@@ -1,5 +1,6 @@
 import { Image } from "@unpic/preact";
 import PixelAvatar from "./utils/pixelAvatar";
+import cdn_url from "../../../constants/cdn_url";
 
 export default function UIUserBlock({ avatar, badge, name, desc, pixels}) {
 	return (
