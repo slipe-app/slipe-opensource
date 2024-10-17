@@ -1,6 +1,6 @@
-# Tauri + Preact
+# Slipe 1.4V Repository
 
-This template should help get you started developing with Tauri and Preact in Vite.
+This official repository contains the open source code for the Slipe app
 
 ## Recommended IDE Setup
 
