@@ -23,6 +23,7 @@ export default function Blogs() {
 			setBlogs(allBlogs);
 		}
 	}, [startData, isLoading, error]);
+	
 	return (
 		<main style={{ background: theme.background }} className='w-screen fixed h-screen top-0'>
 			{" "}

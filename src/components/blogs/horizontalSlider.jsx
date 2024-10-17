@@ -57,7 +57,8 @@ export default function BlogsSlider({ blogs }) {
 			>
 				{allBlogs?.map(blog => (
 					<SwiperSlide className='px-5'>
-						<PostUserBlock />
+						<PostUserBlock user={user} date={blog?.date}/>
+						{/* get post's reactions blog.reactions */}
 						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(100%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-white' />
 					</SwiperSlide>
 				))}
