@@ -1,6 +1,8 @@
 export const staticColors = {
 	green: "#22C55E",
 	red: "#FF4B41",
+	white: "#fff",
+	black: "#000",
 	blue: "#0070F3",
 }
 
@@ -17,6 +19,8 @@ export const themedColors = {
         semiTransparentBg: "#00000052",
         navigationBackground: "#000000cc",
         nonTransparentButtonBg: "#141414",
+		inActiveButtonNonTransBg: '#262626',
+		inActiveButtonNonTransBorder: '#474747',
     },
     light: {
         background: "#fff",
@@ -30,5 +34,7 @@ export const themedColors = {
         semiTransparentBg: "#00000052",
         navigationBackground: "#ffffffcc",
         nonTransparentButtonBg: "#EBEBEB",
+		inActiveButtonNonTransBg: '#262626',
+		inActiveButtonNonTransBorder: '#474747',
     },
 };
