@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { useTheme } from "../../../common/contexts/themeContext";
 import icons from "../../../../constants/icons";
+import Svg from "../../../common/ui/utils/svg";
 import AuthInput from "../../common/input";
 import { animate } from "motion";
 
@@ -22,30 +23,15 @@ export default function AuthLogInMain({ password, error, setPassword, setStagesT
 	return (
 		<>
 			<div style={{ background: theme.nonTransparentButtonBg }} className='w-32 rounded-full justify-center items-center flex h-32'>
-				<svg width='96' height='96' style={{ color: theme.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-					<path fill-rule='evenodd' clip-rule='evenodd' d={icons["user1"]} />
-				</svg>
+				<Svg size={96} style={{ color: theme.text }} icon={icons["user1"]} />
 			</div>
 			<span style={{ color: theme.text }} className='text-3xl font-semibold'>
 				Welcome back!
 			</span>
 			<AuthInput maxLength={48} type={isPassword ? "password" : "text"} value={password} onChange={data => setPassword(data.target.value)} placeholder='Password here'>
 				<div onClick={() => setIsPassword(!isPassword)} className='h-full aspect-square justify-center items-center relative flex'>
-					<svg id='passwordEye' width='40' height='40' style={{ color: theme.textPrimaryTransparent }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["eye"]} />
-					</svg>
-					<svg
-						className='absolute opacity-0'
-						id='passwordSlashedEye'
-						width='40'
-						height='40'
-						style={{ color: theme.textPrimaryTransparent }}
-						viewBox='0 0 24 24'
-						fill='currentColor'
-						xmlns='http://www.w3.org/2000/svg'
-					>
-						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["slashedEye"]} />
-					</svg>
+					<Svg id='passwordEye' size={40} style={{ color: theme.textPrimaryTransparent }} icon={icons["eye"]} />
+					<Svg id='passwordSlashedEye' className='absolute opacity-0' size={40} style={{ color: theme.textPrimaryTransparent }} icon={icons["slashedEye"]} />
 				</div>
 			</AuthInput>
 

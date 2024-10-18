@@ -2,9 +2,10 @@ import { useState, useEffect } from "preact/hooks";
 import { useTheme } from "../../common/contexts/themeContext";
 import { animate } from "motion";
 import icons from "../../../constants/icons";
+import Svg from "../../common/ui/utils/svg";
 
 export default function AuthButton({ text, type, callBack, id, isActive = true, stagesType }) {
-	const { theme } = useTheme()
+	const { theme } = useTheme();
 	const [currentText, setCurrentText] = useState(text);
 
 	useEffect(() => {
@@ -31,15 +32,13 @@ export default function AuthButton({ text, type, callBack, id, isActive = true, 
 					className='origin-center p-4 rounded-3xl opacity-0 -ml-[5rem] text-lg font-medium active:!scale-[0.99] active:opacity-90 duration-150'
 				>
 					<span id={`text-${id}`}>
-						<svg width='32' height='32' style={{ color: theme.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-							<path fill-rule='evenodd' clip-rule='evenodd' d={icons["chevronLeft"]} />
-						</svg>
+						<Svg size={32} style={{ color: theme.text }} icon={icons["chevronLeft"]} />
 					</span>
 				</button>
 			) : (
 				<button
 					onClick={callBack}
-					style={{ background: theme.blue, pointerEvents: isActive ? 'auto' : 'none' }}
+					style={{ background: theme.blue, pointerEvents: isActive ? "auto" : "none" }}
 					className={`text-white w-full origin-center p-[1.125rem] rounded-3xl text-lg font-medium active:!scale-[0.99] ${isActive ? "active:opacity-90" : "opacity-85"} duration-150`}
 				>
 					<span id={`text-${id}`}>{currentText}</span>

@@ -11,7 +11,7 @@ export default function UIFollowButton({ state = false, isCompact = false, paddi
 					background: state ? staticColors.inActiveButtonNonTransBg : staticColors.blue,
 					color: staticColors.white,
 				}}
-				className='rounded-full border-[1.5px] duration-200 ease-out font-medium'
+				className='rounded-full active:opacity-80 border-[1.5px] duration-200 ease-out font-medium'
 				onClick={onClick}
 			>
 				{state ? "Unfollow" : "Follow"}

@@ -29,7 +29,7 @@ export default function AuthStagesSlider({ type, setType, currentSlide, setCurre
 					triggerAnimation("translateY(0px)", 1);
 				}, 200);
 			});
-		}, 55000);
+		}, 5000);
 
 		return () => clearInterval(intervalRef.current);
 	}, []);

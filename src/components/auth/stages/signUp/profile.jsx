@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { useTheme } from "../../../common/contexts/themeContext";
 import icons from "../../../../constants/icons";
+import Svg from "../../../common/ui/utils/svg";
 import AuthInput from "../../common/input";
 import { animate } from "motion";
 import { Image } from "@unpic/preact";
@@ -35,9 +36,7 @@ export default function AuthSignUpProfile({ avatar, displayname, error, setAvata
 				{avatar ? (
 					<Image width={128} height={128} className='rounded-full' src={avatar} />
 				) : (
-					<svg width='96' height='96' style={{ color: theme.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-						<path fill-rule='evenodd' clip-rule='evenodd' d={icons["avatar"]} />
-					</svg>
+					<Svg size={96} style={{ color: theme.text }} icon={icons["avatar"]} />
 				)}
 			</div>
 			<span style={{ color: theme.text }} className='text-3xl font-semibold'>

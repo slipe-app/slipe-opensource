@@ -1,6 +1,7 @@
 import { useEffect, useState } from "preact/hooks";
 import { useTheme } from "../../../common/contexts/themeContext";
 import icons from "../../../../constants/icons";
+import Svg from "../../../common/ui/utils/svg";
 import AuthInput from "../../common/input";
 import { animate } from "motion";
 
@@ -29,9 +30,7 @@ export default function AuthSignUpUsername({ username, error, setUsername }) {
 	return (
 		<>
 			<div style={{ background: theme.nonTransparentButtonBg }} className='w-32 rounded-full justify-center items-center flex h-32'>
-				<svg width='96' height='96' style={{ color: theme.text }} viewBox='0 0 24 24' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-					<path fill-rule='evenodd' clip-rule='evenodd' d={icons["symbol"]} />
-				</svg>
+				<Svg size={96} style={{ color: theme.text }} icon={icons["symbol"]} />
 			</div>
 			<span style={{ color: theme.text }} className='text-3xl font-semibold'>
 				How we can call you?
