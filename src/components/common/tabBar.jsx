@@ -22,7 +22,7 @@ export default function TabBar() {
 					<a href='/' style={{ opacity: url === "/" ? 1 : 0.25, color: theme.text }} className='w-full duration-200 ease-out pt-4 pb-6 justify-center flex'>
 						<Svg size={44} icon={icons["blogs"]} />
 					</a>
-					<a href='/add' style={{ opacity: url === "/add" ? 1 : 0.25, color: theme.text }} className='w-full duration-200 ease-out pt-4 pb-6 justify-center flex'>
+					<a href='/auth' style={{ opacity: url === "/add" ? 1 : 0.25, color: theme.text }} className='w-full duration-200 ease-out pt-4 pb-6 justify-center flex'>
 						<Svg size={44} icon={icons["plus"]} />
 					</a>
 					<a href='/profile' style={{ opacity: url === "/profile" ? 1 : 0.5 }} className='w-full duration-200 ease-out pt-4 pb-6 justify-center flex'>

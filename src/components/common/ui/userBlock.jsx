@@ -4,7 +4,7 @@ import cdn_url from "../../../constants/cdn_url";
 
 export default function UIUserBlock({ avatar, badge, name, desc, pixels}) {
 	return (
-		<div className='w-full flex gap-[0.625rem] items-center overflow-hidden'>
+		<div className='w-full flex gap-[0.625rem] duration-200 ease-out active:scale-[0.97] active:opacity-80 items-center overflow-hidden'>
 			{avatar ? (
 				<Image width={48} height={48} className='rounded-full' src={cdn_url + "/avatars/" + avatar} />
 			) : (
