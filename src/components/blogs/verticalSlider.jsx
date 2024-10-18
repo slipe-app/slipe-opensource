@@ -5,12 +5,15 @@ import "swiper/css";
 import BlogsSlider from "./horizontalSlider";
 import { Virtual } from "swiper/modules";
 import { useEffect, useState } from "preact/hooks";
+import { useStorage } from "../common/contexts/sessionContext";
 
 import fetcher from "../../utils/fetcher";
 
 export default function UsersSlider({ users, blogs }) {
 	const [allUsers, setUsers] = useState();
 	const [allBlogs, setBlogs] = useState();
+
+	const { token, store } = useStorage();
 
 	useEffect(() => {
 		setUsers(users);
@@ -23,7 +26,7 @@ export default function UsersSlider({ users, blogs }) {
 		const allUserIds = [...new Set(allBlogs.map(blog => blog.author.id))];
 
 		if (greatestIndex - currentSlide === 1) {
-			const reqBlogs = await fetcher(`/post/get?after=0&users=[${allUserIds}]&region=slavic`, "get");
+			const reqBlogs = await fetcher(`/post/get?after=0&users=[${allUserIds}]&region=slavic`, "get", null, { Authorization: "Bearer " + token });
 			const reqUsers = Object.keys(reqBlogs?.success);
 
 			setUsers(oldValue => [...oldValue, ...reqUsers]);

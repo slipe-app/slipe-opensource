@@ -11,10 +11,12 @@ import { useState, useEffect } from "preact/hooks";
 import fetcher from "../../utils/fetcher";
 import cdn_url from "../../constants/cdn_url";
 import PostActionsBlock from "./post/actionsBlock";
+import { useStorage } from "../common/contexts/sessionContext";
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
 	const [user, setUser] = useState();
+	const { token, store } = useStorage();
 
 	useEffect(() => {
 		setBlogs(blogs);
@@ -27,7 +29,7 @@ export default function BlogsSlider({ blogs }) {
 		const lastBlog = allBlogs[greatestIndex];
 
 		if (greatestIndex - currentSlide === 1) {
-			const reqBlogs = await fetcher(`/post/get?after=${lastBlog?.id}&user=${user.id}&limit=3`, "get");
+			const reqBlogs = await fetcher(`/post/get?after=${lastBlog?.id}&user=${user.id}&limit=3`, "get", null, { Authorization: "Bearer " + token });
 
 			setBlogs(oldValue => [...oldValue, ...reqBlogs?.success]);
 		}
