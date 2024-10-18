@@ -12,6 +12,7 @@
   "dependencies": {
     "@tauri-apps/api": ">=2.0.0",
     "@tauri-apps/plugin-shell": ">=2.0.0",
+    "@tauri-apps/plugin-store": "^2.0.0",
     "@unpic/preact": "^0.0.44",
     "motion": "^10.18.0",
     "preact": "^10.22.1",
@@ -20,8 +21,7 @@
     "react-virtual": "^2.10.4",
     "swiper": "^11.1.14",
     "swr": "^2.2.5",
-    "tailwind-gradient-mask-image": "^1.2.0",
-    "tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store#v1"
+    "tailwind-gradient-mask-image": "^1.2.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",

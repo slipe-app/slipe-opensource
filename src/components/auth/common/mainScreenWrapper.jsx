@@ -5,6 +5,7 @@ import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
 import validateUsername from "../../../utils/auth/usernameChecks";
 import { useLocation } from 'preact-iso';
+import { createStore } from '@tauri-apps/plugin-store';
 
 const signUpTexts = ["Next > Password", "Next > Profile", "Dive into blogging"];
 
@@ -21,13 +22,17 @@ const getImageBlobById = async src => {
 	return data;
 };
 
+
+const store = await createStore('settings.json', {
+	autoSave: 0,
+});
+
 export default function AuthMainScreenWrapper() {
 	const [stagesType, setStagesType] = useState("main");
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [userData, setUserData] = useState({ username: "", avatar: "", displayname: "", password: "" });
 	const [isContinue, setIsContinue] = useState(true);
 	const [error, setError] = useState(null);
-	const [token, setToken] = useState(null);
 	const location = useLocation();
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
@@ -49,7 +54,9 @@ export default function AuthMainScreenWrapper() {
 				}), { 'Content-Type': 'application/json' });
 
 				if (result?.token) {
-					setToken(result.token);
+					// save session
+					await store.set("token", result.token)
+					await store.save()
 
 					setCurrentSlide(prevSlide => updateSlide(prevSlide, "next"))
 				} else {
@@ -71,13 +78,12 @@ export default function AuthMainScreenWrapper() {
 					formData.append('username', userData.username);
 					formData.append('nickname', userData.displayname);
 
-					const result = await fetcher(`/settings/profile`, "post", formData, { "Authorization": "Bearer " + token });
+					const result = await fetcher(`/settings/profile`, "post", formData, { "Authorization": "Bearer " + await store.get("token") });
 
 					if (result?.error) {
 						// error 
 						console.log(result?.error);
 					} else {
-						// save session
 						// redirect
 						location.route('/');
 					}
@@ -99,9 +105,10 @@ export default function AuthMainScreenWrapper() {
 				console.log(result)
 
 				if (result?.token) {
-					console.log(result.token) //token
-
 					// save session
+					await store.set("token", result.token)
+					await store.save()
+
 					// redirect
 					location.route('/');
 				} else {
@@ -133,8 +140,6 @@ export default function AuthMainScreenWrapper() {
 		else setError(null)
 	}, [userData, currentSlide, stagesType]);
 
-	useEffect(() => console.log(userData.displayname), [userData])
-
 	return (
 		<section className='w-screen animate-[fadeIn_0.15s_ease] absolute top-0 h-screen flex flex-col'>
 			<AuthStagesSlider
@@ -155,10 +160,7 @@ export default function AuthMainScreenWrapper() {
 					isActive={currentSlide >= 1 && currentSlide !== 2}
 					id='secondaryButton'
 					type='secondary'
-					callBack={() => {
-						setCurrentSlide(prevSlide => updateSlide(prevSlide, "prev"));
-						console.log(currentSlide);
-					}}
+					callBack={() => setCurrentSlide(prevSlide => updateSlide(prevSlide, "prev"))}
 				/>
 				<AuthButton
 					id='mainButton'
