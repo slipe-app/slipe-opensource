@@ -1,6 +1,6 @@
 import { createContext } from 'preact';
 import { useState, useContext } from 'preact/hooks';
-import { themedColors } from '../../../constants/colors';
+import { themedColors, staticColors } from '../../../constants/colors';
 
 const ThemeContext = createContext(null);
 
@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
     const currentTheme = isLightTheme ? themedColors.light : themedColors.dark;
 
     return (
-        <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme: {...currentTheme, ...staticColors}, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );

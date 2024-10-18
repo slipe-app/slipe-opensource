@@ -6,6 +6,7 @@ import icons from "../../../constants/icons";
 export default function AuthButton({ text, type, callBack, id, isActive = true, stagesType }) {
 	const { theme } = useTheme()
 	const [currentText, setCurrentText] = useState(text);
+
 	useEffect(() => {
 		animate(`#text-${id}`, { opacity: 0 }, { duration: 0.15, easing: "ease-out" });
 		setTimeout(() => {
