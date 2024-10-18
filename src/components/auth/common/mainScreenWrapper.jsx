@@ -5,7 +5,7 @@ import fetcher from "../../../utils/fetcher";
 import hasStringByPass from "../../../utils/auth/passwordChecks";
 import validateUsername from "../../../utils/auth/usernameChecks";
 import { useLocation } from 'preact-iso';
-import { createStore } from '@tauri-apps/plugin-store';
+import { useStorage } from "../../common/contexts/sessionContext";
 
 const signUpTexts = ["Next > Password", "Next > Profile", "Dive into blogging"];
 
@@ -22,11 +22,6 @@ const getImageBlobById = async src => {
 	return data;
 };
 
-
-const store = await createStore('settings.json', {
-	autoSave: 0,
-});
-
 export default function AuthMainScreenWrapper() {
 	const [stagesType, setStagesType] = useState("main");
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -34,6 +29,7 @@ export default function AuthMainScreenWrapper() {
 	const [isContinue, setIsContinue] = useState(true);
 	const [error, setError] = useState(null);
 	const location = useLocation();
+	const { token, store } = useStorage();
 
 	const updateUserData = key => value => setUserData(prevData => ({ ...prevData, [key]: value }));
 
@@ -166,7 +162,7 @@ export default function AuthMainScreenWrapper() {
 					id='mainButton'
 					isActive={isContinue}
 					callBack={handleMainButtonClick}
-					text={stagesType === "main" ? "Start blogging" : stagesType === "logIn" ? "Log in to account" : signUpTexts[currentSlide]}
+					text={stagesType === "main" ? "Start blogging" : stagesType === "logIn" ? "Log in to account".split() : signUpTexts[currentSlide]}
 				/>
 			</div>
 		</section>
