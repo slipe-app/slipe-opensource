@@ -29,6 +29,8 @@ export default function Blogs() {
 		}
 	}, [startData, isLoading, error]);
 	
+	//Add a routing to auth if !session 
+	
 	return (
 		<main style={{ background: theme.background }} className='w-screen fixed h-screen top-0'>
 			{" "}

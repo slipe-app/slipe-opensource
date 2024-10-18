@@ -10,6 +10,8 @@ import "swiper/css";
 export default function PostActionsBlock({ reactions }) {
 	const reactionsRef = useRef(null);
 	const { theme } = useTheme();
+
+	//This for reactions scrolling fix, maybe shitcode
 	useEffect(() => {
 		const reactionsElement = reactionsRef.current;
 
@@ -19,6 +21,7 @@ export default function PostActionsBlock({ reactions }) {
 			reactionsElement.removeEventListener("touchstart", e => e.stopPropagation());
 		};
 	}, []);
+	//===
 	return (
 		<div className='w-[calc(200%-2.5rem)] p-4 pr-0 flex gap-4 bg-gradient-to-t from-black/35 to-transparent'>
 			<button
@@ -35,6 +38,7 @@ export default function PostActionsBlock({ reactions }) {
 			>
 				<Svg size={30} icon={icons["message"]} />
 			</button>
+
 			<div ref={reactionsRef} className='w-full overflow-scroll pr-2 flex gap-4'>
 				{reactions.map(reaction => (
 					<button
