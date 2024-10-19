@@ -2,16 +2,28 @@ import { useEffect, useState } from "preact/hooks";
 import UIFollowButton from "../../common/ui/followButton";
 import UIUserBlock from "../../common/ui/userBlock";
 import TimePassedFromDate from "../../../utils/time/timePassedFromDate";
+import fetcher from "../../../utils/fetcher";
+import { useStorage } from "../../common/contexts/sessionContext";
 
 export default function PostUserBlock({ user, setUser, date }) {
 	const [localUser, setLocalUser] = useState(user);
 	const [state, setState] = useState(localUser?.subscribed);
+	const { token, store } = useStorage();
 
 	async function subscribe () {
 		if (state) setState(false);
 		else setState(true);
-	}
 
+		const followRequest = await fetcher("/account/subscribe", "post", JSON.stringify({
+			user_id: user.id
+		}), { 'Content-Type': 'application/json', 'Authorization': "Bearer " + token });
+
+		if (followRequest?.error) {
+			if (state) setState(true);
+			else setState(false);
+		}
+	}
+	
 	useEffect(() => setUser({ ...user, subscribed: state }), [state]);
 
 	useEffect(() => {
