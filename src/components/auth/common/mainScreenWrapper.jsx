@@ -76,13 +76,7 @@ export default function AuthMainScreenWrapper() {
 
 					const result = await fetcher(`/settings/profile`, "post", formData, { "Authorization": "Bearer " + await store.get("token") });
 
-					if (result?.error) {
-						// error 
-						console.log(result?.error);
-					} else {
-						// redirect
-						location.route('/');
-					}
+					location.route('/');
 				} else {
 					// redirect
 					location.route('/');
