@@ -3,13 +3,26 @@ import UIFollowButton from "../../common/ui/followButton";
 import UIUserBlock from "../../common/ui/userBlock";
 import TimePassedFromDate from "../../../utils/time/timePassedFromDate";
 
-export default function PostUserBlock({ user, date }) {
-    const [state, setState] = useState(user?.subscribed);
+export default function PostUserBlock({ user, setUser, date }) {
+	const [localUser, setLocalUser] = useState(user);
+	const [state, setState] = useState(localUser?.subscribed);
+
+	async function subscribe () {
+		if (state) setState(false);
+		else setState(true);
+	}
+
+	useEffect(() => setUser({ ...user, subscribed: state }), [state]);
+
+	useEffect(() => {
+		setLocalUser(user)
+		setState(user?.subscribed)
+	}, [user]);
 
 	return (
 		<div className='w-[calc(200%-2.5rem)] p-4 flex gap-3 bg-gradient-to-b from-black/35 to-transparent'>
-			<UIUserBlock badge={user?.badge} desc={TimePassedFromDate(date)} name={user?.nickname ? user.nickname : user.username} avatar={user?.avatar} pixels={user?.pixel_order} />
-			<UIFollowButton state={state} onClick={() => setState(!state)} />
+			<UIUserBlock badge={localUser?.badge} desc={TimePassedFromDate(date)} name={localUser?.nickname ? localUser.nickname : localUser.username} avatar={localUser?.avatar} pixels={localUser?.pixel_order} />
+			<UIFollowButton state={state} onClick={subscribe} />
 		</div>
 	);
 }

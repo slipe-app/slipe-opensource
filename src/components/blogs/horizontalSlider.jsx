@@ -63,7 +63,7 @@ export default function BlogsSlider({ blogs }) {
 			>
 				{allBlogs?.map((blog, index) => (
 					<SwiperSlide key={blog?.image} className={`!overflow-visible flex flex-col justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
-						<PostUserBlock user={user} date={blog?.date} />
+						<PostUserBlock user={user} setUser={setUser} date={blog?.date} />
 						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(200%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
 						<PostActionsBlock reactions={blog.reactions}/>
 					</SwiperSlide>
