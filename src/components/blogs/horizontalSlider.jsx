@@ -10,12 +10,15 @@ import { useState, useEffect } from "preact/hooks";
 
 import fetcher from "../../utils/fetcher";
 import cdn_url from "../../constants/cdn_url";
+import PostQuickReactions from "./post/quickReactions";
 import PostActionsBlock from "./post/actionsBlock";
 import { useStorage } from "../common/contexts/sessionContext";
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
 	const [user, setUser] = useState();
+	const [miniatureImage, setMiniatureImage] = useState('');
+	const [isQuickReaction, setIsQuickReaction] = useState(false);
 	const { token, store } = useStorage();
 
 	useEffect(() => {
@@ -35,11 +38,18 @@ export default function BlogsSlider({ blogs }) {
 		}
 	}
 
+	function activateQuickReactions(slide){
+		setMiniatureImage(allBlogs[slide.activeIndex]?.image)
+		console.log(allBlogs[slide.activeIndex]?.image)
+		setIsQuickReaction(true)
+	}
+
 	return (
 		<>
 			<Swiper
 				slidesPerView={2}
         centeredSlides={true}
+				onDoubleTap={activateQuickReactions}
 				modules={[EffectCreative, Virtual]}
 				effect={"creative"}
 				creativeEffect={{
@@ -62,13 +72,15 @@ export default function BlogsSlider({ blogs }) {
 				virtual
 			>
 				{allBlogs?.map((blog, index) => (
-					<SwiperSlide key={blog?.image} className={`!overflow-visible flex flex-col justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
+					<SwiperSlide key={index} className={`!overflow-visible flex flex-col justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
 						<PostUserBlock user={user} setUser={setUser} date={blog?.date} />
 						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(200%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
 						<PostActionsBlock reactions={blog.reactions}/>
 					</SwiperSlide>
 				))}
 			</Swiper>
+			{/*All modals, sheets and etc located below*/}
+			<PostQuickReactions image={miniatureImage} setisQuickReactions={setIsQuickReaction} isQuickReactions={isQuickReaction}/>
 		</>
 	);
 }
