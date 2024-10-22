@@ -7,19 +7,19 @@ export default function AuthMainReactions() {
 		<>
 			<div className='w-full flex gap-5'>
 				<div className='flex flex-col'>
-					<Image src='emojis/moneyMouth.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
-					<Image src='emojis/sobFace.png' className='!w-full aspect-square' />
-					<Image src='emojis/vomitFace.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/0.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/1.png' className='!w-full aspect-square' />
+					<Image src='emojis/new/0/2.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
 				</div>
 				<div className='flex flex-col'>
-					<Image src='emojis/kissingFace.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
-					<Image src='emojis/faceTongue.png' className='!w-full aspect-square' />
-					<Image src='emojis/faceGlasses.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/3.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/4.png' className='!w-full aspect-square' />
+					<Image src='emojis/new/0/5.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
 				</div>
 				<div className='flex flex-col'>
-					<Image src='emojis/faceClasp.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
-					<Image src='emojis/smileFace.png' className='!w-full aspect-square' />
-					<Image src='emojis/cryingFace.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/6.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
+					<Image src='emojis/new/0/7.png' className='!w-full aspect-square' />
+					<Image src='emojis/new/0/8.png' className='!w-full scale-[0.65] opacity-50 aspect-square' />
 				</div>
 			</div>
 			<div className=' flex flex-col gap-2'>

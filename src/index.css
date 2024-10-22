@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 body {
-	font-family: 'Geist';
-    src: url('font/Geist.ttf') format('truetype');
+	font-family: "Geist";
+	src: url("font/Geist.ttf") format("truetype");
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+}
+
+.no3d {
+	transform-style: flat !important;
 }
