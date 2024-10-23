@@ -5,7 +5,7 @@ import TimePassedFromDate from "../../../utils/time/timePassedFromDate";
 import fetcher from "../../../utils/fetcher";
 import { useStorage } from "../../common/contexts/sessionContext";
 
-export default function PostUserBlock({ user, setUser, date }) {
+export default function UserBlock({ user, setUser, date }) {
 	const [localUser, setLocalUser] = useState(user);
 	const [state, setState] = useState(localUser?.subscribed);
 	const { token, store } = useStorage();

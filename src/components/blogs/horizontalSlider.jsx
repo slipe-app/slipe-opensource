@@ -5,13 +5,12 @@ import "swiper/css/effect-creative";
 
 import { EffectCreative, Virtual } from "swiper/modules";
 import { Image } from "@unpic/preact";
-import PostUserBlock from "./post/userBlock";
 import { useState, useEffect } from "preact/hooks";
-
 import fetcher from "../../utils/fetcher";
 import cdn_url from "../../constants/cdn_url";
-import PostActionsBlock from "./post/actionsBlock";
 import { useStorage } from "../common/contexts/sessionContext";
+import ActionsBlock from "./post/actionsBlock/actionsBlock";
+import UserBlock from "./post/userBlock";
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
@@ -63,9 +62,9 @@ export default function BlogsSlider({ blogs }) {
 			>
 				{allBlogs?.map((blog, index) => (
 					<SwiperSlide key={index} className={`!overflow-visible flex flex-col no3d justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
-						<PostUserBlock user={user} setUser={setUser} date={blog?.date} />
+						<UserBlock user={user} setUser={setUser} date={blog?.date} />
 						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(200%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
-						<PostActionsBlock id={blog?.id} reactions={blog.reactions} />
+						<ActionsBlock id={blog?.id} reactions={blog.reactions} />
 					</SwiperSlide>
 				))}
 			</Swiper>

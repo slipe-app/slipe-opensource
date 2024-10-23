@@ -7,6 +7,7 @@ export const staticColors = {
 	inActiveButtonNonTransBg: '#262626',
 	inActiveButtonNonTransBorder: '#474747',
     semiTransparentBg: "#00000052",
+    grayBackground: "#161616",
 }
 
 
