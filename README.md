@@ -1,4 +1,4 @@
-# Slipe 1.4V Repository
+# Slipe 2.0.0V Repository
 
 This official repository contains the open source code for the Slipe app
 
