@@ -10,6 +10,10 @@ body {
 	overflow: hidden;
 }
 
+::-webkit-scrollbar {
+	display: none;
+  }
+
 .no3d {
 	transform-style: flat !important;
 }
