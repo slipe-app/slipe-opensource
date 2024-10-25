@@ -11,58 +11,47 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 	const { token, store } = useStorage()
 	const [localCurrentReaction, setCurrentReaction] = useState();
 	const [localReactions, setReactions] = useState([]);
-
-
-	// теперь код просто большой, если повезет, исправлю это
+	
 	async function reactionClicked(reactionCategory, reactionId) {
 		let reactions = localReactions;
 		const reactionName = `${reactionCategory}_${reactionId}`;
-		const reaction = reactions?.find(reaction => reaction?.name === reactionName);
-		const reactionIndex = reactions?.indexOf(reaction);
-
+		const reactionIndex = reactions?.findIndex(reaction => reaction?.name === reactionName);
+		const currentReactionIndex = reactions?.findIndex(reaction => reaction?.name === localCurrentReaction?.name);
+	
+		const updateReactionCount = (index, count) => {
+			count === "1" ? delete reactions[index] : reactions[index].count = String(Number(count) - 1);
+		};
+	
 		if (localCurrentReaction?.name === reactionName) {
-			if (reaction?.count === "1") {
-				delete reactions[reactionIndex];
-			} else {
-				reactions[reactionIndex].count = String(Number(reaction?.count) - 1);
-			}
-
+			updateReactionCount(reactionIndex, reactions[reactionIndex]?.count);
 			setCurrentReaction();
 		} else {
-			if (localCurrentReaction) {
-				const currentReactionObject = reactions?.find(reaction => reaction?.name === localCurrentReaction?.name);
-				const currentReactionIndex = reactions?.indexOf(currentReactionObject)
-
-				if (currentReactionObject?.count === "1") {
-					delete reactions[currentReactionIndex];
-				} else {
-					reactions[currentReactionIndex].count = String(Number(currentReactionObject?.count) - 1);
-				}
-			}
-
-			if (reaction) {
-				reactions[reactionIndex].count = String(Number(reaction.count) - 1);
+			if (localCurrentReaction) updateReactionCount(currentReactionIndex, reactions[currentReactionIndex]?.count);
+			if (reactionIndex > -1) {
+				reactions[reactionIndex].count = String(Number(reactions[reactionIndex].count) + 1);
 				setCurrentReaction(reactions[reactionIndex]);
 			} else {
-				const newCurrentReaction = { name: reactionName, count: '1' };
-				reactions.push(newCurrentReaction);
-				setCurrentReaction(newCurrentReaction);
+				const newReaction = { name: reactionName, count: '1' };
+				reactions.push(newReaction);
+				setCurrentReaction(newReaction);
 			}
 		}
-
-		setReactions(reactions.filter(Boolean))
-
+	
+		setReactions(reactions.filter(Boolean));
+	
 		const formData = new FormData();
 		formData.append('to_post', id);
 		formData.append('name', reactionName);
-
+	
 		await fetcher("/reaction/add", "post", formData, { 'Authorization': "Bearer " + token });
 	}
-
+	
 	useEffect(() => {
 		setCurrentReaction(currentReaction);
 		setReactions(reactions);
 	}, []);
+
+	useEffect(() => console.log(localReactions, localCurrentReaction), [localReactions, localCurrentReaction])
 
 	return (
 		<div id={`actionsBlock-${id}`} className='w-[calc(200%-2.5rem)] rounded-b-[2rem] p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
