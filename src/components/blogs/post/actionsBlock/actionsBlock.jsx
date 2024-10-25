@@ -50,9 +50,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 		setCurrentReaction(currentReaction);
 		setReactions(reactions);
 	}, []);
-
-	useEffect(() => console.log(localReactions, localCurrentReaction), [localReactions, localCurrentReaction])
-
+	
 	return (
 		<div id={`actionsBlock-${id}`} className='w-[calc(200%-2.5rem)] rounded-b-[2rem] p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
 			<QuickReactions quickReactions={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} id={id} reactionClicked={reactionClicked} />
