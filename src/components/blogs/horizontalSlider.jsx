@@ -64,7 +64,7 @@ export default function BlogsSlider({ blogs }) {
 					<SwiperSlide key={index} className={`!overflow-visible flex flex-col no3d justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
 						<UserBlock user={user} setUser={setUser} date={blog?.date} />
 						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(200%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
-						<ActionsBlock id={blog?.id} reactions={blog.reactions} />
+						<ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} />
 					</SwiperSlide>
 				))}
 			</Swiper>
