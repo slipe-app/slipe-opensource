@@ -9,54 +9,60 @@ import { useEffect, useState } from "preact/hooks";
 export default function ActionsBlock({ reactions, currentReaction, id }) {
 	const { theme } = useTheme();
 	const { token, store } = useStorage()
-	const [ localCurrentReaction, setCurrentReaction ] = useState([]);
-	const [ localReactions, setReactions ] = useState([]);
+	const [localCurrentReaction, setCurrentReaction] = useState();
+	const [localReactions, setReactions] = useState([]);
 
 
-	//осторожно, говнокод
-	//улучшу код как добавлю удаление текущей реакции при установке новой
-	//а пока что можно наслаждаться размножением реакций
-	async function reactionClicked (reactionCategory, reactionId) {
+	// теперь код просто большой, если повезет, исправлю это
+	async function reactionClicked(reactionCategory, reactionId) {
+		let reactions = localReactions;
 		const reactionName = `${reactionCategory}_${reactionId}`;
-		const reaction = localReactions?.find(reaction => reaction?.name === reactionName);
-		const reactionIndex = localReactions?.indexOf(reaction);
+		const reaction = reactions?.find(reaction => reaction?.name === reactionName);
+		const reactionIndex = reactions?.indexOf(reaction);
+
+		if (localCurrentReaction?.name === reactionName) {
+			if (reaction?.count === "1") {
+				delete reactions[reactionIndex];
+			} else {
+				reactions[reactionIndex].count = String(Number(reaction?.count) - 1);
+			}
+
+			setCurrentReaction();
+		} else {
+			if (localCurrentReaction) {
+				const currentReactionObject = reactions?.find(reaction => reaction?.name === localCurrentReaction?.name);
+				const currentReactionIndex = reactions?.indexOf(currentReactionObject)
+
+				if (currentReactionObject?.count === "1") {
+					delete reactions[currentReactionIndex];
+				} else {
+					reactions[currentReactionIndex].count = String(Number(currentReactionObject?.count) - 1);
+				}
+			}
+
+			if (reaction) {
+				reactions[reactionIndex].count = String(Number(reaction.count) - 1);
+				setCurrentReaction(reactions[reactionIndex]);
+			} else {
+				const newCurrentReaction = { name: reactionName, count: '1' };
+				reactions.push(newCurrentReaction);
+				setCurrentReaction(newCurrentReaction);
+			}
+		}
+
+		setReactions(reactions.filter(Boolean))
 
 		const formData = new FormData();
 		formData.append('to_post', id);
 		formData.append('name', reactionName);
 
-		if (localCurrentReaction?.name == reactionName) {
-			if (reaction?.count === '1') {
-				setReactions(localReactions.filter((reaction, index) => index !== reactionIndex));
-			} else setReactions(oldValue => {
-				oldValue[reactionIndex].count = String(Number(reaction.count) - 1);
-
-				return oldValue;
-			});
-			
-			setCurrentReaction();
-		} else {
-			if (reaction) setReactions(oldValue => {
-				oldValue[reactionIndex].count = String(Number(reaction.count) + 1);
-				setCurrentReaction(oldValue[reactionIndex]);
-
-				return oldValue;
-			}); else {
-				const newCurrentReaction = {name: reactionName, count: '1'};
-				setReactions([...localReactions, newCurrentReaction]);
-				setCurrentReaction(newCurrentReaction);
-			};
-		}
-
-		// const setReactionReq = await fetcher("/reaction/add", "post", formData, { 'Authorization': "Bearer " + token });
-	};
+		await fetcher("/reaction/add", "post", formData, { 'Authorization': "Bearer " + token });
+	}
 
 	useEffect(() => {
 		setCurrentReaction(currentReaction);
 		setReactions(reactions);
 	}, []);
-
-	useEffect(() => console.log(localReactions, localCurrentReaction), [localReactions, localCurrentReaction])
 
 	return (
 		<div id={`actionsBlock-${id}`} className='w-[calc(200%-2.5rem)] rounded-b-[2rem] p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
