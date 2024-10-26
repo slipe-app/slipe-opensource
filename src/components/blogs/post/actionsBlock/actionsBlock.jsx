@@ -42,7 +42,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 		const formData = new FormData();
 		formData.append('to_post', id);
 		formData.append('name', reactionName);
-	
+		
 		await fetcher("/reaction/add", "post", formData, { 'Authorization': "Bearer " + token });
 	}
 	
@@ -52,7 +52,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 	}, []);
 	
 	return (
-		<div id={`actionsBlock-${id}`} className='w-[calc(200%-2.5rem)] rounded-b-[2rem] p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
+		<div id={`actionsBlock-${id}`} className='w-full p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
 			<QuickReactions quickReactions={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} id={id} reactionClicked={reactionClicked} />
 			<button
 				id={`commentsButton-${id}`}

@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
+import "./horizontalSlider.scss"
 
 import { EffectCreative, Virtual } from "swiper/modules";
 import { Image } from "@unpic/preact";
@@ -11,6 +12,8 @@ import cdn_url from "../../constants/cdn_url";
 import { useStorage } from "../common/contexts/sessionContext";
 import ActionsBlock from "./post/actionsBlock/actionsBlock";
 import UserBlock from "./post/userBlock";
+
+
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
@@ -56,15 +59,17 @@ export default function BlogsSlider({ blogs }) {
 						translate: [75, 0, 0],
 					},
 				}}
-				className='!w-full !h-full py-28'
+				className='blogsSlider'
 				onSlideChange={onSlideChange}
 				virtual
 			>
 				{allBlogs?.map((blog, index) => (
-					<SwiperSlide key={index} className={`!overflow-visible flex flex-col no3d justify-between ${index == 0 || 5 ? "opacity-0" : ""} items-center`} virtualIndex={index}>
-						<UserBlock user={user} setUser={setUser} date={blog?.date} />
-						<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='!w-[calc(200%-2.5rem)] -z-10 absolute top-0 rounded-[2rem] block h-full bg-black' />
-						<ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} />
+					<SwiperSlide style={{ opacity : index == 0 || 5 ? 0 : 1}} key={index} className="blogSlide" virtualIndex={index}>
+						<div className="postWrapper">
+							<UserBlock user={user} setUser={setUser} date={blog?.date} />
+							<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='postImage' />
+							<ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} />
+						</div>
 					</SwiperSlide>
 				))}
 			</Swiper>

@@ -1,0 +1,17 @@
+@import "../../../animations";
+
+header {
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    gap: 1rem;
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    z-index: 10;
+    padding: 1rem;
+    background: var(--nav-bg);
+    animation: fadeIn 0.2s ease-out;
+
+    a {
+    }
+}

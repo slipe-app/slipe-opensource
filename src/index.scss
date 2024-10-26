@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--static-green: #22c55e;
+	--static-red: #ff4b41;
+	--static-white: #fff;
+	--static-black: #000;
+	--static-blue: #0070f3;
+	--static-inactive-button-bg-nontrans: #262626;
+	--static-inactive-button-border-nontrans: #474747;
+	--static-semi-transparent-bg: #00000052;
+	--static-gray-background: #161616;
+	--text-primary-trans: #ffffff80;
+	--text-primary: #404040;
+	--modal-background: #161616;
+	--modal-backdrop: #0000001a;
+	--button-bg-inactive: #ffffff14;
+	--nav-bg: #000000cc;
+	--button-bg-nontrans: #141414;
+	--bg-color: #000000;
+	--text-color: #ffffff;
+}
+
+[data-theme="light"] {
+	--bg-color: #ffffff;
+	--text-color: #000000;
+}
+
+@mixin fullSize {
+	width: 100vw;
+	height: 100vh;
+}
+
+@font-face {
+	font-family: "Geist";
+	src: url("font/Geist.ttf") format("truetype");
+}
+
+body {
+	@include fullSize;
+	font-family: "Geist";
+	background-color: var(--bg-color);
+	overflow: hidden;
+
+	main {
+		@include fullSize;
+		top: 0;
+		position: fixed;
+	}
+}
+
+::-webkit-scrollbar {
+	display: none;
+}

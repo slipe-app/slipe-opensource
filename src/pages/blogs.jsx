@@ -30,9 +30,6 @@ export default function Blogs() {
 	}, [startData, isLoading, error]);
 
 	return (
-		<main style={{ background: theme.background }} className='w-screen fixed h-screen top-0'>
-			{" "}
 			<UsersSlider users={users} blogs={blogs} />
-		</main>
 	);
 }

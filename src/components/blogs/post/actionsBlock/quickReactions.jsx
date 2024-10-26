@@ -43,11 +43,9 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], r
 		animate(`#reactionsBlockButton1-${id}`, { opacity: isReactions ? 0 : 1, scale: isReactions ? 0.4 : 1 }, { easing: "ease-out", duration: 0.2 });
 	};
 
-	const animateExpandedReactions = state => {
+	const animateExpandedReactions = (state) => {
 		setIsExpanded(state);
-		animate(`#actionsBlock-${id}`, { padding: state ? "0rem" : "1rem" }, { easing: "ease-out", duration: 0.2 });
-
-		animate(`#reactionsBlock-${id}`, { borderRadius: state ? "0rem" : "5rem" }, { easing: "ease-out", duration: 0.2 });
+		animate(`#reactionsBlock-${id}`, { height: state ? "3.75rem" : "23rem" }, { easing: "ease-out", duration: 0.2 })
 	};
 
 	useEffect(() => {
@@ -59,10 +57,10 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], r
 	}, []);
 
 	return (
-		<div id={`reactionsBlock-${id}`} style={{ color: theme.white, background: theme.semiTransparentBg }} className='rounded-[5rem] p-[0.1875rem] gap-3 flex w-[3.125rem] min-w-[3.125rem]'>
+		<div id={`reactionsBlock-${id}`} style={{ color: theme.white, background: theme.semiTransparentBg }} className='rounded-[2.25rem] p-[0.1875rem] items-end gap-3 flex w-[3.125rem] min-w-[3.125rem]'>
 			<button
 				id={`reactionsBlockButton-${id}`}
-				onClick={() => animateReactionsBlock(!isReactions)}
+				onClick={() => {animateReactionsBlock(!isReactions); animateExpandedReactions(isExpanded)}}
 				style={{ color: theme.white }}
 				className='rounded-full duration-200 ease-out relative flex justify-center items-center active:opacity-80 active:scale-[0.97] min-w-11 h-11'
 			>
@@ -71,7 +69,15 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], r
 			</button>
 			<div ref={reactionsRef} className='w-full overflow-scroll flex gap-4 items-center'>
 				{quickReactions.map((reaction, index) => (
-					<button onClick={() => reactionClicked(0, reaction)} id={`reactionsBlockReaction-${id}-${index}`} className='min-w-[2.125rem]'>
+					<button
+						onClick={() => {
+							reactionClicked(0, reaction);
+							animateReactionsBlock(false);
+							animateExpandedReactions(false);
+						}}
+						id={`reactionsBlockReaction-${id}-${index}`}
+						className='min-w-[2.125rem] h-11'
+					>
 						<Image width={34} height={34} className='duration-200 ease-out active:opacity-80 active:scale-[0.97]' src={`emojis/new/0/${reaction}.png`} />
 					</button>
 				))}
@@ -80,9 +86,9 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], r
 				id={`reactionsBlockButton1-${id}`}
 				onClick={() => animateExpandedReactions(!isExpanded)}
 				style={{ color: theme.white, background: theme.buttonInactiveBg }}
-				className='rounded-full scale-[0.4] opacity-0 flex justify-center items-center ease-out active:opacity-80 min-w-[2.75rem] active:scale-[0.97] p-[0.4375rem]'
+				className='rounded-full scale-[0.4] opacity-0 flex justify-center items-center ease-out active:opacity-80 min-w-[2.75rem] h-11 active:scale-[0.97] p-[0.4375rem]'
 			>
-				<Svg size={24} className='rotate-90' icon={icons["chevronLeft"]} />
+				<Svg size={24} className={`${isExpanded ? "rotate-90" : "-rotate-90"} duration-200 ease-out`} icon={icons["chevronLeft"]} />
 			</button>
 		</div>
 	);

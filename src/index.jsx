@@ -2,7 +2,7 @@ import { render } from "preact";
 import { Router, Route } from "preact-iso";
 
 import Blogs from "./pages/blogs.jsx";
-import "./index.css";
+import "./index.scss";
 import Profile from "./pages/profile.jsx";
 import Search from "./pages/search.jsx";
 import Header from "./components/common/header/header.jsx";
@@ -15,12 +15,14 @@ export function App() {
 	return (
 		<IndexContexts>
 			<Header />
+			<main>
 				<Router>
 					<Route path='/' component={Blogs} />
 					<Route path='/profile' component={Profile} />
 					<Route path='/search' component={Search} />
 					<Route path='/auth' component={Auth} />
 				</Router>
+			</main>
 			<TabBar />
 		</IndexContexts>
 	);

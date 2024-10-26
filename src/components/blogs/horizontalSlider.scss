@@ -1,0 +1,33 @@
+
+.blogsSlider {
+    width: 100%;
+    height: 100%;
+    padding: 7rem 0rem;
+}
+
+.blogSlide {
+    display: flex;
+    justify-content: center;
+    overflow: visible !important;
+}
+
+.postWrapper {
+    display: flex;
+    width: calc(200% - 2.5rem);
+    position: absolute;
+    border-radius: 2rem;
+    justify-content: space-between;
+    height: 100%;
+    overflow: hidden;
+    align-items: center;
+    flex-direction: column;
+
+    .postImage{
+        width: 100% !important;
+        z-index: -10;
+        position: absolute;
+        top: 0;
+        display: block;
+        height: 100%;
+    }
+}

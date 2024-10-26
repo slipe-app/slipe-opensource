@@ -28,6 +28,7 @@
     "@tauri-apps/cli": ">=2.0.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
+    "sass": "^1.80.4",
     "tailwindcss": "^3.4.14",
     "vite": "^5.3.1"
   }
