@@ -6,7 +6,7 @@ import "./index.scss";
 import Profile from "./pages/profile.jsx";
 import Search from "./pages/search.jsx";
 import Header from "./components/common/header/header.jsx";
-import TabBar from "./components/common/tabBar.jsx";
+import TabBar from "./components/common/tabBar/tabBar.jsx";
 import Auth from "./pages/auth.jsx";
 import IndexContexts from "./components/common/contexts/contexts.jsx";
 

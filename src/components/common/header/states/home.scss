@@ -1,0 +1,53 @@
+@mixin button-link {
+    border-radius: 999rem;
+    transition: 200ms ease-out;
+    padding: 0.75rem;
+}
+
+@mixin switcher__tab {
+    flex: 1;
+    z-index: 10;
+    font-weight: 500;
+    text-align: center;
+    transition: 200ms ease-out;
+}
+
+.button--active {
+    @include button-link;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.button--inactive {
+    @include button-link;
+    background-color: var(--button-bg-inactive);
+    color: var(--text-color);
+}
+
+.switcher {
+    padding: 0.25rem;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 999rem;
+    background-color: var(--button-bg-inactive);
+
+    .switcher__indicator {
+        position: absolute;
+        width: calc(50% - 0.25rem);
+        height: calc(100% - 0.5rem);
+        border-radius: 999rem;
+        background-color: var(--button-bg-inactive);
+    }
+
+    .tab--active {
+        @include switcher__tab;
+        color: var(--text-color);
+    }
+
+    .tab--inactive {
+        @include switcher__tab;
+        color: var(--text-primary-trans);
+    }
+}

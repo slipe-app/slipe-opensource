@@ -28,7 +28,7 @@
 	--text-color: #000000;
 }
 
-@mixin fullSize {
+@mixin full-size {
 	width: 100vw;
 	height: 100vh;
 }
@@ -39,13 +39,13 @@
 }
 
 body {
-	@include fullSize;
+	@include full-size;
 	font-family: "Geist";
 	background-color: var(--bg-color);
 	overflow: hidden;
 
 	main {
-		@include fullSize;
+		@include full-size;
 		top: 0;
 		position: fixed;
 	}

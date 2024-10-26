@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
-import "./horizontalSlider.scss"
+import "./sliders.scss"
 
 import { EffectCreative, Virtual } from "swiper/modules";
 import { Image } from "@unpic/preact";
@@ -59,15 +59,15 @@ export default function BlogsSlider({ blogs }) {
 						translate: [75, 0, 0],
 					},
 				}}
-				className='blogsSlider'
+				className='blogs_slider'
 				onSlideChange={onSlideChange}
 				virtual
 			>
 				{allBlogs?.map((blog, index) => (
-					<SwiperSlide style={{ opacity : index == 0 || 5 ? 0 : 1}} key={index} className="blogSlide" virtualIndex={index}>
-						<div className="postWrapper">
+					<SwiperSlide style={{ opacity : index == 0 || 5 ? 0 : 1}} key={index} className="blogs_slider__blog_slide" virtualIndex={index}>
+						<div className="blog_slide__post-wrapper">
 							<UserBlock user={user} setUser={setUser} date={blog?.date} />
-							<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='postImage' />
+							<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='post-wrapper__post-image' />
 							<ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} />
 						</div>
 					</SwiperSlide>

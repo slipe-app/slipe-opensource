@@ -1,0 +1,50 @@
+@import "../../../animations";
+
+@mixin tab-bar__tab {
+    width: 100%;
+    transition: 200ms ease-out;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    color: VAR(--text-color);
+    justify-content: center;
+}
+
+.tab-bar {
+    background-color: var(--nav-bg);
+    width: 100vw;
+    animation: fade-in 0.2s ease-out;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    z-index: 10;
+
+    .tab--active {
+        @include tab-bar__tab;
+        opacity: 1;
+    }
+
+    .tab--inactive {
+        @include tab-bar__tab;
+        opacity: 0.25;
+    }
+
+    .tab_user--inactive {
+        @include tab-bar__tab;
+        opacity: 0.5;
+    }
+}
+
+.avatar-wrapper {
+    width: 2.75rem;
+    height: 2.75rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    img {
+        border-radius: 999rem;
+    }
+}
