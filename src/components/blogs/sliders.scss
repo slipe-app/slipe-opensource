@@ -19,6 +19,7 @@
 
 .blog_slide__post-wrapper {
     display: flex;
+    background-color: var(--modal-background);
     width: calc(200% - 2.5rem);
     position: absolute;
     border-radius: 2rem;
@@ -30,7 +31,6 @@
 
     .post-wrapper__post-image {
         @include full_size(true);
-        z-index: -10;
         position: absolute;
         top: 0;
         display: block;

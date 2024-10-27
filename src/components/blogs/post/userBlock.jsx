@@ -32,8 +32,8 @@ export default function UserBlock({ user, setUser, date }) {
 	}, [user]);
 
 	return (
-		<div className='w-full p-4 flex gap-3 bg-gradient-to-b from-black/35 to-transparent'>
-			<UIUserBlock badge={localUser?.badge} desc={TimePassedFromDate(date)} name={localUser?.nickname ? localUser.nickname : localUser.username} avatar={localUser?.avatar} pixels={localUser?.pixel_order} />
+		<div className='w-full z-10 p-4 flex gap-3 bg-gradient-to-b from-black/35 to-transparent'>
+			<UIUserBlock badge={localUser?.badge} desc={TimePassedFromDate(date)} name={localUser.nickname} username={localUser.username} avatar={localUser?.avatar} pixels={localUser?.pixel_order} />
 			<UIFollowButton state={state} onClick={subscribe} />
 		</div>
 	);

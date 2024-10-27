@@ -52,7 +52,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 	}, []);
 	
 	return (
-		<div id={`actionsBlock-${id}`} className='w-full p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
+		<div id={`actionsBlock-${id}`} className='w-full z-10 p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
 			<QuickReactions quickReactions={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} id={id} reactionClicked={reactionClicked} />
 			<button
 				id={`commentsButton-${id}`}

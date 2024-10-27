@@ -1,13 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-
 import BlogsSlider from "./horizontalSlider";
 import { Virtual } from "swiper/modules";
 import { useEffect, useState } from "preact/hooks";
 import { useStorage } from "../common/contexts/sessionContext";
-
 import fetcher from "../../utils/fetcher";
+
+import "swiper/css";
+import "./sliders.scss";
 
 export default function UsersSlider({ users, blogs }) {
 	const [allUsers, setUsers] = useState();

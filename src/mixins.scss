@@ -1,3 +1,5 @@
+@import "./animations";
+
 @mixin full_size($isImportant: false) {
     width: 100%#{if($isImportant, " !important", "")};
     height: 100%#{if($isImportant, " !important", "")};
@@ -5,7 +7,22 @@
 
 @mixin screen_size {
     width: 100vw;
-	height: 100vh;
+    height: 100vh;
+}
+
+@mixin pixel($index: 0, $delay: 0.2, $opacity: 0.25) {
+    .pixel-avatar__pixel-#{$index} {
+        @include full_size;
+        opacity: $opacity;
+        animation: fade-in $delay ease-out;
+    }
+}
+
+@mixin element--pressed($scale: 0.97, $opacity: 0.8) {
+    &:active {
+        transform: scale($scale);
+        opacity: $opacity;
+    }
 }
 
 @mixin tab-bar__tab {

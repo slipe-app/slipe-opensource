@@ -1,0 +1,43 @@
+@import '../../../mixins';
+
+.user_block {
+    width: 100%;
+    display: flex;
+    gap: 0.625rem;
+    transition: 0.2s ease-out;
+    align-items: center;
+    overflow: hidden;
+
+    @include element--pressed(0.99);
+
+    .user-block__avatar {
+        border-radius: 999rem;
+    }
+}
+
+.user-block__user-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.user-info__username-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 0.25rem;
+
+    .username-wrapper__username {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: fit-content;
+        text-overflow: ellipsis;
+        font-weight: 500;
+        color: var(--static-white);
+    }
+}
+
+.user-info__description {
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.75);
+}
