@@ -1,16 +1,4 @@
-@mixin button-link {
-    border-radius: 999rem;
-    transition: 200ms ease-out;
-    padding: 0.75rem;
-}
-
-@mixin switcher__tab {
-    flex: 1;
-    z-index: 10;
-    font-weight: 500;
-    text-align: center;
-    transition: 200ms ease-out;
-}
+@import "../../../../mixins";
 
 .button--active {
     @include button-link;

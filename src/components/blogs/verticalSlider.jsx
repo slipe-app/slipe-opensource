@@ -42,9 +42,9 @@ export default function UsersSlider({ users, blogs }) {
 
 	return (
 		<>
-			<Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='!w-full !h-full' onSlideChange={onSlideChange} virtual>
+			<Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='users_slider' onSlideChange={onSlideChange} virtual>
 				{allUsers?.map((username, index) => (
-					<SwiperSlide key={index} virtualIndex={index} className='!w-full !h-full'>
+					<SwiperSlide key={index} virtualIndex={index} className='users_slider'>
 						<BlogsSlider blogs={allBlogs.filter(blog => blog.author.username === username)} />
 					</SwiperSlide>
 				))}

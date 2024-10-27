@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './mixins';
+
 :root {
 	--static-green: #22c55e;
 	--static-red: #ff4b41;
@@ -28,24 +30,19 @@
 	--text-color: #000000;
 }
 
-@mixin full-size {
-	width: 100vw;
-	height: 100vh;
-}
-
 @font-face {
 	font-family: "Geist";
 	src: url("font/Geist.ttf") format("truetype");
 }
 
 body {
-	@include full-size;
+	@include screen_size;
 	font-family: "Geist";
 	background-color: var(--bg-color);
 	overflow: hidden;
 
 	main {
-		@include full-size;
+		@include screen_size;
 		top: 0;
 		position: fixed;
 	}

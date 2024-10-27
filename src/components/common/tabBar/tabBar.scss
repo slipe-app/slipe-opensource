@@ -1,14 +1,5 @@
 @import "../../../animations";
-
-@mixin tab-bar__tab {
-    width: 100%;
-    transition: 200ms ease-out;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    display: flex;
-    color: VAR(--text-color);
-    justify-content: center;
-}
+@import "../../../mixins";
 
 .tab-bar {
     background-color: var(--nav-bg);
