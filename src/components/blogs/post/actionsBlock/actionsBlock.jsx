@@ -2,6 +2,7 @@ import icons from "../../../../constants/icons";
 import { useTheme } from "../../../common/contexts/themeContext";
 import Svg from "../../../common/ui/utils/svg";
 import QuickReactions from "./quickReactions";
+import { Image } from "@unpic/preact";
 import fetcher from "../../../../utils/fetcher";
 import { useStorage } from "../../../common/contexts/sessionContext";
 import { useEffect, useState, useRef } from "preact/hooks";
@@ -9,8 +10,8 @@ import { useEffect, useState, useRef } from "preact/hooks";
 export default function ActionsBlock({ reactions, currentReaction, id }) {
 	const { theme } = useTheme();
 	const { token, store } = useStorage();
-	const [localCurrentReaction, setCurrentReaction] = useState();
-	const [localReactions, setReactions] = useState([]);
+	const [localCurrentReaction, setCurrentReaction] = useState(currentReaction);
+	const [localReactions, setReactions] = useState(reactions);
 	const reactionsRef = useRef(null);
 
 	async function reactionClicked(reactionCategory, reactionId) {
@@ -48,20 +49,16 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 	}
 
 	useEffect(() => {
-		const reactionsElement = reactionsRef.current;
+		const reactionsElement = reactionsRef?.current;
 
 		reactionsElement.addEventListener("touchstart", e => e.stopPropagation());
-
-		setCurrentReaction(currentReaction);
-		setReactions(reactions);
-
 		return () => {
 			reactionsElement.removeEventListener("touchstart", e => e.stopPropagation());
 		};
 	}, []);
 
 	return (
-		<div id={`actionsBlock-${id}`} className='w-full z-10 p-4 pr-0 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
+		<div id={`actionsBlock-${id}`} className='w-full z-10 p-4 flex items-end gap-4 bg-gradient-to-t overflow-hidden from-black/25 to-transparent'>
 			<QuickReactions quickReactions={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} id={id} reactionClicked={reactionClicked} />
 			<button
 				id={`commentsButton-${id}`}
@@ -76,7 +73,8 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 						style={{ color: theme.white, background: theme.semiTransparentBg }}
 						className='rounded-full flex min-w-fit items-center font-medium gap-2 duration-200 ease-out active:scale-[0.97] active:opacity-80 px-5 p-[0.625rem]'
 					>
-						{reaction.name}
+						<Image width={30} height={30} src={reaction.name?.startsWith("emoji_") ? `emojis/old/${reaction.name}` : `emojis/new/${reaction.name[0]}/${reaction.name.slice(2, reaction.name.length)}.png`} />
+						{reaction.count}
 					</button>
 				))}
 			</div>
