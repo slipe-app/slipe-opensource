@@ -1,0 +1,20 @@
+@import "../../../mixins";
+
+.full_screen_sheet {
+    @include screen_size;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+
+    &--blured {
+        @extend .full_screen_sheet;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    &--default {
+        @extend .full_screen_sheet;
+        background: var(--bg-color);
+    }
+}

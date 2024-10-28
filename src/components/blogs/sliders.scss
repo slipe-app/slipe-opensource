@@ -15,6 +15,11 @@
     display: flex;
     justify-content: center;
     overflow: visible !important;
+
+    &--phantom {
+        @extend .blogs_slider__blog_slide;
+        opacity: 0;
+    }
 }
 
 .blog_slide__post-wrapper {

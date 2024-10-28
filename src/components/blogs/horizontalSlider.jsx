@@ -61,7 +61,7 @@ export default function BlogsSlider({ blogs }) {
 				virtual={true}
 			>
 				{allBlogs?.map((blog, index) => (
-					<SwiperSlide style={{ opacity : index == 0 || 5 ? 0 : 1}} key={index} className="blogs_slider__blog_slide" virtualIndex={index}>
+					<SwiperSlide key={index} className={`blogs_slider__blog_slide${index == 0 || 5 ? "--phantom" : ""}`} virtualIndex={index}>
 						<div id={index}  className="blog_slide__post-wrapper">
 							<UserBlock user={user} setUser={setUser} date={blog?.date} />
 							<Image width={1600} height={1600} src={cdn_url + `/posts/${blog?.image}`} className='post-wrapper__post-image' />

@@ -3,7 +3,9 @@ import { animate } from "motion";
 import { useEffect } from "preact/compat";
 import { useTheme } from "../contexts/themeContext";
 
-export default function UIFullScreenSheet({ children, isBackdropBlur = false, isOpen = false, onClick, id = "1", zIndex = 20 }) {
+import "./fullScreenSheet.scss";
+
+export default function UIFullScreenSheet({ children, backdropBlur = false, isOpen = false, onClick, id = "1", zIndex = 20 }) {
 	const [isRender, setIsRender] = useState(false);
 	const { theme } = useTheme();
 	useEffect(() => {
@@ -24,12 +26,7 @@ export default function UIFullScreenSheet({ children, isBackdropBlur = false, is
 		<>
 			{isRender &&
 				createPortal(
-					<div
-						style={{ background: isBackdropBlur ? theme.semiTransparentBg : theme.background, backdropFilter: isBackdropBlur ? "blur(12px)" : "", zIndex: zIndex }}
-						id={`UIFullScreenSheet-${id}`}
-						onClick={onClick}
-						className='w-screen absolute opacity-0 top-0 left-0 h-screen'
-					>
+					<div style={{ zIndex: zIndex }} id={`UIFullScreenSheet-${id}`} onClick={onClick} className={`full_screen_sheet${backdropBlur ? "--blured" : "--default"}`}>
 						{children}
 					</div>,
 					document.body

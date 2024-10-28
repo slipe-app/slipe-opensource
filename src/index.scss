@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './mixins';
+@import "./mixins";
 
 :root {
 	--static-green: #22c55e;
@@ -10,8 +10,8 @@
 	--static-white: #fff;
 	--static-black: #000;
 	--static-blue: #0070f3;
-	--static-inactive-button-bg-nontrans: #262626;
-	--static-inactive-button-border-nontrans: #474747;
+	--static-gray-button: #262626;
+	--static-gray-button-border: #474747;
 	--static-semi-transparent-bg: #00000052;
 	--static-gray-background: #161616;
 	--text-primary-trans: #ffffff80;
@@ -20,6 +20,8 @@
 	--modal-backdrop: #0000001a;
 	--button-bg-inactive: #ffffff14;
 	--nav-bg: #000000cc;
+	--gray-button: #262626;
+	--gray-button-border: #474747;
 	--button-bg-nontrans: #141414;
 	--bg-color: #000000;
 	--text-color: #ffffff;

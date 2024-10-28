@@ -28,4 +28,7 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
+  build: {
+    target: 'esnext'
+  },
 }));

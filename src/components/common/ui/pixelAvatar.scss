@@ -1,5 +1,5 @@
-@import '../../../mixins';
-@import '../../../animations.scss';
+@import "../../../mixins";
+@import "../../../animations.scss";
 
 .pixel_avatar {
     overflow: hidden;
@@ -10,6 +10,6 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
 
     @for $i from 0 through 3 {
-        @include pixel($i, 0.2s + ($i * 0.1s), 0.25 + ($i * 0.25))
+        @include pixel($i, 0.2s + ($i * 0.1s), 0.25 + ($i * 0.25));
     }
 }

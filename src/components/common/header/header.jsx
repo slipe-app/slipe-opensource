@@ -14,7 +14,7 @@ export default function Header() {
 	return (
 		<>
 			{url !== "/auth" ? (
-				<header className="header">
+				<header className={`header${url == "/profile" ? "" : "--with_bg"}`}>
 					<StateHome url={url}/>
 				</header>
 			) : null}

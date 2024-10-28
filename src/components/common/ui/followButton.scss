@@ -1,1 +1,31 @@
 @import "../../../mixins";
+
+.follow_button {
+    border-radius: 999rem;
+    transition: 0.2s ease-out;
+    font-weight: 500;
+    border-width: 0.09375rem;
+
+    &--un_followed {
+        @extend .follow_button;
+        background-color: var(--static-blue);
+        color: var(--static-white);
+        border-color: transparent;
+    }
+
+    &--followed {
+        @extend .follow_button;
+        background-color: var(--gray-button);
+        color: var(--text-color);
+        border-color: var(--gray-button-border);
+    }
+
+    &--followed_fixed {
+        @extend .follow_button;
+        background-color: var(--static-gray-button);
+        color: var(--static-white);
+        border-color: var(--static-gray-button-border);
+    }
+
+    @include element--pressed(0.99, 0.9);
+}

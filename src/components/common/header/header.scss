@@ -5,10 +5,15 @@ header {
     position: fixed;
     display: flex;
     gap: 1rem;
-    backdrop-filter: blur(64px);
-    -webkit-backdrop-filter: blur(64px);
     z-index: 10;
     padding: 1rem;
     background: var(--nav-bg);
     animation: fade-in 0.2s ease-out;
+
+    &--with_bg {
+        @extend header;
+        background: var(--nav-bg);
+        backdrop-filter: blur(64px);
+        -webkit-backdrop-filter: blur(64px);
+    }
 }

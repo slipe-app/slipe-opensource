@@ -1,20 +1,17 @@
-import { staticColors } from "../../../constants/colors";
+import icons from "../../../constants/icons";
+import Svg from "./utils/svg";
 
-export default function UIFollowButton({ state = false, isCompact = false, paddingX = "1.5rem", paddingY = "0.75rem", fontSize = "1rem", iconSize = 24, onClick }) {
+import "./followButton.scss";
+
+export default function UIFollowButton({ compact = false, subscribed = false, fixed = false, onClick, iconSize = 26, padding = 0.75 }) {
 	return (
 		<>
 			<button
-				style={{
-					padding: `${paddingY} ${paddingX}`,
-					borderColor: state ? staticColors.inActiveButtonNonTransBorder : staticColors.blue,
-					fontSize: fontSize,
-					background: state ? staticColors.inActiveButtonNonTransBg : staticColors.blue,
-					color: staticColors.white,
-				}}
-				className='rounded-full active:opacity-80 border-[1.5px] duration-200 ease-out font-medium'
+				style={{ padding: `${padding}rem ${padding * 2}rem` }}
 				onClick={onClick}
+				className={`follow_button${subscribed ? (fixed ? "--followed_fixed" : "--followed") : "--un_followed"}`}
 			>
-				{state ? "Unfollow" : "Follow"}
+				{subscribed ? <>{compact ? <Svg size={iconSize} icon={icons["x"]} /> : <>Followed</>}</> : <>{compact ? <Svg size={iconSize} icon={icons["checkmark"]} /> : <>Follow</>}</>}
 			</button>
 		</>
 	);
