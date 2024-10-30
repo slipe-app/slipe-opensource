@@ -6,9 +6,9 @@ import "./userBlock.scss";
 
 export default function UIUserBlock({ avatar, badge, name, username, desc, pixels }) {
 	return (
-		<div className='user_block'>
+		<div className='ui_user_block'>
 			{avatar ? <Image width={48} height={48} className='user-block__avatar' src={`${cdn_url}/avatars/${avatar}`} /> : <PixelAvatar size={48} username={username} pixels={pixels} />}
-			<div className='user-block__user-info'>
+			<div className='ui_user-block__user-info'>
 				<div className='user-info__username-wrapper'>
 					<div className='username-wrapper__username'>{name ? name : username}</div>
 				</div>

@@ -1,6 +1,6 @@
 @import "../../../mixins";
 
-.user_block {
+.ui_user_block {
     width: 100%;
     display: flex;
     gap: 0.625rem;
@@ -15,7 +15,7 @@
     }
 }
 
-.user-block__user-info {
+.ui_user-block__user-info {
     display: flex;
     flex-direction: column;
     width: 100%;

@@ -1,0 +1,39 @@
+@import "../../../../mixins";
+@import "../../../../animations";
+
+.quick-reactions-wrapper {
+    transition: 0.2s ease-out;
+    overflow: hidden;
+    display: flex;
+
+    &--expanded {
+        @extend .quick-reactions-wrapper;
+        width: 100%;
+        opacity: 1;
+    }
+
+    &--closed {
+        @extend .quick-reactions-wrapper;
+        width: 0%;
+        opacity: 0;
+    }
+}
+
+.quick-reactions-list {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.quick-reactions-list__reaction {
+    @include element--pressed(1, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &--disabled {
+        @extend .quick-reactions-list__reaction;
+        opacity: 0.5;
+    }
+}

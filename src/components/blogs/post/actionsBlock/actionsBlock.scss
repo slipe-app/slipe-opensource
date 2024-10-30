@@ -1,0 +1,94 @@
+@import "../../../../mixins";
+
+@mixin action-button {
+    position: relative;
+    display: flex;
+    color: var(--text-color);
+    border-radius: 999rem;
+    transition: 0.2s ease-out;
+}
+
+.actions_block {
+    width: 100%;
+    z-index: 10;
+    padding: 1rem;
+    padding-right: 0rem;
+    display: flex;
+    align-items: end;
+    overflow: hidden;
+    gap: 1rem;
+    background: linear-gradient(to top, #00000040, #00000000);
+}
+
+.actions-block__reactions {
+    width: 100%;
+    overflow-x: scroll;
+    display: flex;
+    transition: 0.2s ease-out;
+    gap: 1rem;
+
+    &--hidden {
+        @extend .actions-block__reactions;
+        margin-right: -130%;
+        opacity: 0;
+    }
+}
+
+.action-block__action-button--expanded {
+    @include action-button;
+    width: calc(100% - 1rem);
+    padding: 0.4375rem;
+    background-color: var(--modal-background);
+}
+
+.action-block__action-button--closed {
+    @include element--pressed;
+    @include action-button;
+    width: 3.125rem;
+    padding: 0.125rem;
+    background-color: var(--static-semi-transparent-bg);
+}
+
+.action-block__action-button--comments {
+    @include element--pressed;
+    @include action-button;
+    background-color: var(--static-semi-transparent-bg);
+    padding: 0.625rem;
+
+    &--hidden {
+        @extend .action-block__action-button--comments;
+        opacity: 0;
+    }
+}
+
+.action-button__button {
+    @include element--pressed;
+    height: 2.875rem;
+    min-width: 2.875rem;
+    width: 2.875rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    border-radius: 999rem;
+    transition: 0.2s ease-out;
+
+    &--active {
+        @extend .action-button__button;
+        background-color: var(--button-bg-inactive);
+    }
+}
+
+.reactions__reaction {
+    @include element--pressed;
+    color: var(--text-color);
+    background-color: var(--static-semi-transparent-bg);
+    border-radius: 999rem;
+    transition: 0.2s ease-out;
+    display: flex;
+    min-width: fit-content;
+    align-items: center;
+    font-weight: 500;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+}
