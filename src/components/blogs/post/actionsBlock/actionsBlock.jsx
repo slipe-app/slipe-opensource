@@ -25,6 +25,8 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 		};
 	}, []);
 
+	console.log(localReactions, localCurrentReaction)
+
 	return (
 		<div className='actions_block'>
 			<div className={`action-block__action-button${isReactions ? "--expanded" : "--closed"}`}>
@@ -43,7 +45,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 				<Svg size={30} icon={icons["message"]} />
 			</button>
 			<div ref={reactionsRef} className={`actions-block__reactions${isReactions ? "--hidden" : ""}`}>
-				{reactions.map(reaction => (
+				{localReactions.map(reaction => (
 					<button className='reactions__reaction'>
 						<Image
 							width={30}
