@@ -81,8 +81,6 @@
 
 .reactions__reaction {
     @include element--pressed;
-    color: var(--text-color);
-    background-color: var(--static-semi-transparent-bg);
     border-radius: 999rem;
     transition: 0.2s ease-out;
     display: flex;
@@ -91,4 +89,16 @@
     font-weight: 500;
     gap: 0.5rem;
     padding: 0.625rem 1.25rem;
+
+    &--active {
+        @extend .reactions__reaction;
+        background-color: var(--static-white);
+        color: var(--static-black);
+    }
+
+    &--inactive {
+        @extend .reactions__reaction;
+        color: var(--text-color);
+        background-color: var(--static-semi-transparent-bg);
+    }
 }

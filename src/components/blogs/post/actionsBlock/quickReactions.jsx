@@ -1,21 +1,12 @@
 import { Image } from "@unpic/preact";
 import Svg from "../../../common/ui/utils/svg";
 import icons from "../../../../constants/icons";
-import { useRef, useEffect } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 
 import "./quickReactions.scss";
 import { animate } from "motion";
 
 export default function QuickReactions({ reactionClicked, quickReactions = [], setIsReactions, isReactions = false }) {
-	const reactionsRef = useRef(null);
-
-	// useEffect(() => {
-	// 	reactionsRef.current.addEventListener("touchstart", e => e.stopPropagation());
-
-	// 	return () => {
-	// 		reactionsRef.current.removeEventListener("touchstart", e => e.stopPropagation());
-	// 	};
-	// }, []);
 
 	useEffect(() => {
 		quickReactions.map(index => {

@@ -1,5 +1,4 @@
 import icons from "../../../../constants/icons";
-import { useTheme } from "../../../common/contexts/themeContext";
 import Svg from "../../../common/ui/utils/svg";
 import QuickReactions from "./quickReactions";
 import { Image } from "@unpic/preact";
@@ -25,7 +24,9 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 		};
 	}, []);
 
-	console.log(localReactions, localCurrentReaction)
+	const reactionClick = (reactionCategory, reactionId) => {
+		ReactionClicked(reactionCategory, reactionId, localReactions, localCurrentReaction, id, token, setCurrentReaction, setReactions);
+	};
 
 	return (
 		<div className='actions_block'>
@@ -34,7 +35,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 					isReactions={isReactions}
 					setIsReactions={setIsReactions}
 					quickReactions={[0, 1, 2, 3, 4]}
-					reactionClicked={(reactionCategory, reactionId) => ReactionClicked(reactionCategory, reactionId, localReactions, localCurrentReaction, id, token, setCurrentReaction, setReactions)}
+					reactionClicked={(reactionCategory, reactionId) => reactionClick(reactionCategory, reactionId)}
 				/>
 				<button onClick={() => setIsReactions(!isReactions)} className={`action-button__button${isReactions ? "--active" : ""}`}>
 					<Svg size={30} icon={icons["smile"]} />
@@ -46,7 +47,10 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 			</button>
 			<div ref={reactionsRef} className={`actions-block__reactions${isReactions ? "--hidden" : ""}`}>
 				{localReactions.map(reaction => (
-					<button className='reactions__reaction'>
+					<button
+						onClick={reaction.name?.startsWith("emoji_") ? () => {} : () => reactionClick(reaction.name[0], reaction.name.slice(2, reaction.name.length))}
+						className={`reactions__reaction--${reaction.name === localCurrentReaction?.name ? "active" : "inactive"}`}
+					>
 						<Image
 							width={30}
 							height={30}
