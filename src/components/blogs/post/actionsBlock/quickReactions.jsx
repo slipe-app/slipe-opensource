@@ -19,7 +19,7 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], s
 
 	useEffect(() => {
 			quickReactions.map(index => {
-				animate(`.quick-reaction-${index}`, isReactions ? {scale: 1, opacity: 1,} : {scale: 0.25, opacity: 0,}, {easing: 'ease-out', duration: 0.1 + (index * 0.1)})
+				animate(`.quick-reaction-${index}`, isReactions ? {scale: 1, opacity: 1,} : {scale: 0.25, opacity: 0,}, {easing: 'ease-out', duration: 0.2 + (index * 0.05)})
 	})
 			
 	}, [isReactions])
@@ -32,7 +32,7 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], s
 			<div className='quick-reactions-list'>
 				{quickReactions.map((reaction, index) => (
 					<button className={`quick-reactions-list__reaction quick-reaction-${index}`}>
-						<Image width={36} height={36} src={`emojis/new/0/${reaction}.png`} />
+						<Image width={34} height={34} src={`emojis/new/0/${reaction}.png`} />
 					</button>
 				))}
 			</div>

@@ -31,7 +31,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 				<QuickReactions
 					isReactions={isReactions}
 					setIsReactions={setIsReactions}
-					quickReactions={[0, 1, 2, 3]}
+					quickReactions={[0, 1, 2, 3, 4]}
 					reactionClicked={(reactionCategory, reactionId) => ReactionClicked(reactionCategory, reactionId, localReactions, localCurrentReaction, id, token, setCurrentReaction, setReactions)}
 				/>
 				<button onClick={() => setIsReactions(!isReactions)} className={`action-button__button${isReactions ? "--active" : ""}`}>
