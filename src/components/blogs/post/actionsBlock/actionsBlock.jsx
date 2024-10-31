@@ -32,6 +32,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 		<div className='actions_block'>
 			<div className={`action-block__action-button${isReactions ? "--expanded" : "--closed"}`}>
 				<QuickReactions
+					currentReaction={localCurrentReaction}
 					isReactions={isReactions}
 					setIsReactions={setIsReactions}
 					quickReactions={[0, 1, 2, 3, 4]}

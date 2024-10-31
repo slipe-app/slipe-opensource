@@ -6,8 +6,7 @@ import { useEffect } from "preact/hooks";
 import "./quickReactions.scss";
 import { animate } from "motion";
 
-export default function QuickReactions({ reactionClicked, quickReactions = [], setIsReactions, isReactions = false }) {
-
+export default function QuickReactions({ reactionClicked, quickReactions = [], setIsReactions, isReactions = false, currentReaction }) {
 	useEffect(() => {
 		quickReactions.map(index => {
 			animate(`.quick-reaction-${index}`, isReactions ? { scale: 1, opacity: 1 } : { scale: 0.25, opacity: 0 }, { easing: "ease-out", duration: 0.2 + index * 0.05 });
@@ -26,7 +25,9 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], s
 							reactionClicked(0, reaction);
 							setIsReactions(false);
 						}}
-						className={`quick-reactions-list__reaction quick-reaction-${index}`}
+						className={`quick-reactions-list__reaction${
+							currentReaction?.name[0] == "0" && currentReaction?.name.slice(2, currentReaction?.name.length) == reaction ? "--disabled" : ""
+						} quick-reaction-${index}`}
 					>
 						<Image width={34} height={34} src={`emojis/new/0/${reaction}.png`} />
 					</button>
