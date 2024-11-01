@@ -1,15 +1,16 @@
 import bannerColors from "../../../constants/bannerColors";
 import shufflePixels from "../../../utils/ui/generateBanner";
+import { Image } from "@unpic/preact";
+import cdn_url from "../../../constants/cdn_url";
 
 import "./banner.scss";
 import "../../common/ui/pixelAvatar.scss";
-import { Image } from "@unpic/preact";
 
-export default function ProfileBanner({ pixels, image, username }) {
+export default function ProfileBanner({ pixels, banner, username }) {
 	return (
 		<div className='profile-banner'>
-			{image ? (
-				<Image width={1000} height={1000} className='profile-banner__image' />
+			{banner ? (
+				<Image width={1000} src={`${cdn_url}/banners/${banner}`} height={1000} className='profile-banner__image' />
 			) : (
 				<div className='profile-banner__pixels'>
 					{shufflePixels(pixels)?.map(pixel => (
