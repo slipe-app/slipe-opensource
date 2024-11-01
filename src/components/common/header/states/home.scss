@@ -1,18 +1,18 @@
 @import "../../../../mixins";
 
-.button--active {
+.header_button_home--active {
     @include button-link;
     background-color: var(--text-color);
     color: var(--bg-color);
 }
 
-.button--inactive {
+.header_button_home--inactive {
     @include button-link;
     background-color: var(--button-bg-inactive);
     color: var(--text-color);
 }
 
-.switcher {
+.header_home_switcher {
     padding: 0.25rem;
     position: relative;
     display: flex;
@@ -21,7 +21,7 @@
     border-radius: 999rem;
     background-color: var(--button-bg-inactive);
 
-    .switcher__indicator {
+    .header_home_switcher__indicator {
         position: absolute;
         width: calc(50% - 0.25rem);
         height: calc(100% - 0.5rem);
@@ -29,12 +29,12 @@
         background-color: var(--button-bg-inactive);
     }
 
-    .tab--active {
+    .header_home_switcher__tab--active {
         @include switcher__tab;
         color: var(--text-color);
     }
 
-    .tab--inactive {
+    .header_home_switcher__tab--inactive {
         @include switcher__tab;
         color: var(--text-primary-trans);
     }

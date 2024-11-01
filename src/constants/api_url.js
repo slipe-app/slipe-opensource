@@ -1,1 +1,1 @@
-export default "https://api.slipe.space";
+export default "https://api.slipe.fun";

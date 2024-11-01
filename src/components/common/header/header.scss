@@ -3,18 +3,21 @@
 .header {
     width: 100vw;
     position: fixed;
-    display: flex;
-    gap: 1rem;
     z-index: 10;
     padding: 1rem;
-    transition: 0.2s ease-out;
     animation: fade-in 0.2s ease-out;
 
-    &--with_bg { 
+    &--with_bg {
         @extend .header;
         background: var(--nav-bg);
         backdrop-filter: blur(64px);
         -webkit-backdrop-filter: blur(64px);
-       
     }
+}
+
+.header-wrapper {
+    display: flex;
+    opacity: 1;
+    width: 100%;
+    gap: 1rem;
 }

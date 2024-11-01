@@ -2,14 +2,10 @@ import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 import { useState, useEffect } from "preact/hooks";
 import UsersSlider from "../components/blogs/verticalSlider";
-import { useTheme } from "../components/common/contexts/themeContext";
 import { useStorage } from "../components/common/contexts/sessionContext";
-import { useLocation } from 'preact-iso';
 
 export default function Blogs() {
-	const { theme } = useTheme();
 	const { token, store } = useStorage();
-	const location = useLocation();
 	const [users, setUsers] = useState([]);
 	const [blogs, setBlogs] = useState([]);
 

@@ -1,4 +1,4 @@
-import { PostsTypeContext } from "../../contexts/postsTypeContext";
+import { PagesContentTypeContext } from "../../contexts/pagesContentTypeContext";
 import { useEffect, useContext } from "preact/hooks";
 import { animate } from "motion";
 import Svg from "../../ui/utils/svg";
@@ -7,32 +7,38 @@ import icons from "../../../../constants/icons";
 import "./home.scss";
 
 export default function StateHome({ url }) {
-	const { activeTab, setActiveTab } = useContext(PostsTypeContext);
+	const { activeContent, setActiveContent } = useContext(PagesContentTypeContext);
+
+	const changeTab = (value) =>{
+		const updatedTab = [...activeContent];
+    	updatedTab[0] = value; 
+		setActiveContent(updatedTab);
+	}
 
 	useEffect(() => {
 		if (url == "/") {
-			animate(".switcher__indicator", { transform: activeTab === "forYou" ? "translateX(0)" : "translateX(100%)" }, { easing: "ease-out", duration: 0.15 });
+			animate(".header_home_switcher__indicator", { transform: activeContent[0] === "forYou" ? "translateX(0)" : "translateX(100%)" }, { easing: "ease-out", duration: 0.15 });
 		} else {
-			setActiveTab("forYou");
+			changeTab('forYou')
 		}
-	}, [url, activeTab]);
+	}, [url, activeContent]);
 
 	return (
 		<>
-			<a href='/notifs' className={url == "/notifs" ? "button--active" : "button--inactive"}>
-				<Svg size={32} icon={icons["bell"]} />
+			<a href='/notifs' className={url == "/notifs" ? "header_button_home--active" : "header_button_home--inactive"}>
+				<Svg size={32} icon={icons['bell']} />
 			</a>
-			<div className='switcher'>
-				<div className='switcher__indicator' />
-				<button onClick={() => setActiveTab("forYou")} className={activeTab == "forYou" ? "tab--active" : "tab--inactive"}>
+			<div className='header_home_switcher'>
+				<div className='header_home_switcher__indicator' />
+				<button onClick={() => changeTab("forYou")} className={`header_home_switcher__tab--${activeContent[0] == "forYou" ? "active" : "inactive"}`}>
 					Blogs
 				</button>
-				<button onClick={() => setActiveTab("follows")} className={activeTab == "follows" ? "tab--active" : "tab--inactive"}>
+				<button onClick={() => changeTab("follows")} className={`header_home_switcher__tab--${activeContent[0] == "follows" ? "active" : "inactive"}`}>
 					Follows
 				</button>
 			</div>
-			<a href='/search' className={url == "/search" ? "button--active" : "button--inactive"}>
-				<Svg size={32} icon={icons["search"]} />
+			<a href='/search' className={url == "/search" ? "header_button_home--active" : "header_button_home--inactive"}>
+				<Svg size={32} icon={icons['search']} />
 			</a>
 		</>
 	);

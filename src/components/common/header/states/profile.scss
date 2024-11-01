@@ -1,0 +1,43 @@
+@import "../../../../mixins";
+
+.header_button_profile--active {
+    @include button-link(true);
+    background-color: var(--static-white);
+    color: var(--static-black);
+}
+
+.header_button_profile--inactive {
+    @include button-link(true);
+    background-color: var(--static-nav-bg);
+    color: var(--static-white);
+}
+
+.header_profile_switcher {
+    padding: 0.25rem;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 999rem;
+    background-color: var(--static-nav-bg);
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+
+    .header_profile_switcher__indicator {
+        position: absolute;
+        width: calc(50% - 0.25rem);
+        height: calc(100% - 0.5rem);
+        border-radius: 999rem;
+        background-color: var(--button-bg-inactive);
+    }
+
+    .header_profile_switcher__tab--active {
+        @include switcher__tab;
+        color: var(--text-color);
+    }
+
+    .header_profile_switcher__tab--inactive {
+        @include switcher__tab;
+        color: var(--text-primary-trans);
+    }
+}

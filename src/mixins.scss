@@ -12,7 +12,8 @@
 
 @mixin pixel($index: 0, $delay: 0.2, $opacity: 0.25) {
     .pixel-avatar__pixel-#{$index} {
-        @include full_size;
+        width: 100%;
+        aspect-ratio: 1 / 1;
         opacity: $opacity;
         animation: fade-in $delay ease-out;
     }

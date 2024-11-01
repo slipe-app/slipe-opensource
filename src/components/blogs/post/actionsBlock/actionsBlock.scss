@@ -38,7 +38,7 @@
     @include action-button;
     width: calc(100% - 1rem);
     padding: 0.4375rem;
-    background-color: var(--modal-background);
+    background-color: var(--static-gray-background);
 }
 
 .action-block__action-button--closed {
@@ -75,7 +75,7 @@
 
     &--active {
         @extend .action-button__button;
-        background-color: var(--button-bg-inactive);
+        background-color: var(--static-button-bg-inactive);
     }
 }
 

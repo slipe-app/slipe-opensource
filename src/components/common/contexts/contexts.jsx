@@ -1,5 +1,5 @@
 import LanguageContextProvider from "./languageContext";
-import PostsTypeContextProvider from "./postsTypeContext";
+import PagesContentTypeContextProvider from "./pagesContentTypeContext";
 import { ThemeProvider } from "./themeContext";
 import { SessionContextProvider } from "./sessionContext";
 import { LocationProvider } from "preact-iso";
@@ -7,13 +7,13 @@ import { LocationProvider } from "preact-iso";
 export default function IndexContexts({ children }) {
 	return (
 		<LanguageContextProvider>
-			<PostsTypeContextProvider>
+			<PagesContentTypeContextProvider>
 				<ThemeProvider>
 					<SessionContextProvider>
 						<LocationProvider>{children}</LocationProvider>
 					</SessionContextProvider>
 				</ThemeProvider>
-			</PostsTypeContextProvider>
+			</PagesContentTypeContextProvider>
 		</LanguageContextProvider>
 	);
 }

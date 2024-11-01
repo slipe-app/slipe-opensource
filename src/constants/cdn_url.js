@@ -1,1 +1,1 @@
-export default "https://cdn.slipe.space";
+export default "https://cdn.slipe.fun";
