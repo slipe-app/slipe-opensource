@@ -1,3 +1,5 @@
+@import "../../../animations";
+
 .profile-wrapper{
     width: 100%;
     height: auto;
@@ -6,4 +8,5 @@
     padding: 0rem 1.25rem;
     flex-direction: column;
     gap: 1.5rem;
+    animation: fadeIn 0.2s ease-out;
 }

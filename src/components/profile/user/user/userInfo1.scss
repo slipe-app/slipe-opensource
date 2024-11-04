@@ -1,0 +1,29 @@
+.profile-user-info1 {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    transform: translateY(-100%);
+    align-items: center;
+
+    button {
+        font-size: 1.0625rem;
+    }
+}
+
+.profile-user-info1__user-data {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+
+    .user-data__name {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    .user-data__username {
+        color: var(--text-primary-trans);
+        font-size: 1.125rem;
+    }
+}

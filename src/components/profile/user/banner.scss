@@ -1,9 +1,12 @@
+@import "../../../animations";
+
 .profile-banner {
     width: 100%;
     aspect-ratio: 1.5 / 1;
     background-color: var(--static-black);
     border-radius: 0rem 0rem 1.25rem 1.25rem;
     overflow: hidden;
+    animation: fade-in 0.2s ease-out;
 
     .profile-banner__image {
         width: 100% !important;

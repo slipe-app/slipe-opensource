@@ -9,7 +9,6 @@ import "./profile.scss";
 export default function StateProfile({ url }) {
 	const { activeContent, setActiveContent } = useContext(PagesContentTypeContext);
 	const [isShare, setIsShare] = useState(false);
-	const [isReport, setIsReport] = useState(false);
 
 	const changeTab = (value) =>{
 		const updatedTab = [...activeContent];
@@ -39,9 +38,9 @@ export default function StateProfile({ url }) {
 					Edit
 				</button>
 			</div>
-			<button onClick={() => setIsReport(true)} className={`header_button_profile--${isReport ? "active" : "inactive"}`}>
-				<Svg size={32} icon={icons['flag']} />
-			</button>
+			<a href="/settings" className='header_button_profile--inactive'>
+				<Svg size={32} icon={icons['gear']} />
+			</a>
 		</>
 	);
 }

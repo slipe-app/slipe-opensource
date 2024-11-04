@@ -8,7 +8,7 @@
 .blogs_slider {
     @include full_size();
     padding: 6.5rem 0;
-    animation: fadeIn 0.2s ease-out;
+    animation: fade-in 0.2s ease-out;
 }
 
 .blogs_slider__blog_slide {
