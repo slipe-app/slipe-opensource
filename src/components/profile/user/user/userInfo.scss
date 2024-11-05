@@ -26,9 +26,12 @@
 .profile-user-info__avatar-wrapper {
     width: 7.5rem;
     height: 7.5rem;
+    min-width: 7.5rem;
+    min-height: 7.5rem;
     border-radius: 999rem;
     padding: 0.375rem;
     background-color: var(--bg-color);
+
 
     .avatar-wrapper__avatar {
         @include full_size;

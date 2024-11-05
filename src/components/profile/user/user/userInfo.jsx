@@ -1,5 +1,6 @@
 import PixelAvatar from "../../../common/ui/pixelAvatar";
 import { Image } from "@unpic/preact";
+import cdn_url from "../../../../constants/cdn_url";
 
 import "./userInfo.scss";
 
