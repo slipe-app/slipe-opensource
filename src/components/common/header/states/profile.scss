@@ -20,8 +20,8 @@
     height: 3.5rem;
     border-radius: 999rem;
     background-color: var(--static-nav-bg);
-    backdrop-filter: blur(64px);
-    -webkit-backdrop-filter: blur(64px);
+    backdrop-filter: saturate(180%) blur(32px);
+    -webkit-backdrop-filter: saturate(180%) blur(32px);
 
     .header_profile_switcher__indicator {
         position: absolute;

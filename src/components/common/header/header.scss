@@ -10,8 +10,8 @@
     &--with_bg {
         @extend .header;
         background: var(--nav-bg);
-        backdrop-filter: blur(64px);
-        -webkit-backdrop-filter: blur(64px);
+        backdrop-filter: saturate(180%) blur(32px);
+        -webkit-backdrop-filter: saturate(180%) blur(32px);
     }
 }
 
