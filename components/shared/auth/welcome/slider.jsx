@@ -1,13 +1,12 @@
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, EffectCreative } from "swiper/modules";
 import WelcomeFeature from "@/components/shared/auth/welcome/feature";
-import { EffectCreative } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 
-export default function AuthSlider() {
+export default function WelcomeFeaturesSlider() {
 	return (
 		<Swiper
 			creativeEffect={{
@@ -29,13 +28,16 @@ export default function AuthSlider() {
 				clickable: true,
 			}}
 			effect='creative'
-			autoHeight
 			loop
 			modules={[Pagination, EffectCreative, Autoplay]}
 			className='w-full'
 		>
 			<SwiperSlide>
-				<WelcomeFeature img='/static/auth-assets/light-logo.svg' title='Slipe’s blogging' desc='A whole new approach to blogging and browsing, enjoy it' />
+				<WelcomeFeature
+					img='/static/auth-assets/light-logo.svg'
+					title='Slipe’s blogging'
+					desc='A whole new approach to blogging and browsing, enjoy it'
+				/>
 			</SwiperSlide>
 			<SwiperSlide>
 				<WelcomeFeature

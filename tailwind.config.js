@@ -54,6 +54,16 @@ export default {
 					5: "hsl(var(--chart-5))",
 				},
 			},
+			keyframes: {
+				fadeIn: {
+					"0%": { filter: "blur(4px)", opacity: "0" },
+					"100%": { filter: "blur(0px)", opacity: "1" },
+				},
+				fadeOut: {
+					"0%": { filter: "blur(0px)", opacity: "1" },
+					"100%": { filter: "blur(4px)", opacity: "0" },
+				},
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
