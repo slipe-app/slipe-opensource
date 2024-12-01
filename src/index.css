@@ -5,6 +5,7 @@
 @layer base {
 	:root {
 		--background: 0 0% 100%;
+		--pagination: 0 0% 0%;
 		--foreground: 222.2 84% 4.9%;
 		--card: 0 0% 100%;
 		--card-foreground: 222.2 84% 4.9%;
@@ -32,7 +33,8 @@
 	}
 
 	.dark {
-		--background: 222.2 84% 4.9%;
+		--background: 0 0% 0%;
+		--pagination: 0 0% 100%;
 		--foreground: 210 40% 98%;
 		--card: 222.2 84% 4.9%;
 		--card-foreground: 210 40% 98%;
@@ -55,6 +57,16 @@
 		--chart-4: 280 65% 60%;
 		--chart-5: 340 75% 55%;
 	}
+}
+
+.swiper-pagination-bullet {
+	transition: 0.2s ease-out;
+	margin: 0px 6px !important;
+	background: hsl(var(--pagination)) !important;
+}
+
+.swiper-pagination {
+	position: relative !important;
 }
 
 @layer base {
