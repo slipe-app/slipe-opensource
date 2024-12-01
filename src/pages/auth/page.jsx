@@ -35,15 +35,15 @@ export default function Auth() {
 					allowTouchMove={false}
 					effect='creative'
 					modules={[EffectCreative]}
-					className='w-full'
+					className='w-full h-full'
 				>
-					<SwiperSlide>
+					<SwiperSlide className="!flex items-center">
 						<WelcomeFeaturesSlider />
 					</SwiperSlide>
-					<SwiperSlide>
+					<SwiperSlide className="!flex items-center">
 						<SignUpSlider signUpStage={signUpStage} isAccount={setStage} />
 					</SwiperSlide>
-					<SwiperSlide>
+					<SwiperSlide className="!flex items-center">
 						<WelcomeFeaturesSlider />
 					</SwiperSlide>
 				</Swiper>

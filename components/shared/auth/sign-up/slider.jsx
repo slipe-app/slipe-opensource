@@ -7,10 +7,15 @@ import "swiper/css/effect-creative";
 import UsernameSlide from "./slides/username";
 import { useEffect, useState, useRef } from "react";
 import PasswordSlide from "./slides/password";
+import ProfileSlide from "./slides/profile";
+import CategoriesSlide from "./slides/categories";
 
 export default function SignUpSlider({ isAccount, signUpStage }) {
 	const [username, setUsername] = useState("");
+	const [displayname, setDisplayname] = useState("");
+	const [avatar, setAvatar] = useState("");
 	const [password, setPassword] = useState("");
+	const [categoriesPack, setCategoriesPack] = useState(0);
     const swiperRef = useRef(null);
 
 	useEffect(() => {
@@ -30,6 +35,7 @@ export default function SignUpSlider({ isAccount, signUpStage }) {
 					translate: ["100%", 0, 0],
 				},
 			}}
+			autoHeight
 			allowTouchMove={false}
 			effect='creative'
 			modules={[EffectCreative]}
@@ -40,6 +46,12 @@ export default function SignUpSlider({ isAccount, signUpStage }) {
 			</SwiperSlide>
 			<SwiperSlide>
 				<PasswordSlide password={password} setPassword={setPassword} />
+			</SwiperSlide>
+			<SwiperSlide>
+				<ProfileSlide avatar={avatar} setAvatar={setAvatar} displayname={displayname} setDisplayname={setDisplayname} />
+			</SwiperSlide>
+			<SwiperSlide>
+				<CategoriesSlide categoriesPack={categoriesPack} setCategoriesPack={setCategoriesPack} />
 			</SwiperSlide>
 		</Swiper>
 	);

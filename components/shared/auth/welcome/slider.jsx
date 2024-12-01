@@ -29,6 +29,7 @@ export default function WelcomeFeaturesSlider() {
 			}}
 			effect='creative'
 			loop
+			autoHeight
 			modules={[Pagination, EffectCreative, Autoplay]}
 			className='w-full'
 		>
