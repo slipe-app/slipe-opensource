@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-creative";
 import SignUpSlider from "@/components/shared/auth/sign-up/slider";
+import LogInSlider from "@/components/shared/auth/log-in/log-in";
 
 export default function Auth() {
 	const [stage, setStage] = useState(0);
@@ -44,7 +45,7 @@ export default function Auth() {
 						<SignUpSlider signUpStage={signUpStage} isAccount={setStage} />
 					</SwiperSlide>
 					<SwiperSlide className="!flex items-center">
-						<WelcomeFeaturesSlider />
+						<LogInSlider isAccount={setStage} />
 					</SwiperSlide>
 				</Swiper>
 			</div>
