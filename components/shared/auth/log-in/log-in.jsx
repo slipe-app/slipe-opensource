@@ -11,7 +11,6 @@ import "swiper/css";
 import "swiper/css/effect-creative";
 
 export default function LogInSlider({ isAccount }) {
-	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
     const [isPassword, setIsPassword] = useState(true);
 
@@ -24,16 +23,6 @@ export default function LogInSlider({ isAccount }) {
 			<SwiperSlide>
             <div className='flex flex-col gap-4 px-5 items-center'>
 				<SlideTemplate title='Welcome back!' img='/static/auth-assets/chain.png' />
-				<div className='bg-foreground/[0.12] flex items-center w-full rounded-2xl'>
-					<Input
-						maxLength={20}
-						onInput={element => setUsername(element.target.value)}
-						value={username}
-						type='username'
-						className='bg-transparent rounded-none h-auto p-4 pr-0'
-						placeholder='Display name here'
-					/>
-				</div>
                 <div className='bg-foreground/[0.12] flex items-center w-full rounded-2xl'>
 					<Input
 						maxLength={32}
