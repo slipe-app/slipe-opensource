@@ -10,17 +10,24 @@ import PasswordSlide from "./slides/password";
 import ProfileSlide from "./slides/profile";
 import CategoriesSlide from "./slides/categories";
 
-export default function SignUpSlider({ isAccount, signUpStage }) {
-	const [username, setUsername] = useState("");
-	const [displayname, setDisplayname] = useState("");
-	const [avatar, setAvatar] = useState("");
-	const [password, setPassword] = useState("");
+export default function SignUpSlider({ isAccount, signUpStage, setUsername, setDisplayname, setAvatar, setPassword }) {
+	const [username, setSignUpUsername] = useState("");
+	const [displayname, setSignUpDisplayname] = useState("");
+	const [avatar, setSignUpAvatar] = useState("");
+	const [password, setSignUpPassword] = useState("");
 	const [categoriesPack, setCategoriesPack] = useState(0);
     const swiperRef = useRef(null);
 
 	useEffect(() => {
 		swiperRef?.current.swiper.slideTo(signUpStage);
 	}, [signUpStage]);
+
+	useEffect(() => {
+		setUsername(username);
+		setDisplayname(displayname);
+		setAvatar(avatar);
+		setPassword(password);
+	}, [username, displayname, avatar, password]);
 
 	return (
 		<Swiper
@@ -42,13 +49,13 @@ export default function SignUpSlider({ isAccount, signUpStage }) {
 			className='w-full'
 		>
 			<SwiperSlide>
-				<UsernameSlide username={username} isAccount={isAccount} setUsername={setUsername} />
+				<UsernameSlide username={username} isAccount={isAccount} setUsername={setSignUpUsername} />
 			</SwiperSlide>
 			<SwiperSlide>
-				<PasswordSlide password={password} setPassword={setPassword} />
+				<PasswordSlide password={password} setPassword={setSignUpPassword} />
 			</SwiperSlide>
 			<SwiperSlide>
-				<ProfileSlide avatar={avatar} setAvatar={setAvatar} displayname={displayname} setDisplayname={setDisplayname} />
+				<ProfileSlide avatar={avatar} setAvatar={setSignUpAvatar} displayname={displayname} setDisplayname={setSignUpDisplayname} />
 			</SwiperSlide>
 			<SwiperSlide>
 				<CategoriesSlide categoriesPack={categoriesPack} setCategoriesPack={setCategoriesPack} />

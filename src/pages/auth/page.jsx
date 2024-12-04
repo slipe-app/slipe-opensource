@@ -10,11 +10,20 @@ import SignUpSlider from "@/components/shared/auth/sign-up/slider";
 import LogInSlider from "@/components/shared/auth/log-in/log-in";
 import Svg from "@/components/ui/icons/svg";
 import icons from "@/components/ui/icons/icons";
+import isRegistrationDataCorrect from "@/lib/auth/signUp/isDataCorrect";
+import auth from "@/lib/auth/auth";
 
 export default function Auth() {
 	const [stage, setStage] = useState(0);
 	const [signUpStage, setSignUpStage] = useState(0);
 	const swiperRef = useRef(null);
+
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [displayname, setDisplayname] = useState("");
+	const [avatar, setAvatar] = useState("");
+
+	const [error, setError] = useState({});
 
 	const buttonText = () => {
 		switch (stage) {
@@ -34,6 +43,40 @@ export default function Auth() {
 	useEffect(() => {
 		swiperRef?.current.swiper.slideTo(stage);
 	}, [stage]);
+
+
+	// sign up inputs checks
+	useEffect(() => {
+		if (stage === 0) setError({ success: true });
+		else if ([0, 1].includes(signUpStage)) setError(isRegistrationDataCorrect(username, password)[signUpStage]);
+		else setError({ success: true });
+	}, [stage, signUpStage, username, password])
+
+	// sign in inputs checks
+	useEffect(() => {
+		if (stage === 2) {
+			if (username?.length > 0 && password?.length > 0) setError({ success: true });
+			else setError({ success: false });
+		}
+	}, [stage, username, password])
+
+	// sign up button
+	async function authButton(type, newSlide) {
+		console.log(stage)
+		if (stage === 0) return newSlide();
+		else if ((stage === 1 && signUpStage == 1) || (stage === 2)) {
+			await auth(type, username, password, () => setError({ success: false }), (token) => {
+				if (type === "signup") { 
+					setError({ success: true });
+					newSlide();
+				} else {
+					// redirect
+				}
+			}, (error) => {
+				setError({ success: true, message: error });
+			});			
+		} else newSlide();
+	}
 
 	return (
 		<div className='h-full flex flex-col animate-[fadeIn_0.3s_ease-out]'>
@@ -59,10 +102,19 @@ export default function Auth() {
 						<WelcomeFeaturesSlider />
 					</SwiperSlide>
 					<SwiperSlide className='!flex items-center'>
-						<SignUpSlider signUpStage={signUpStage} isAccount={setStage} />
+						<SignUpSlider
+							signUpStage={signUpStage}
+							isAccount={setStage}
+							setAvatar={setAvatar}
+							setPassword={setPassword}
+							setUsername={setUsername}
+							setDisplayname={setDisplayname} />
 					</SwiperSlide>
 					<SwiperSlide className='!flex items-center'>
-						<LogInSlider isAccount={setStage} />
+						<LogInSlider
+							isAccount={setStage}
+							setUsername={setUsername}
+							setPassword={setPassword} />
 					</SwiperSlide>
 				</Swiper>
 			</div>
@@ -76,7 +128,7 @@ export default function Auth() {
 				>
 					<Svg icon={icons["chevronLeft"]} className='!w-7 !h-7' />
 				</Button>
-				<Button onClick={() => (stage == 1 ? setSignUpStage(stage => stage + 1) : setStage(1))} size='full'>
+				<Button disabled={!error?.success} onClick={async () => await authButton(stage === 2 ? "login" : "signup", () => stage == 1 ? setSignUpStage(stage => stage + 1) : setStage(1))} size='full'>
 					{buttonText()}
 				</Button>
 			</div>
