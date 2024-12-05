@@ -9,6 +9,7 @@ import Header from "@/components/shared/header";
 import PagesContentTypeContextProvider from "@/hooks/contexts/posts-type";
 
 import "./index.css";
+import NavBar from "@/components/shared/navBar";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
 						<Route path='/profile' element={<Profile />} />
 					</Routes>
 				</main>
+				<NavBar/>
 			</BrowserRouter>
 			<Toaster
 				gap={12}

@@ -21,7 +21,7 @@ export default function Header() {
 				<header
 					id='header-wrapper'
 					data-isbg={url == "/profile"}
-					className='w-screen data-[isbg=false]:bg-background/80 data-[isbg=false]:backdrop-blur-2xl fixed z-50 p-4 animate-[fadeIn_0.3s_ease-out]'
+					className='w-screen animate-[fadeIn_0.3s_ease-out] data-[isbg=false]:bg-background/80 data-[isbg=false]:backdrop-blur-2xl fixed z-50 p-4 animate-[fadeIn_0.3s_ease-out]'
 				>
 					<div className='flex opacity-100 w-full gap-4'>
 						{currentPage == "/" ? <StateHome url={url} /> : currentPage == "/profile" ? <StateProfile url={url} /> : null}
