@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import fetcher from "@/lib/fetcher";
 import cdn from "@/constants/cdn";
 import api from "@/constants/api";
+import UserBlock from "../slides/post/user-block";
 import clsx from "clsx";
 import { useStorage } from "@/hooks/contexts/session";
 
@@ -69,7 +70,7 @@ export default function BlogsSlider({ blogs }) {
 							id={index}
 							className='flex bg-card w-[calc(200%-2.5rem)] absolute rounded-[2rem] justify-between h-full overflow-hidden items-center flex-col'
 						>
-							{/* <UserBlock user={user} setUser={setUser} date={blog?.date} /> */}
+							<UserBlock user={user} setUser={setUser} date={blog?.date} />
 							<img src={cdn + `/posts/${blog?.image}`} className='w-full object-contain h-full absolute top-0 block' />
 							{/* <ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} /> */}
 						</div>

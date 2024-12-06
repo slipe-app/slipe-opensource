@@ -1,14 +1,13 @@
 import { SwiperSlide, Swiper } from "swiper/react";
 import { EffectCreative } from "swiper/modules";
-import WelcomeFeature from "@/components/shared/auth/welcome/feature";
-
-import "swiper/css";
-import "swiper/css/effect-creative";
 import UsernameSlide from "./slides/username";
 import { useEffect, useState, useRef } from "react";
 import PasswordSlide from "./slides/password";
 import ProfileSlide from "./slides/profile";
 import CategoriesSlide from "./slides/categories";
+
+import "swiper/css";
+import "swiper/css/effect-creative";
 
 export default function SignUpSlider({ isAccount, signUpStage, setUsername, setDisplayname, setAvatar, setPassword }) {
 	const [username, setSignUpUsername] = useState("");
