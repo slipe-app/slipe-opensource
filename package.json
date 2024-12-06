@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "tauri": "tauri",
     "preview": "vite preview"
   },
   "dependencies": {

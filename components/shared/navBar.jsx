@@ -9,19 +9,14 @@ import { NavLink } from "react-router";
 import api from "@/constants/api";
 
 export default function NavBar() {
+	const { data: user, error, isLoading } = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 	const url = useLocation();
 	const { token, store } = useStorage();
 
-	const {
-		data: user,
-		error,
-		isLoading,
-	} = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
-
 	return (
 		<>
-			{url !== "/auth" ? (
-				<div className='bg-background/80 w-screen fixed flex bottom-0 backdrop-blur-2xl z-50 animate-[fadeIn_0.3s_ease-out]'>
+			{url.pathname !== "/auth" ? (
+				<div className='bg-background/90 w-screen fixed flex bottom-0 backdrop-blur-2xl z-50 animate-[fadeIn_0.3s_ease-out]'>
 					<NavLink to='/' className='w-full pt-4 pb-6 flex justify-center text-foreground'>
 						{({ isActive }) => (
 							<Svg

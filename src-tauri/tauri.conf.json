@@ -5,7 +5,7 @@
   "identifier": "com.tauri.dev",
   "build": {
     "frontendDist": "../build",
-    "devUrl": "http://localhost:5173",
+    "devUrl": "http://localhost:3000",
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build"
   },
@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "slipe",
-        "width": 800,
-        "height": 600,
+        "width": 390,
+        "height": 800,
         "resizable": true,
         "fullscreen": false
       }
