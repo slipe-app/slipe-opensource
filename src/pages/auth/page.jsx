@@ -11,6 +11,7 @@ import icons from "@/components/ui/icons/icons";
 import isRegistrationDataCorrect from "@/lib/auth/signUp/isDataCorrect";
 import auth from "@/lib/auth/auth";
 import { toast } from "sonner";
+import { useStorage } from "@/hooks/contexts/session";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -23,6 +24,7 @@ export default function Auth() {
 	const [displayname, setDisplayname] = useState("");
 	const [avatar, setAvatar] = useState("");
 	const [isContinue, setIsContinue] = useState(true);
+	const { token, store } = useStorage();
 
 	const swiperRef = useRef(null);
 
@@ -47,22 +49,24 @@ export default function Auth() {
 
 	// sign up button
 	async function authButton(type) {
-		console.log(stage);
-		if (stage === 0) return newSlide();
-		else if (signUpStage === 0 || signUpStage === 1) {
+		if (stage > 0) {
 			const isDataCorrect = isRegistrationDataCorrect(username, password)[signUpStage]
 			if (!isDataCorrect.success) {
-				toast.error(isDataCorrect?.message, { className: "bg-red text-red-foreground" });
-			} else {
-				newSlide();
-			}
-		} else if ((stage === 1 && signUpStage == 1) || stage === 2) {
-			await auth(
+				return toast.error(isDataCorrect?.message, { className: "bg-red text-red-foreground" });
+			}			
+		}
+		
+		if ((stage === 1 && signUpStage == 1) || stage === 2) {
+			return await auth(
 				type,
 				username,
 				password,
 				() => setIsContinue(false),
 				token => {
+					console.log(token)
+					store.set("token", token)
+					store.save()
+
 					if (type === "signup") {
 						setIsContinue(true);
 						newSlide();
@@ -75,14 +79,17 @@ export default function Auth() {
 					toast.error(error, { className: "bg-red text-red-foreground" });
 				}
 			);
-		} else newSlide();
+		}
+
+		newSlide()
 	}
 
 	useEffect(() => {
 		swiperRef?.current.swiper.slideTo(stage);
+		if (stage === 1) setIsContinue(true);
 	}, [stage]);
 
-	// sign up inputs checks
+	// // sign up inputs checks
 	// useEffect(() => {
 	// 	if (stage === 0) setIsContinue(true);
 	// 	else if ([0, 1].includes(signUpStage)) {
@@ -132,7 +139,7 @@ export default function Auth() {
 						/>
 					</SwiperSlide>
 					<SwiperSlide className='!flex items-center'>
-						<LogInSlider isAccount={setStage} setUsername={setUsername} setPassword={setPassword} />
+						<LogInSlider isAccount={setStage} username={username} password={password} setUsername={setUsername} setPassword={setPassword} />
 					</SwiperSlide>
 				</Swiper>
 			</div>

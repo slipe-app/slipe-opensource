@@ -1,23 +1,22 @@
 import icons from "../ui/icons/icons";
 import Svg from "../ui/icons/svg";
 import { useLocation } from "react-router";
-// import { useStorage } from "../contexts/sessionContext";
+import { useStorage } from "@/hooks/contexts/session";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import cdn from "@/constants/cdn";
 import { NavLink } from "react-router";
+import api from "@/constants/api";
 
 export default function NavBar() {
 	const url = useLocation();
 	const { token, store } = useStorage();
 
-    // Я добавил херню для токенов но я не проверил работает ли это, тут все готово кроме получения токена
-
 	const {
 		data: user,
 		error,
 		isLoading,
-	} = useSWR("/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
+	} = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 
 	return (
 		<>

@@ -10,15 +10,20 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-creative";
 
-export default function LogInSlider({ isAccount, setUsername, setPassword }) {
-	const [username, setLogInUsername] = useState("");
-	const [password, setLogInPassword] = useState("");
+export default function LogInSlider({ isAccount, username, password, setUsername, setPassword }) {
+	const [logInUsername, setLogInUsername] = useState("");
+	const [logInPassword, setLogInPassword] = useState("");
 	const [isPassword, setIsPassword] = useState(true);
 
 	useEffect(() => {
-		setUsername(username);
-		setPassword(password);
-	}, [username, password]);
+		setUsername(logInUsername);
+		setPassword(logInPassword);
+	}, [logInUsername, logInPassword]);
+
+	useEffect(() => {
+		setLogInUsername(username);
+		setLogInPassword(password);
+	}, [username, password])
 
 	return (
 		<Swiper
@@ -33,7 +38,7 @@ export default function LogInSlider({ isAccount, setUsername, setPassword }) {
 						<Input
 							maxLength={32}
 							onInput={element => setLogInUsername(element.target.value)}
-							value={username}
+							value={logInUsername}
 							type={"text"}
 							className='bg-transparent rounded-none h-auto pr-0 p-4'
 							placeholder='Username here'
@@ -43,7 +48,7 @@ export default function LogInSlider({ isAccount, setUsername, setPassword }) {
 						<Input
 							maxLength={32}
 							onInput={element => setLogInPassword(element.target.value)}
-							value={password}
+							value={logInPassword}
 							type={isPassword ? "password" : "text"}
 							className='bg-transparent rounded-none h-auto pr-0 p-4'
 							placeholder='Password here'

@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import Auth from "./pages/auth/page";
 import Header from "@/components/shared/header";
 import PagesContentTypeContextProvider from "@/hooks/contexts/posts-type";
+import { SessionContextProvider } from "@/hooks/contexts/session";
 
 import "./index.css";
 import NavBar from "@/components/shared/navBar";
@@ -14,17 +15,19 @@ import NavBar from "@/components/shared/navBar";
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
 		<PagesContentTypeContextProvider>
-			<BrowserRouter>
-				<Header />
-				<main className='w-screen h-screen'>
-					<Routes>
-						<Route path='/auth' element={<Auth />} />
-						<Route path='/' element={<Home />} />
-						<Route path='/profile' element={<Profile />} />
-					</Routes>
-				</main>
-				<NavBar/>
-			</BrowserRouter>
+			<SessionContextProvider>
+				<BrowserRouter>
+					<Header />
+					<main className='w-screen h-screen'>
+						<Routes>
+							<Route path='/auth' element={<Auth />} />
+							<Route path='/' element={<Home />} />
+							<Route path='/profile' element={<Profile />} />
+						</Routes>
+					</main>
+					<NavBar />
+				</BrowserRouter>
+			</SessionContextProvider>
 			<Toaster
 				gap={12}
 				toastOptions={{
