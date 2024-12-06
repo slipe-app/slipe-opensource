@@ -28,12 +28,6 @@ export default function UsernameSlide({ username, setUsername, isAccount }) {
 						{username.length}/24
 					</span>
 				</div>
-				<p className='text-foreground/50 text-center'>
-					Already have an account?{" "}
-					<span onClick={() => isAccount(2)} className='text-foreground font-medium cursor-pointer'>
-						Log in
-					</span>
-				</p>
 			</div>
 		</>
 	);

@@ -12,6 +12,8 @@ import isRegistrationDataCorrect from "@/lib/auth/signUp/isDataCorrect";
 import auth from "@/lib/auth/auth";
 import { toast } from "sonner";
 import { useStorage } from "@/hooks/contexts/session";
+import fetcher from "@/lib/fetcher";
+import api from "@/constants/api";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
@@ -50,21 +52,25 @@ export default function Auth() {
 
 	// sign up button
 	async function authButton(type) {
-		if (stage > 0) {
+		if ([0, 1].includes(signUpStage) && stage > 0) {
 			const isDataCorrect = isRegistrationDataCorrect(username, password)[signUpStage]
-			if (!isDataCorrect.success) {
+			if (!isDataCorrect?.success) {
 				return toast.error(isDataCorrect?.message, { className: "bg-red text-red-foreground" });
-			}			
+			}
 		}
-		
-		if ((stage === 1 && signUpStage == 1) || stage === 2) {
+
+		if (signUpStage === 0 && stage === 1) {
+			const user = await fetcher(api.v1 + "/account/get/" + username, "get");
+			
+			if (user.error) return setSignUpStage(1)
+			else if (user?.success[0]) return setStage(2)
+		} else if ((stage === 1 && signUpStage === 1) || stage === 2) {
 			return await auth(
 				type,
 				username,
 				password,
 				() => setIsContinue(false),
 				token => {
-					console.log(token)
 					store.set("token", token)
 					store.save()
 
@@ -140,15 +146,15 @@ export default function Auth() {
 						/>
 					</SwiperSlide>
 					<SwiperSlide className='!flex items-center'>
-						<LogInSlider isAccount={setStage} username={username} password={password} setUsername={setUsername} setPassword={setPassword} />
+						<LogInSlider isAccount={setStage} password={password} setPassword={setPassword} />
 					</SwiperSlide>
 				</Swiper>
 			</div>
 			<div className='p-5 flex gap-4'>
 				<Button
-					data-isexpanded={signUpStage == 1}
+					data-isexpanded={signUpStage == 1 || stage == 2}
 					className='data-[isexpanded=false]:-mr-[4.5rem] data-[isexpanded=false]:pointer-events-none data-[isexpanded=true]:-mr-0 data-[isexpanded=false]:opacity-0 data-[isexpanded=true]:opacity-100'
-					onClick={() => setSignUpStage(stage => stage - 1)}
+					onClick={() => signUpStage == 1 ? setSignUpStage(stage => stage - 1) : setStage(stage => stage - 1)}
 					variant='secondary'
 					size='icon'
 				>

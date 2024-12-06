@@ -10,20 +10,17 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/effect-creative";
 
-export default function LogInSlider({ isAccount, username, password, setUsername, setPassword }) {
-	const [logInUsername, setLogInUsername] = useState("");
+export default function LogInSlider({ isAccount, password, setPassword }) {
 	const [logInPassword, setLogInPassword] = useState("");
 	const [isPassword, setIsPassword] = useState(true);
 
 	useEffect(() => {
-		setUsername(logInUsername);
 		setPassword(logInPassword);
-	}, [logInUsername, logInPassword]);
+	}, [logInPassword]);
 
 	useEffect(() => {
-		setLogInUsername(username);
 		setLogInPassword(password);
-	}, [username, password])
+	}, [password])
 
 	return (
 		<Swiper
@@ -34,16 +31,6 @@ export default function LogInSlider({ isAccount, username, password, setUsername
 			<SwiperSlide>
 				<div className='flex flex-col gap-4 px-5 items-center'>
 					<SlideTemplate title='Welcome back!' img='/static/auth-assets/chain.png' />
-					<div className='bg-foreground/[0.12] flex items-center w-full rounded-2xl'>
-						<Input
-							maxLength={32}
-							onInput={element => setLogInUsername(element.target.value)}
-							value={logInUsername}
-							type={"text"}
-							className='bg-transparent rounded-none h-auto pr-0 p-4'
-							placeholder='Username here'
-						/>
-					</div>
 					<div className='bg-foreground/[0.12] flex items-center w-full rounded-2xl'>
 						<Input
 							maxLength={32}
