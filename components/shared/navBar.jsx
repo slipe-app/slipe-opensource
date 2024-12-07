@@ -3,7 +3,7 @@ import Svg from "../ui/icons/svg";
 import { useLocation } from "react-router";
 import { useStorage } from "@/hooks/contexts/session";
 import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
+import { fetcher } from "@/lib/utils";
 import cdn from "@/constants/cdn";
 import { NavLink } from "react-router";
 import api from "@/constants/api";
@@ -41,7 +41,7 @@ export default function NavBar() {
 								data-isactive={isActive}
 								className='w-11 h-11 flex justify-center items-center data-[isactive=true]:opacity-100 data-[isactive=false]:opacity-50'
 							>
-								<img className='w-9 h-9 rounded-full' src={!isLoading ? `${cdn}/avatars/${user?.success[0]?.avatar}` : null} />
+								<img className='w-9 h-9 rounded-full' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
 							</div>
 						)}
 					</NavLink>

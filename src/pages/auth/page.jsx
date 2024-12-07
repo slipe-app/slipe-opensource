@@ -12,7 +12,7 @@ import isRegistrationDataCorrect from "@/lib/auth/signUp/isDataCorrect";
 import auth from "@/lib/auth/auth";
 import { toast } from "sonner";
 import { useStorage } from "@/hooks/contexts/session";
-import fetcher from "@/lib/fetcher";
+import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 
 import "swiper/css";

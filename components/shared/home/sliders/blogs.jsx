@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Virtual } from "swiper/modules";
 import { useState, useEffect } from "react";
-import fetcher from "@/lib/fetcher";
+import { fetcher } from "@/lib/utils";
 import cdn from "@/constants/cdn";
 import api from "@/constants/api";
+import ActionsBlock from "../slides/post/actions-block";
 import UserBlock from "../slides/post/user-block";
 import clsx from "clsx";
 import { useStorage } from "@/hooks/contexts/session";
@@ -72,7 +73,7 @@ export default function BlogsSlider({ blogs }) {
 						>
 							<UserBlock user={user} setUser={setUser} date={blog?.date} />
 							<img src={cdn + `/posts/${blog?.image}`} className='w-full object-contain h-full absolute top-0 block' />
-							{/* <ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} /> */}
+							<ActionsBlock id={blog?.id} currentReaction={blog.reaction} reactions={blog.reactions} />
 						</div>
 					</SwiperSlide>
 				))}

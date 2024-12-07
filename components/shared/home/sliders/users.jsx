@@ -4,7 +4,7 @@ import { Virtual } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { useStorage } from "@/hooks/contexts/session";
 import api from "@/constants/api";
-import fetcher from "@/lib/fetcher";
+import { fetcher } from "@/lib/utils";
 
 import "swiper/css";
 

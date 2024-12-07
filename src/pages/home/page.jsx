@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
+import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 import { useState, useEffect } from "react";
 import UsersSlider from "@/components/shared/home/sliders/users";
