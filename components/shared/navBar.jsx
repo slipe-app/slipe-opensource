@@ -9,10 +9,10 @@ import { NavLink } from "react-router";
 import api from "@/constants/api";
 
 export default function NavBar() {
-	const { data: user, error, isLoading } = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 	const url = useLocation();
 	const { token, store } = useStorage();
-
+	const { data: user, error, isLoading } = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
+	
 	return (
 		<>
 			{url.pathname !== "/auth" ? (

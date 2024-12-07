@@ -12,8 +12,8 @@ export default function QuickReactions({ reactionClicked, quickReactions = [], s
 	}, [isReactions]);
 	return (
 		<div data-isexpanded={isReactions} className="duration-200 ease-out overflow-hidden flex w-0 opacity-0 data-[isexpanded=true]:w-full data-[isexpanded=true]:opacity-100">
-			<button onClick={() => setIsReactions(false)} className="w-[2.875rem] bg-white/[0.12] flex justify-center items-center text-white rounded-full duration-200 ease-out min-w-[2.875rem] h-[2.875rem]">
-				<Svg className="!w-6 !h-6" icon={icons["x"]} />
+			<button onClick={() => setIsReactions(false)} className="min-w-[2.625rem] bg-white/[0.12] flex justify-center items-center text-white rounded-full duration-200 ease-out h-[2.625rem]">
+				<Svg className="!w-[1.375rem] !h-[1.375rem]" icon={icons["x"]} />
 			</button>
 			<div className='flex w-full mx-1 justify-between'>
 				{quickReactions.map((reaction, index) => (
