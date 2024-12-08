@@ -5,7 +5,7 @@ import icons from "@/components/ui/icons/icons";
 import { useEffect, useState } from "react";
 import { useStorage } from "@/hooks/contexts/session";
 
-export default function ReactionsModal({ children, currentReaction, open, setOpen }) {
+export default function ReactionsModal({ children, currentReaction, onReactionClicked, open, setOpen }) {
 	const [activeCategory, setCategory] = useState("recently");
 	const [reactions, setReactions] = useState([]);
 	const { token, store } = useStorage([]);
@@ -21,9 +21,10 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 	];
 
 	const reactionClicked = async reaction => {
-		console.log(reactions);
+		await onReactionClicked(reaction.slice(0, 1), reaction.slice(2));
 		await store.set("reactions", Array.from(new Set([...reactions, reaction])).slice(-5));
 		getReactions();
+		setOpen(false);
 	};
 
 	const clearRecently = async () => {
@@ -38,8 +39,11 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 
 	useEffect(() => {
 		getReactions();
-		console.log(reactions);
 	}, []);
+
+	useEffect(() => {
+		console.log(123, currentReaction);
+	}, [currentReaction])
 
 	return (
 		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
@@ -66,7 +70,7 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 									{reactions.map(reaction => (
 										<Button
 											onClick={() => reactionClicked(reaction)}
-											data-active={false}
+											data-active={`${reaction.slice(0, 1)}_${reaction.slice(2)}` === currentReaction?.name}
 											key={reaction}
 											size='iconLg'
 											className='w-full animate-[fadeInOpacity_3s_ease-out] max-[380px]:p-2 h-auto p-3 hover:bg-foreground/[0.12] bg-transparent data-[active=true]:bg-foreground/[0.12] min-h-0 min-w-0 aspect-square'
@@ -80,7 +84,7 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 									{Array.from({ length: category.maxReactions }, (_, i) => i).map(index => (
 										<Button
 											onClick={() => reactionClicked(`${category.id}/${index}`)}
-											data-active={false}
+											data-active={`${category.id}_${index}` === currentReaction?.name}
 											key={index}
 											size='iconLg'
 											className='w-full h-auto p-3 hover:bg-foreground/[0.12] max-[380px]:p-2 bg-transparent data-[active=true]:bg-foreground/[0.12] min-h-0 min-w-0 aspect-square'

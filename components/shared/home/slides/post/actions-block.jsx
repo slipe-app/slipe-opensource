@@ -30,7 +30,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 	};
 
     const reactionsModalOpen = () => {
-        setReactionsModal(true); setIsReactions(false)
+        setReactionsModal(true); setIsReactions(false);
     }
 
 	return (
@@ -43,7 +43,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 					currentReaction={localCurrentReaction}
 					isReactions={isReactions}
 					setIsReactions={setIsReactions}
-					reactionClicked={(reactionCategory, reactionId) => reactionClicked(reactionCategory, reactionId)}
+					reactionClicked={reactionClicked}
 				/>
 				<button
 					data-isactive={isReactions}
@@ -52,7 +52,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 				>
 					<Svg data-isactive={isReactions} className='!w-[1.875rem] duration-200 ease-out data-[isactive=true]:!w-7 data-[isactive=true]:!h-7 !h-[1.875rem]' icon={icons["smile"]} />
 				</button>
-				<ReactionsModal open={isReactionsModal} setOpen={setReactionsModal} />
+				<ReactionsModal currentReaction={localCurrentReaction} onReactionClicked={reactionClicked} open={isReactionsModal} setOpen={setReactionsModal} />
 			</div>
 
 			<button

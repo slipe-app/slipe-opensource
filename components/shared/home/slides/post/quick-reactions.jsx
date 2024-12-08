@@ -28,13 +28,13 @@ export default function QuickReactions({ reactionClicked, setIsReactions, isReac
 			<div className='flex w-full mx-1 justify-between'>
 				{reactions.map((reaction, index) => (
 					<button
-                    data-isactive={currentReaction?.name[0] == "0" && currentReaction?.name.slice(2, currentReaction?.name.length) == reaction}
+                    data-isactive={currentReaction?.name === `${reaction[0]}_${reaction.slice(2)}`}
                     id={`quick-reaction-${index}`}
 						onClick={() => {
 							reactionClicked(reaction[0], reaction.slice(2));
 							setIsReactions(false);
 						}}
-						className='flex justify-center items-center w-full data-[isactive=false]:opacity-50'
+						className='flex justify-center items-center w-full data-[isactive=true]:!opacity-50'
 					>
 						<img className=" w-8 h-8" src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
 					</button>
