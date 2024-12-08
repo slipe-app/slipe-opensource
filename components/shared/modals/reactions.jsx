@@ -27,13 +27,13 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 	};
 
 	const clearRecently = async () => {
-		setReactions(["emojis/new/0/0", "emojis/new/0/1", "emojis/new/0/2", "emojis/new/0/3", "emojis/new/0/4"]);
-		await store.set("reactions", ["emojis/new/0/0", "emojis/new/0/1", "emojis/new/0/2", "emojis/new/0/3", "emojis/new/0/4"]);
+		setReactions(["0/0", "0/1", "0/2", "0/3", "0/4"]);
+		await store.set("reactions", ["0/0", "0/1", "0/2", "0/3", "0/4"]);
 	};
 
 	const getReactions = async () => {
 		const value = await store.get("reactions");
-		setReactions(value || ["emojis/new/0/0", "emojis/new/0/1", "emojis/new/0/2", "emojis/new/0/3", "emojis/new/0/4"]);
+		setReactions(value || ["0/0", "0/1", "0/2", "0/3", "0/4"]);
 	};
 
 	useEffect(() => {
@@ -71,7 +71,7 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 											size='iconLg'
 											className='w-full animate-[fadeInOpacity_3s_ease-out] max-[380px]:p-2 h-auto p-3 hover:bg-foreground/[0.12] bg-transparent data-[active=true]:bg-foreground/[0.12] min-h-0 min-w-0 aspect-square'
 										>
-											<img className='w-full aspect-square' src={reaction + ".png"} />
+											<img className='w-full aspect-square' src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
 										</Button>
 									))}
 								</div>
@@ -79,7 +79,7 @@ export default function ReactionsModal({ children, currentReaction, open, setOpe
 								<div className='grid grid-cols-5'>
 									{Array.from({ length: category.maxReactions }, (_, i) => i).map(index => (
 										<Button
-											onClick={() => reactionClicked(`emojis/new/${category.id}/${index}`)}
+											onClick={() => reactionClicked(`${category.id}/${index}`)}
 											data-active={false}
 											key={index}
 											size='iconLg'

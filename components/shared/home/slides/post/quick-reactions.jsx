@@ -31,12 +31,12 @@ export default function QuickReactions({ reactionClicked, setIsReactions, isReac
                     data-isactive={currentReaction?.name[0] == "0" && currentReaction?.name.slice(2, currentReaction?.name.length) == reaction}
                     id={`quick-reaction-${index}`}
 						onClick={() => {
-							reactionClicked(0, reaction);
+							reactionClicked(reaction[0], reaction.slice(2));
 							setIsReactions(false);
 						}}
 						className='flex justify-center items-center w-full data-[isactive=false]:opacity-50'
 					>
-						<img className=" w-8 h-8" src={reaction + ".png"} />
+						<img className=" w-8 h-8" src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
 					</button>
 				))}
 			</div>
