@@ -15,6 +15,7 @@ export default {
 			colors: {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
+				modal: "hsl(var(--modal))",
 				red: {
 					DEFAULT: "hsl(var(--red-background))",
 					foreground: "hsl(var(--red))"

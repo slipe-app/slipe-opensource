@@ -14,6 +14,7 @@
 		--primary: 210 100% 52%;
 		--red: 0 100% 62%;
 		--green: 142% 71% 45%;
+		--modal: 0 0% 91%;
 		--red-background: 0 100% 95%;
 		--green-background: 142% 71% 95%;
 		--primary-foreground: 210 40% 98%;
@@ -47,6 +48,7 @@
 		--secondary: 217.2 32.6% 17.5%;
 		--secondary-foreground: 210 40% 98%;
 		--muted: 217.2 32.6% 17.5%;
+		--modal: 0 0% 9%;
 		--muted-foreground: 215 20.2% 65.1%;
 		--accent: 217.2 32.6% 17.5%;
 		--accent-foreground: 210 40% 98%;
