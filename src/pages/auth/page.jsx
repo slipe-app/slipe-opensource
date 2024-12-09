@@ -86,23 +86,28 @@ export default function Auth() {
 					toast.error(error, { className: "bg-red text-red-foreground" });
 				}
 			);
+		} else if (signUpStage === 2) {
+			const profileAvatar = await fetch(avatar).then(async res => await res.blob())
+
+			const formData = new FormData();
+			formData.append('avatar', new File([profileAvatar], "avatar.png", {
+				type: profileAvatar?.type
+			}));
+			formData.append('username', username);
+			formData.append('nickname', displayname);
+	
+			setIsContinue(false)
+			await fetcher(api.v1 + `/settings/profile`, "post", formData, { "Authorization": "Bearer " + await store.get("token") });
+			setIsContinue(true);
 		}
 
-		newSlide()
+		newSlide();
 	}
 
 	useEffect(() => {
 		swiperRef?.current.swiper.slideTo(stage);
 		if (stage === 1) setIsContinue(true);
 	}, [stage]);
-
-	// // sign up inputs checks
-	// useEffect(() => {
-	// 	if (stage === 0) setIsContinue(true);
-	// 	else if ([0, 1].includes(signUpStage)) {
-	// 		toast.error(isRegistrationDataCorrect(username, password)[signUpStage]?.message, { className: "bg-red text-red-foreground" });
-	// 	} else setIsContinue(true);
-	// }, [stage, signUpStage, username, password]);
 
 	// sign in inputs checks
 	useEffect(() => {
