@@ -2,6 +2,7 @@ import icons from "@/components/ui/icons/icons";
 import Svg from "@/components/ui/icons/svg";
 import QuickReactions from "./quick-reactions";
 import { ReactionClicked } from "@/lib/utils";
+import { animate } from "motion";
 import { useStorage } from "@/hooks/contexts/session";
 import { useEffect, useState, useRef } from "react";
 import { ReactionsModal } from "@/components/shared/modals";
@@ -18,12 +19,18 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 
 	useEffect(() => {
 		const reactionsElement = reactionsRef?.current;
-
 		reactionsElement.addEventListener("touchstart", e => e.stopPropagation());
 		return () => {
 			reactionsElement.removeEventListener("touchstart", e => e.stopPropagation());
 		};
 	}, []);
+
+	// const deleteAnimation = (deleteCallback, reactionName, id) => {
+	// 	console.log(document.getElementById(`${id}-${reactionName}`))
+	// 	animate(document.getElementById(`${id}-${reactionName}`), { opacity: 0 }, { ease: "easeOut", duration: 0.2 }).then(() => {
+	// 		deleteCallback()
+	// 	})
+	// }
 
 	const reactionClicked = (reactionCategory, reactionId) => {
 		ReactionClicked(reactionCategory, reactionId, localReactions, localCurrentReaction, id, token, setCurrentReaction, setReactions);
@@ -68,6 +75,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 			>
 				{localReactions.map(reaction => (
 					<button
+					id={id + "-" + reaction.name}
 						onClick={
 							reaction.name?.startsWith("emoji_") ? () => {} : () => reactionClicked(reaction.name[0], reaction.name.slice(2, reaction.name.length))
 						}

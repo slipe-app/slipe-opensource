@@ -2,13 +2,15 @@ import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerT
 import { Button } from "@/components/ui/button";
 import Svg from "@/components/ui/icons/svg";
 import icons from "@/components/ui/icons/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStorage } from "@/hooks/contexts/session";
 
 export default function ReactionsModal({ children, currentReaction, onReactionClicked, open, setOpen }) {
 	const [activeCategory, setCategory] = useState("recently");
 	const [reactions, setReactions] = useState([]);
 	const { token, store } = useStorage([]);
+	const indicatorRef = useRef(null);
+	const scrollerRef = useRef(null);
 	const categories = [
 		{ icon: icons["clock"], id: "recently", maxReactions: 5, label: "Recently used" },
 		{ icon: icons["smile"], id: "0", maxReactions: 61, label: "Emojis and people" },
@@ -37,9 +39,43 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 		setReactions(value || ["0/0", "0/1", "0/2", "0/3", "0/4"]);
 	};
 
+	const categoryClicked = category => {
+		setCategory(category);
+		scrollerRef.current?.scrollTo({
+			top: document.getElementById(`category-item-${category}`).offsetTop,
+			block: "start",
+		});
+	};
+
+	const handleScroll = () => {
+		const header = indicatorRef.current?.getBoundingClientRect();
+
+		categories.map(category => {
+			const element = document.getElementById(`category-item-${category.id}`)?.getBoundingClientRect();
+			if (element && header.bottom > element.top && header.top < element.bottom) {
+				setCategory(category.id);
+			}
+		});
+	};
+
+	useEffect(() => {
+		document.getElementById('categories-scroller')?.scrollTo({
+			left: document.getElementById(`category-button-${activeCategory}`).offsetLeft - 20,
+			behavior: 'smooth',
+			block: "start",
+		});
+	}, [activeCategory]);
+
 	useEffect(() => {
 		getReactions();
 	}, []);
+
+	useEffect(() => {
+		setTimeout(() => {
+			scrollerRef.current?.addEventListener("scroll", handleScroll);
+		}, 10);
+		return () => scrollerRef.current?.removeEventListener("scroll", handleScroll);
+	}, [open]);
 
 	return (
 		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
@@ -48,9 +84,10 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 				<DrawerHeader className='p-5'>
 					<DrawerTitle className='font-medium'>Reactions</DrawerTitle>
 				</DrawerHeader>
-				<ul className='w-full h-[26rem] px-5 flex flex-col gap-5 overflow-y-scroll'>
+				<ul ref={scrollerRef} className='w-full h-[26rem] px-5 relative flex flex-col gap-5 overflow-y-scroll'>
+					<div ref={indicatorRef} className='w-full pointer-events-none fixed h-8 left-0' />
 					{categories.map((category, index) => (
-						<li key={index} className='flex flex-col gap-2'>
+						<li id={`category-item-${category.id}`} key={index} className='flex flex-col gap-2'>
 							{category.id == "recently" ? (
 								<div className='flex justify-between'>
 									<span className='text-lg text-foreground/50'>{category.label}</span>
@@ -93,11 +130,12 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 						</li>
 					))}
 				</ul>
-				<DrawerFooter className='p-5 flex-row overflow-x-scroll flex gap-0'>
+				<DrawerFooter id="categories-scroller" className='p-5 flex-row overflow-x-scroll flex gap-0'>
 					{categories.map((category, index) => (
 						<Button
+						id={`category-button-${category.id}`}
 							data-active={category.id == activeCategory}
-							onClick={() => setCategory(category.id)}
+							onClick={() => categoryClicked(category.id)}
 							size='icon'
 							className='rounded-full data-[active=true]:bg-primary data-[active=true]:opacity-100 opacity-50 bg-transparent h-[3.25rem] min-h-[3.25rem] px-[1.375rem] min-w-fit w-fit'
 							key={index}

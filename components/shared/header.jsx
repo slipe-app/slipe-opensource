@@ -9,8 +9,8 @@ export default function Header() {
 	const [currentPage, setCurrentPage] = useState();
 
 	useEffect(() => {
-		animate("#header-wrapper", { opacity: 0 }, { easing: "ease-out", duration: 0.1 }).then(() => {
-			animate("#header-wrapper", { opacity: 1 }, { easing: "ease-out", duration: 0.1 });
+		animate("#header-wrapper", { opacity: 0 }, { ease: "easeOut", duration: 0.1 }).then(() => {
+			animate("#header-wrapper", { opacity: 1 }, { ease: "easeOut", duration: 0.1 });
 			setCurrentPage(url.pathname);
 		});
 	}, [url]);
