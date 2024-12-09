@@ -41,10 +41,6 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 		getReactions();
 	}, []);
 
-	useEffect(() => {
-		console.log(123, currentReaction);
-	}, [currentReaction])
-
 	return (
 		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
