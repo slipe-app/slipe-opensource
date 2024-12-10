@@ -5,12 +5,13 @@ import Home from "./pages/home/page";
 import Profile from "./pages/profile/page";
 import { Toaster } from "sonner";
 import Auth from "./pages/auth/page";
-import Header from "@/components/shared/header";
+import Header from "@/components/shared/header/header";
+import NavBar from "@/components/shared/navBar";
 import PagesContentTypeContextProvider from "@/hooks/contexts/posts-type";
 import { SessionContextProvider } from "@/hooks/contexts/session";
 
 import "./index.css";
-import NavBar from "@/components/shared/navBar";
+
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
