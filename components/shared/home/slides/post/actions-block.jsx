@@ -6,12 +6,14 @@ import { motion, AnimatePresence } from "motion/react";
 import { useStorage } from "@/hooks/contexts/session";
 import { useEffect, useState, useRef } from "react";
 import { ReactionsModal } from "@/components/shared/modals";
+import CommentsModal from "@/components/shared/modals/comments/comments";
 
 // Forgoten shi
 
 export default function ActionsBlock({ reactions, currentReaction, id }) {
 	const { token, store } = useStorage();
 	const [isReactions, setIsReactions] = useState(false);
+	const [isComments, setComments] = useState(false);
 	const [localCurrentReaction, setCurrentReaction] = useState(currentReaction);
 	const [localReactions, setReactions] = useState(reactions);
 	const [isReactionsModal, setReactionsModal] = useState(false);
@@ -63,11 +65,17 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 					open={isReactionsModal}
 					setOpen={setReactionsModal}
 				/>
+				<CommentsModal
+					setOpen={setComments}
+					open={isComments}
+				/>
 			</div>
 
 			<button
 				data-ishidden={isReactions}
-				className='relative data-[ishidden=true]:opacity-0 flex text-white rounded-full ease-out duration-200 bg-black/50 p-[0.625rem]'
+				data-isactive={isComments}
+				onClick={() => setComments(true)}
+				className='relative data-[ishidden=true]:opacity-0 flex data-[isactive=true]:bg-white data-[isactive=true]:text-black text-white rounded-full ease-out duration-200 bg-black/50 p-[0.625rem]'
 			>
 				<Svg className='!w-[1.875rem] !h-[1.875rem]' icon={icons["message"]} />
 			</button>
