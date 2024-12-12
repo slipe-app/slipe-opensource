@@ -68,6 +68,7 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 				<CommentsModal
 					setOpen={setComments}
 					open={isComments}
+					postId={id}
 				/>
 			</div>
 

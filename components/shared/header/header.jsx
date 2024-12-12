@@ -17,14 +17,14 @@ export default function Header() {
 
 	return (
 		<>
-			{url.pathname !== "/auth" ? (
+			{currentPage !== "/auth" ? (
 				<header
 					id='header-wrapper'
-					data-isbg={url.pathname == "/profile"}
+					data-isbg={currentPage == "/profile"}
 					className='w-screen opacity-100 data-[isbg=false]:bg-background/90 data-[isbg=false]:backdrop-blur-2xl fixed z-50 p-4'
 				>
 					<div className='flex opacity-100 w-full gap-4'>
-						{currentPage == "/" ? <HomeState url={url.pathname} /> : currentPage == "/profile" ? <ProfileState url={url.pathname} /> : null}
+						{currentPage == "/" ? <HomeState url={currentPage} /> : currentPage == "/profile" ? <ProfileState url={currentPage} /> : null}
 					</div>
 				</header>
 			) : null}
