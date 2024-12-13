@@ -65,6 +65,11 @@
 	}
 }
 
+.swiper-followers .swiper-wrapper {
+	height: auto;
+	margin-bottom: 0.5rem;
+}
+
 .swiper-pagination-bullet {
 	transition: 0.2s ease-out;
 	margin: 0px 6px !important;
