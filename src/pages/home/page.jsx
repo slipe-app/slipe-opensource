@@ -5,6 +5,8 @@ import { useState, useEffect, useContext } from "react";
 import UsersSlider from "@/components/shared/home/sliders/users";
 import { useStorage } from "@/hooks/contexts/session";
 import { PagesContentTypeContext } from "@/hooks/contexts/posts-type";
+import { AnimatePresence, motion } from "motion/react";
+import NoFollowers from "@/components/shared/home/slides/no-followers/no-followers";
 
 export default function Home() {
 	const [users, setUsers] = useState([]);
@@ -32,5 +34,5 @@ export default function Home() {
 		}
 	}, [startData, isLoading, error]);
 
-	return <UsersSlider users={users} blogs={blogs} />;
+	return <>{activeContent == "forYou" ? <UsersSlider users={users} blogs={blogs} /> : <NoFollowers />}</>;
 }
