@@ -85,10 +85,9 @@ export default function ActionsBlock({ reactions, currentReaction, id }) {
 				ref={reactionsRef}
 				className='w-full overflow-x-scroll flex duration-200 ease-out gap-4 data-[ishidden=true]:opacity-0 data-[ishidden=true]:-mr-[130%]'
 			>
-				<AnimatePresence mode='popLayout'>
+				<AnimatePresence>
 					{localReactions.map(reaction => (
 						<motion.button
-							layout="position"
 							key={id + "-" + reaction.name}
 							initial={{ opacity: 0, x: 4 }}
 							animate={{ opacity: 1, x: 0 }}
