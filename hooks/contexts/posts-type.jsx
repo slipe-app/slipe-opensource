@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 export const PagesContentTypeContext = createContext(null);
 
 const PagesContentTypeContextProvider = ({ children }) => {
-	const [activeContent, setActiveContent] = useState(["forYou", "profile"]);
+	const [activeContent, setActiveContent] = useState("forYou");
 
 	return (
 		<PagesContentTypeContext.Provider value={{ activeContent, setActiveContent }}>

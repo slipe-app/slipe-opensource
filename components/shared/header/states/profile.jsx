@@ -1,19 +1,11 @@
-import { PagesContentTypeContext } from "@/hooks/contexts/posts-type";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Svg from "@/components/ui/icons/svg";
 import { Link } from "react-router";
 import icons from "@/components/ui/icons/icons";
 
 export default function StateProfile({ url }) {
-	const { activeContent, setActiveContent } = useContext(PagesContentTypeContext);
 	const [isShare, setIsShare] = useState(false);
-
-	const changeTab = value => {
-		const updatedTab = [...activeContent];
-		updatedTab[1] = value;
-		setActiveContent(updatedTab);
-	};
 
 	return (
 		<>
@@ -25,7 +17,6 @@ export default function StateProfile({ url }) {
 			>
 				<Svg className='!w-[1.875rem] !h-[1.875rem]' icon={icons["link"]} />
 			</Button>
-			<span className="w-full"/>
 			<Button
 				data-isactive={url == "/settings"}
 				size='icon'
