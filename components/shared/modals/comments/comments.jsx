@@ -76,7 +76,7 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 	}
 
 	useEffect(() => {
-		setComments([...comments, commentsRequest?.success]);
+		setComments(commentsRequest?.success);
 		setCommentsCount(Number(commentsRequest?.count));
 	}, [commentsRequest]);
 
@@ -91,17 +91,12 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 					<DrawerTitle className='font-medium'>{commentsCount ? commentsCount : 0} comments</DrawerTitle>
 				</DrawerHeader>
 				<ul
-					id='scrollableUl'
+					id="commentsScroll"
 					data-shadowed={inputFocus}
 					className='w-full duration-200 !h-[31.5rem] overflow-y-auto ease-out data-[shadowed=true]:opacity-40 px-5 relative pb-[5.5rem] flex flex-col gap-4'
 				>
 					{comments ? (
-						<InfiniteScroll
-							hasMore={!isLoading}
-							dataLength={commentsCount}
-							scrollableTarget='scrollableUl'
-							next={() => loadMoreComments()}
-						>
+						<InfiniteScroll hasMore={!isLoading} dataLength={commentsCount} next={() => loadMoreComments()} scrollableTarget="commentsScroll" className="flex flex-col gap-4">
 							<AnimatePresence initial={false}>
 								{comments?.map((comment, index) => (
 									<motion.li
