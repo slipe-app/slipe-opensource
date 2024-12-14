@@ -61,13 +61,13 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 				<DrawerHeader className='p-5'>
 					<DrawerTitle className='font-medium'>Reactions</DrawerTitle>
 				</DrawerHeader>
-				<ul ref={scrollerRef} className='w-full h-[26rem] px-5 relative flex flex-col gap-5 overflow-y-scroll'>
+				<ul ref={scrollerRef} className='w-full h-[26rem] px-5 relative flex flex-col gap-5 overflow-y-auto'>
 					<div ref={indicatorRef} className='w-full pointer-events-none fixed h-8 left-0' />
 					{categories.map((category, index) => (
 						<ReactionBlock category={category} setOpen={setOpen} key={index} currentReaction={currentReaction} onReactionClicked={onReactionClicked} />
 					))}
 				</ul>
-				<DrawerFooter id='categories-scroller' className='p-5 flex-row overflow-x-scroll flex gap-0'>
+				<DrawerFooter id='categories-scroller' className='p-5 flex-row overflow-x-auto flex gap-0'>
 					{categories.map((category, index) => (
 						<Button
 							id={`category-button-${category.id}`}

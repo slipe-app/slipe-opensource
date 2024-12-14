@@ -11,12 +11,26 @@ import { useStorage } from "@/hooks/contexts/session";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
-
+import { PostInfoModal } from "../../modals";
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
 	const [user, setUser] = useState();
 	const { token, store } = useStorage();
+	const [isHolding, setIsHolding] = useState(false);
+	const [timer, setTimer] = useState();
+
+	const handleTouchStart = () => {
+		const newTimer = setTimeout(() => {
+			setIsHolding(true);
+		}, 1000);
+		setTimer(newTimer);
+	};
+
+	const handleTouchEnd = () => {
+		clearTimeout(timer);
+		setIsHolding(false);
+	};
 
 	async function onSlideChange(slide) {
 		const currentSlide = slide.activeIndex;
@@ -24,7 +38,9 @@ export default function BlogsSlider({ blogs }) {
 		const lastBlog = allBlogs[greatestIndex];
 
 		if (greatestIndex - currentSlide === 1) {
-			const reqBlogs = await fetcher(`${api.v1}/post/get?after=${lastBlog?.id}&user=${user.id}&limit=3`, "get", null, { Authorization: "Bearer " + token });
+			const reqBlogs = await fetcher(`${api.v1}/post/get?after=${lastBlog?.id}&user=${user.id}&limit=3`, "get", null, {
+				Authorization: "Bearer " + token,
+			});
 
 			setBlogs(oldValue => [...oldValue, ...reqBlogs?.success]);
 		}
@@ -62,9 +78,10 @@ export default function BlogsSlider({ blogs }) {
 			>
 				{allBlogs?.map((blog, index) => (
 					<SwiperSlide
-						// data-isphantom={index == 0 || index == 5}
+						onMouseDown={handleTouchStart}
+						onMouseUp={handleTouchEnd}
 						key={index}
-						className={clsx('flex justify-center !overflow-visible', index == 0 || 5 ? "opacity-0" : "")}
+						className={clsx("flex justify-center !overflow-visible", index == 0 || 5 ? "opacity-0" : "")}
 						virtualIndex={index}
 					>
 						<div
@@ -78,6 +95,7 @@ export default function BlogsSlider({ blogs }) {
 					</SwiperSlide>
 				))}
 			</Swiper>
+			<PostInfoModal open={isHolding} setOpen={setIsHolding} />
 		</>
 	);
 }

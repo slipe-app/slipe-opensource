@@ -5,8 +5,7 @@ import { ReactionClicked } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import { useStorage } from "@/hooks/contexts/session";
 import { useEffect, useState, useRef } from "react";
-import { ReactionsModal } from "@/components/shared/modals";
-import CommentsModal from "@/components/shared/modals/comments/comments";
+import { ReactionsModal, CommentsModal } from "@/components/shared/modals";
 
 // Forgoten shi
 
