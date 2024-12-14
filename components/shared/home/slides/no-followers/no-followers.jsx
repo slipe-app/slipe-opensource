@@ -1,9 +1,10 @@
 import UserCard from "./user-card";
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, EffectCreative } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-creative";
 
 export default function NoFollowers() {
 	return (
@@ -13,25 +14,39 @@ export default function NoFollowers() {
 				<span className='text-3xl text-foreground font-semibold'>You have no follows</span>
 			</div>
 			<Swiper
-				spaceBetween={20}
+				creativeEffect={{
+					prev: {
+						opacity: 0.4,
+						translate: ["-106%", 0, 0],
+					},
+					next: {
+						opacity: 0.4,
+						translate: ["106%", 0, 0],
+					},
+				}}
+				effect='creative'
 				slidesPerView='auto'
 				pagination={{
 					clickable: true,
 				}}
-                autoHeight
-				modules={[Pagination]}
+				autoHeight
+				modules={[Pagination, EffectCreative]}
 				className='w-full px-5 swiper-followers'
 			>
-				<SwiperSlide className='!w-fit'>
+				<SwiperSlide className='gap-5 flex'>
+					<UserCard />
 					<UserCard />
 				</SwiperSlide>
-                <SwiperSlide className='!w-fit'>
+				<SwiperSlide className='gap-5 flex'>
+					<UserCard />
 					<UserCard />
 				</SwiperSlide>
-                <SwiperSlide className='!w-fit'>
+				<SwiperSlide className='gap-5 flex'>
+					<UserCard />
 					<UserCard />
 				</SwiperSlide>
-                <SwiperSlide className='!w-fit'>
+				<SwiperSlide className='gap-5 flex'>
+					<UserCard />
 					<UserCard />
 				</SwiperSlide>
 			</Swiper>
