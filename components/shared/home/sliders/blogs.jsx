@@ -69,7 +69,7 @@ export default function BlogsSlider({ blogs }) {
 					>
 						<div
 							id={index}
-							className='flex bg-card w-[calc(200%-2.5rem)] absolute rounded-[2rem] justify-between h-full overflow-hidden items-center flex-col'
+							className='flex bg-[#161616] w-[calc(200%-2.5rem)] absolute rounded-[2rem] justify-between h-full overflow-hidden items-center flex-col'
 						>
 							<UserBlock user={user} setUser={setUser} date={blog?.date} />
 							<img src={cdn + `/posts/${blog?.image}`} className='w-full object-contain h-full absolute top-0 block' />

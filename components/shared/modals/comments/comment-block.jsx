@@ -44,16 +44,16 @@ export default function CommentBlock({ id, user, content, likes, liked, date }) 
 					)}
 					<div className='flex flex-col w-full overflow-hidden'>
 						<div className='w-full flex gap-1'>
-							<div className='whitespace-nowrap overflow-hidden max-w-fit text-ellipsis font-medium text-white'>
+							<div className='whitespace-nowrap overflow-hidden max-w-fit text-ellipsis font-medium text-foreground'>
 								{user?.nickname ? user?.nickname : user?.username}
 							</div>
 						</div>
-						<span className='text-sm text-white/50'>{TimePassedFromDate(date)}</span>
+						<span className='text-sm text-foreground/50'>{TimePassedFromDate(date)}</span>
 					</div>
 				</div>
 				<Button
 					data-liked={localLiked}
-					className='rounded-full data-[liked=true]:bg-red-foreground hover:bg-red-foreground bg-white/[0.08] px-4 min-h-11 h-11 text-sm gap-2'
+					className='rounded-full data-[liked=true]:bg-red-foreground data-[liked=true]:text-white text-foreground hover:text-white hover:bg-red-foreground bg-foreground/[0.08] px-4 min-h-11 h-11 text-sm gap-2'
 					onClick={likeComment}
 				>
 					<Svg className='!w-6 !h-6' icon={icons["heart"]} />
