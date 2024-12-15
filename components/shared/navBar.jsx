@@ -46,11 +46,13 @@ export default function NavBar() {
 								data-isactive={isActive}
 								className='w-11 h-11 flex justify-center items-center data-[isactive=true]:opacity-100 data-[isactive=false]:opacity-50'
 							>
-								{user?.success[0].avatar ? (
-									<img className='w-9 h-9 rounded-full' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
-								) : (
+								{!error ? (
+									<>{user?.success[0].avatar ? (
+										<img className='w-9 h-9 rounded-full' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
+									) : (
 										<PixelAvatar size={36} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
-								)}
+									)}</>
+								) : null}
 							</div>
 						)}
 					</NavLink>

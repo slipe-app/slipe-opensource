@@ -60,15 +60,10 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 			]);
 			setCommentsCount(commentsCount + 1);
 			setCommentText("");
-		} else toast.error(result?.error, { className: "bg-red text-red-foreground" }); //error
+		} else toast.error(result?.error, { className: "bg-red text-red-foreground" });
 
 		setIsButtonLoading(false);
 	}
-
-	const loadMoreComments = useCallback(() => {
-		console.log(page, comments);
-		setPage(prevPage => prevPage + 1);
-	}, []);
 
 	function adjustHeight(element) {
 		element.style.height = "48px";
@@ -76,9 +71,17 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 	}
 
 	useEffect(() => {
-		setComments(commentsRequest?.success);
-		setCommentsCount(Number(commentsRequest?.count));
-	}, [commentsRequest]);
+		if (commentsRequest?.success && !error) {
+			const newComments = commentsRequest.success.filter(
+				(newComment) => !comments.some((existingComment) => existingComment.id === newComment.id)
+			);
+
+			if (newComments.length > 0) {
+				setComments((prev) => [...prev, ...newComments]);
+			}
+			setCommentsCount(Number(commentsRequest?.count));
+		}
+	}, [commentsRequest, error]);
 
 	return (
 		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
@@ -95,9 +98,9 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 					data-shadowed={inputFocus}
 					className='w-full duration-200 !h-[31.5rem] overflow-y-auto ease-out data-[shadowed=true]:opacity-40 px-5 relative pb-[5.5rem] flex flex-col gap-4'
 				>
-					{comments ? (
-						<InfiniteScroll hasMore={!isLoading} dataLength={commentsCount} next={() => loadMoreComments()} scrollableTarget="commentsScroll" className="flex flex-col gap-4">
-							<AnimatePresence initial={false}>
+					{comments?.length > 0 ? (
+						<InfiniteScroll hasMore={!isLoading} dataLength={commentsCount} next={() => setPage(page + 1)} scrollableTarget="commentsScroll" className="flex flex-col gap-4">
+							<AnimatePresence initial={false}>{console.log(comments)}
 								{comments?.map((comment, index) => (
 									<motion.li
 										key={index}
@@ -129,11 +132,14 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 				</ul>
 
 				<DrawerFooter id='categories-scroller' className='p-5 w-full flex-row fixed items-end bottom-0 bg-modal z-10 flex gap-4'>
-					{user?.success[0].avatar ? (
-						<img className='rounded-full min-w-12 object-cover bg-center w-12 h-12' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
-					) : (
-						<PixelAvatar size={48} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
-					)}
+					{!error ? (
+						<>
+							{user?.success[0].avatar ? (
+								<img className='rounded-full min-w-12 object-cover bg-center w-12 h-12' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
+							) : (
+								<PixelAvatar size={48} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
+							)}
+						</>) : null}
 					<Textarea
 						onFocus={() => setInputFocus(true)}
 						onBlur={() => setInputFocus(false)}
