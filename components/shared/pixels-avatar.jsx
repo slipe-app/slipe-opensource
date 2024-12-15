@@ -1,4 +1,4 @@
-import bannerColors from '@/constants/pixels-colors';
+import bannerColors from "@/lib/utils/pixels-colors";
 
 export default function PixelAvatar({ size, pixels, username = "" }) {
 	return (
