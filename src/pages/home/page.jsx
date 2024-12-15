@@ -5,8 +5,6 @@ import { useState, useEffect, useContext } from "react";
 import UsersSlider from "@/components/shared/home/sliders/users";
 import { useStorage } from "@/hooks/contexts/session";
 import { PagesContentTypeContext } from "@/hooks/contexts/posts-type";
-import { AnimatePresence, motion } from "motion/react";
-import NoFollowers from "@/components/shared/home/slides/no-followers/no-followers";
 
 export default function Home() {
 	const [users, setUsers] = useState([]);
@@ -18,7 +16,7 @@ export default function Home() {
 		data: startData,
 		error,
 		isLoading,
-	} = useSWR(api.v1 + "/post/get?after=0&region=slavic", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
+	} = useSWR(api.v1 + `/post/get?after=0&region=slavic${activeContent === "follows" ? "&subscribed=true" : ""}`, async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 
 	useEffect(() => {
 		if (!isLoading && startData?.success) {
@@ -34,5 +32,5 @@ export default function Home() {
 		}
 	}, [startData, isLoading, error]);
 
-	return <>{activeContent == "forYou" ? <UsersSlider users={users} blogs={blogs} type={activeContent}/> : <NoFollowers />}</>;
+	return <><UsersSlider users={users} blogs={blogs} type={activeContent}/></>;
 }

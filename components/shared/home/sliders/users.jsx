@@ -8,7 +8,7 @@ import { fetcher } from "@/lib/utils";
 
 import "swiper/css";
 
-export default function UsersSlider({ users, blogs }) {
+export default function UsersSlider({ users, blogs, type }) {
 	const [allUsers, setUsers] = useState();
 	const [allBlogs, setBlogs] = useState();
 
@@ -25,19 +25,25 @@ export default function UsersSlider({ users, blogs }) {
 		const allUserIds = [...new Set(allBlogs.map(blog => blog.author.id))];
 
 		if (greatestIndex - currentSlide === 1) {
-			const reqBlogs = await fetcher(`${api.v1}/post/get?after=0&users=[${allUserIds}]&region=slavic`, "get", null, { Authorization: "Bearer " + token });
-			const reqUsers = Object.keys(reqBlogs?.success);
+			const reqBlogs = await fetcher(`${api.v1}/post/get?after=0&users=[${allUserIds}]&region=slavic${type === "follows" ? "&subscribed=true" : ""}`, "get", null, { Authorization: "Bearer " + token });
+			if (reqBlogs?.success) {
+				const reqUsers = Object.keys(reqBlogs?.success);
 
-			setUsers(oldValue => [...oldValue, ...reqUsers]);
-			setBlogs(oldValue => [
-				...oldValue,
-				...reqUsers.flatMap(username => {
-					const user = reqBlogs?.success[username];
-					return user?.posts?.map(post => ({ ...post, author: user.author })) || [];
-				}),
-			]);
+				setUsers(oldValue => [...oldValue, ...reqUsers]);
+				setBlogs(oldValue => [
+					...oldValue,
+					...reqUsers.flatMap(username => {
+						const user = reqBlogs?.success[username];
+						return user?.posts?.map(post => ({ ...post, author: user.author })) || [];
+					}),
+				]);				
+			}
 		}
 	}
+
+	useEffect(() => {
+		setUsers([])
+	}, [type])
 
 	return (
 		<>
