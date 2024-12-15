@@ -34,5 +34,5 @@ export default function Home() {
 		}
 	}, [startData, isLoading, error]);
 
-	return <>{activeContent == "forYou" ? <UsersSlider users={users} blogs={blogs} /> : <NoFollowers />}</>;
+	return <>{activeContent == "forYou" ? <UsersSlider users={users} blogs={blogs} type={activeContent}/> : <NoFollowers />}</>;
 }

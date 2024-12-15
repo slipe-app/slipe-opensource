@@ -1,12 +1,23 @@
 import UserCard from "./user-card";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Pagination, EffectCreative } from "swiper/modules";
+import { fetcher } from "@/lib/utils";
+import api from "@/constants/api";
+import useSWR from "swr";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
 
 export default function NoFollowers() {
+	const {
+		data: users,
+		isLoading,
+		error
+	} = useSWR(api.v1 + "/account/popular", async url => await fetcher(url, "get", null));
+
+	console.log(users?.success)
+
 	return (
 		<div className='w-full h-full flex-col flex justify-center animate-[fadeIn_0.3s_ease-out] items-center gap-4'>
 			<div className='flex flex-col gap-2 items-center'>
@@ -33,22 +44,13 @@ export default function NoFollowers() {
 				modules={[Pagination, EffectCreative]}
 				className='w-full px-5 swiper-followers'
 			>
-				<SwiperSlide className='gap-5 flex'>
-					<UserCard />
-					<UserCard />
-				</SwiperSlide>
-				<SwiperSlide className='gap-5 flex'>
-					<UserCard />
-					<UserCard />
-				</SwiperSlide>
-				<SwiperSlide className='gap-5 flex'>
-					<UserCard />
-					<UserCard />
-				</SwiperSlide>
-				<SwiperSlide className='gap-5 flex'>
-					<UserCard />
-					<UserCard />
-				</SwiperSlide>
+				{!isLoading && !error ? [...Array(4).keys()].map(i => i * 2).map((_, index) => (
+					<SwiperSlide className='gap-5 flex'>
+						{users?.success.slice(_, _ + 2).map(user => (
+							<UserCard user={user}/>
+						))}
+					</SwiperSlide>
+				)) : null}
 			</Swiper>
 		</div>
 	);

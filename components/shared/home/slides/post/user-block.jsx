@@ -6,6 +6,7 @@ import api from "@/constants/api";
 import { Button } from "@/components/ui/button";
 import cdn from "@/constants/cdn";
 import PixelAvatar from "@/components/shared/pixels-avatar";
+import follow from "@/lib/users/follow";
 
 export default function UserBlock({ user, setUser, date }) {
 	const [localUser, setLocalUser] = useState(user);
@@ -16,14 +17,7 @@ export default function UserBlock({ user, setUser, date }) {
 		if (state) setState(false);
 		else setState(true);
 
-		const followRequest = await fetcher(
-			api.v1 + "/account/subscribe",
-			"post",
-			JSON.stringify({
-				user_id: user.id,
-			}),
-			{ "Content-Type": "application/json", Authorization: "Bearer " + token }
-		);
+		const followRequest = await follow(user?.id, token);
 
 		if (followRequest?.error) {
 			if (state) setState(true);
