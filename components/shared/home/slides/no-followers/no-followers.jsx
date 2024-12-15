@@ -45,7 +45,7 @@ export default function NoFollowers() {
 					[...Array(4).keys()]
 						.map(i => i * 2)
 						.map((_, index) => (
-							<SwiperSlide className='gap-5 flex'>
+							<SwiperSlide key={index} className='gap-5 flex'>
 								{users?.success.slice(_, _ + 2).map(user => (
 									<UserCard user={user} />
 								))}

@@ -55,7 +55,7 @@ export default function ReactionsModal({ children, currentReaction, onReactionCl
 	}, [open]);
 
 	return (
-		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
+		<Drawer  open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
 			<DrawerContent className='bg-modal border-0'>
 				<DrawerHeader className='p-5'>

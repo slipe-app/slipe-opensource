@@ -11,6 +11,14 @@ const Drawer = ({
 )
 Drawer.displayName = "Drawer"
 
+const NestedDrawer = ({
+  shouldScaleBackground = true,
+  ...props
+}) => (
+  <DrawerPrimitive.NestedRoot shouldScaleBackground={shouldScaleBackground} {...props} />
+)
+NestedDrawer.displayName = "NestedDrawer"
+
 const DrawerTrigger = DrawerPrimitive.Trigger
 
 const DrawerPortal = DrawerPrimitive.Portal
@@ -77,6 +85,7 @@ DrawerDescription.displayName = DrawerPrimitive.Description.displayName
 
 export {
   Drawer,
+  NestedDrawer,
   DrawerPortal,
   DrawerOverlay,
   DrawerTrigger,

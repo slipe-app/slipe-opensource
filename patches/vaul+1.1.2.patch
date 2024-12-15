@@ -1,0 +1,122 @@
+diff --git a/node_modules/vaul/dist/index.js b/node_modules/vaul/dist/index.js
+index 7f343be..aa7a282 100644
+--- a/node_modules/vaul/dist/index.js
++++ b/node_modules/vaul/dist/index.js
+@@ -468,8 +468,8 @@ const TRANSITIONS = {
+ const VELOCITY_THRESHOLD = 0.4;
+ const CLOSE_THRESHOLD = 0.25;
+ const SCROLL_LOCK_TIMEOUT = 100;
+-const BORDER_RADIUS = 8;
+-const NESTED_DISPLACEMENT = 16;
++const BORDER_RADIUS = 24;
++const NESTED_DISPLACEMENT = 24;
+ const WINDOW_TOP_OFFSET = 26;
+ const DRAG_CLASS = 'vaul-dragging';
+ 
+@@ -739,7 +739,7 @@ function useScaleBackground() {
+     const timeoutIdRef = React__namespace.default.useRef(null);
+     const initialBackgroundColor = React.useMemo(()=>document.body.style.backgroundColor, []);
+     function getScale() {
+-        return (window.innerWidth - WINDOW_TOP_OFFSET) / window.innerWidth;
++        return (window.innerWidth - 48) / window.innerWidth;
+     }
+     React__namespace.default.useEffect(()=>{
+         if (isOpen && shouldScaleBackground) {
+@@ -970,7 +970,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         noBodyStyles
+     });
+     function getScale() {
+-        return (window.innerWidth - WINDOW_TOP_OFFSET) / window.innerWidth;
++        return (window.innerWidth - 48) / window.innerWidth;
+     }
+     function onPress(event) {
+         var _drawerRef_current, _drawerRef_current1;
+@@ -1310,7 +1310,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         isOpen
+     ]);
+     function onNestedOpenChange(o) {
+-        const scale = o ? (window.innerWidth - NESTED_DISPLACEMENT) / window.innerWidth : 1;
++        const scale = o ? (window.innerWidth - 48) / window.innerWidth : 1;
+         const initialTranslate = o ? -NESTED_DISPLACEMENT : 0;
+         if (nestedOpenChangeTimer.current) {
+             window.clearTimeout(nestedOpenChangeTimer.current);
+@@ -1331,7 +1331,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+     }
+     function onNestedDrag(_event, percentageDragged) {
+         if (percentageDragged < 0) return;
+-        const initialScale = (window.innerWidth - NESTED_DISPLACEMENT) / window.innerWidth;
++        const initialScale = (window.innerWidth - 48) / window.innerWidth;
+         const newScale = initialScale + percentageDragged * (1 - initialScale);
+         const newTranslate = -NESTED_DISPLACEMENT + percentageDragged * NESTED_DISPLACEMENT;
+         set(drawerRef.current, {
+@@ -1340,8 +1340,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         });
+     }
+     function onNestedRelease(_event, o) {
+-        const dim = isVertical(direction) ? window.innerHeight : window.innerWidth;
+-        const scale = o ? (dim - NESTED_DISPLACEMENT) / dim : 1;
++        const scale = (window.innerWidth - 48) / window.innerWidth;
+         const translate = o ? -NESTED_DISPLACEMENT : 0;
+         if (o) {
+             set(drawerRef.current, {
+diff --git a/node_modules/vaul/dist/index.mjs b/node_modules/vaul/dist/index.mjs
+index 0dbbce5..10ca6ae 100644
+--- a/node_modules/vaul/dist/index.mjs
++++ b/node_modules/vaul/dist/index.mjs
+@@ -446,8 +446,8 @@ const TRANSITIONS = {
+ const VELOCITY_THRESHOLD = 0.4;
+ const CLOSE_THRESHOLD = 0.25;
+ const SCROLL_LOCK_TIMEOUT = 100;
+-const BORDER_RADIUS = 8;
+-const NESTED_DISPLACEMENT = 16;
++const BORDER_RADIUS = 24;
++const NESTED_DISPLACEMENT = 24;
+ const WINDOW_TOP_OFFSET = 26;
+ const DRAG_CLASS = 'vaul-dragging';
+ 
+@@ -717,7 +717,7 @@ function useScaleBackground() {
+     const timeoutIdRef = React__default.useRef(null);
+     const initialBackgroundColor = useMemo(()=>document.body.style.backgroundColor, []);
+     function getScale() {
+-        return (window.innerWidth - WINDOW_TOP_OFFSET) / window.innerWidth;
++        return (window.innerWidth - 48) / window.innerWidth;
+     }
+     React__default.useEffect(()=>{
+         if (isOpen && shouldScaleBackground) {
+@@ -948,7 +948,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         noBodyStyles
+     });
+     function getScale() {
+-        return (window.innerWidth - WINDOW_TOP_OFFSET) / window.innerWidth;
++        return (window.innerWidth - 48) / window.innerWidth;
+     }
+     function onPress(event) {
+         var _drawerRef_current, _drawerRef_current1;
+@@ -1288,7 +1288,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         isOpen
+     ]);
+     function onNestedOpenChange(o) {
+-        const scale = o ? (window.innerWidth - NESTED_DISPLACEMENT) / window.innerWidth : 1;
++        const scale = o ? (window.innerWidth - 48) / window.innerWidth : 1;
+         const initialTranslate = o ? -NESTED_DISPLACEMENT : 0;
+         if (nestedOpenChangeTimer.current) {
+             window.clearTimeout(nestedOpenChangeTimer.current);
+@@ -1309,7 +1309,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+     }
+     function onNestedDrag(_event, percentageDragged) {
+         if (percentageDragged < 0) return;
+-        const initialScale = (window.innerWidth - NESTED_DISPLACEMENT) / window.innerWidth;
++        const initialScale = (window.innerWidth - 48) / window.innerWidth;
+         const newScale = initialScale + percentageDragged * (1 - initialScale);
+         const newTranslate = -NESTED_DISPLACEMENT + percentageDragged * NESTED_DISPLACEMENT;
+         set(drawerRef.current, {
+@@ -1318,8 +1318,7 @@ function Root({ open: openProp, onOpenChange, children, onDrag: onDragProp, onRe
+         });
+     }
+     function onNestedRelease(_event, o) {
+-        const dim = isVertical(direction) ? window.innerHeight : window.innerWidth;
+-        const scale = o ? (dim - NESTED_DISPLACEMENT) / dim : 1;
++        const scale = (window.innerWidth - 48) / window.innerWidth;
+         const translate = o ? -NESTED_DISPLACEMENT : 0;
+         if (o) {
+             set(drawerRef.current, {

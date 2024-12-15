@@ -84,7 +84,7 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 	}, [commentsRequest, error]);
 
 	return (
-		<Drawer activeSnapPoint={0.7} open={open} onOpenChange={setOpen}>
+		<Drawer  open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
 			<DrawerContent className='bg-modal border-0'>
 				<DrawerHeader
