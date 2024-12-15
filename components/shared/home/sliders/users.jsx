@@ -7,6 +7,7 @@ import api from "@/constants/api";
 import { fetcher } from "@/lib/utils";
 
 import "swiper/css";
+import NoFollowers from "../slides/no-followers/no-followers";
 
 export default function UsersSlider({ users, blogs, type }) {
 	const [allUsers, setUsers] = useState();
@@ -36,24 +37,27 @@ export default function UsersSlider({ users, blogs, type }) {
 						const user = reqBlogs?.success[username];
 						return user?.posts?.map(post => ({ ...post, author: user.author })) || [];
 					}),
-				]);				
+				]);
 			}
 		}
 	}
 
 	useEffect(() => {
-		setUsers([])
+		setUsers([]);
+		setBlogs([]);
 	}, [type])
 
 	return (
 		<>
-			<Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='!w-full !h-full' onSlideChange={onSlideChange} virtual>
+		{console.log(allBlogs?.length, type, allBlogs?.length === 0 && type === "follows")}
+			{allBlogs?.length === 0 && type === "follows" ? <>{console.log(123)}<NoFollowers /></> : null}
+			{allBlogs?.length > 0 ? <><Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='!w-full !h-full' onSlideChange={onSlideChange} virtual>
 				{allUsers?.map((username, index) => (
 					<SwiperSlide key={index} virtualIndex={index} className='w-full h-full'>
 						<BlogsSlider blogs={allBlogs.filter(blog => blog.author.username === username)} />
 					</SwiperSlide>
 				))}
-			</Swiper>
+			</Swiper></> : null}
 		</>
 	);
 }
