@@ -19,17 +19,19 @@ export default function Home() {
 	useEffect(() => {
 		setBlogs([]);
 		setUsers([]);
-	}, [activeContent])
+	}, [activeContent]);
 
 	useEffect(() => {
 		(async () => {
 			setIsLoading(true);
-			const request = await fetcher(api.v1 + `/post/get?after=0&region=slavic${activeContent === "follows" ? "&subscribed=true" : ""}`, "get", null, { Authorization: "Bearer " + token });
+			const request = await fetcher(api.v1 + `/post/get?after=0&region=slavic${activeContent === "follows" ? "&subscribed=true" : ""}`, "get", null, {
+				Authorization: "Bearer " + token,
+			});
 			setIsLoading(false);
 			if (request?.success) setStartData(request);
 			else setStartData(request?.error);
-		})()
-	}, [activeContent])
+		})();
+	}, [activeContent]);
 
 	useEffect(() => {
 		if (!isLoading && startData?.success) {
@@ -45,7 +47,5 @@ export default function Home() {
 		}
 	}, [startData, isLoading, error]);
 
-	return <>
-		<UsersSlider users={users} blogs={blogs} type={activeContent}/>
-	</>;
+	return <UsersSlider users={users} blogs={blogs} type={activeContent} />;
 }

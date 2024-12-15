@@ -8,6 +8,7 @@ import { fetcher } from "@/lib/utils";
 
 import "swiper/css";
 import NoFollowers from "../slides/no-followers/no-followers";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function UsersSlider({ users, blogs, type }) {
 	const [allUsers, setUsers] = useState();
@@ -26,7 +27,12 @@ export default function UsersSlider({ users, blogs, type }) {
 		const allUserIds = [...new Set(allBlogs.map(blog => blog.author.id))];
 
 		if (greatestIndex - currentSlide === 1) {
-			const reqBlogs = await fetcher(`${api.v1}/post/get?after=0&users=[${allUserIds}]&region=slavic${type === "follows" ? "&subscribed=true" : ""}`, "get", null, { Authorization: "Bearer " + token });
+			const reqBlogs = await fetcher(
+				`${api.v1}/post/get?after=0&users=[${allUserIds}]&region=slavic${type === "follows" ? "&subscribed=true" : ""}`,
+				"get",
+				null,
+				{ Authorization: "Bearer " + token }
+			);
 			if (reqBlogs?.success) {
 				const reqUsers = Object.keys(reqBlogs?.success);
 
@@ -45,19 +51,30 @@ export default function UsersSlider({ users, blogs, type }) {
 	useEffect(() => {
 		setUsers([]);
 		setBlogs([]);
-	}, [type])
+	}, [type]);
 
 	return (
 		<>
-		{console.log(allBlogs?.length, type, allBlogs?.length === 0 && type === "follows")}
-			{allBlogs?.length === 0 && type === "follows" ? <>{console.log(123)}<NoFollowers /></> : null}
-			{allBlogs?.length > 0 ? <><Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='!w-full !h-full' onSlideChange={onSlideChange} virtual>
-				{allUsers?.map((username, index) => (
-					<SwiperSlide key={index} virtualIndex={index} className='w-full h-full'>
-						<BlogsSlider blogs={allBlogs.filter(blog => blog.author.username === username)} />
-					</SwiperSlide>
-				))}
-			</Swiper></> : null}
+			{allBlogs?.length === 0 && type === "follows" ? (
+				<>
+					<NoFollowers />
+				</>
+			) : null}
+			{allBlogs?.length > 0 ? (
+				<>
+					<Swiper slidesPerView={1} modules={[Virtual]} direction='vertical' className='!w-full !h-full' onSlideChange={onSlideChange} virtual>
+						{allUsers?.map((username, index) => (
+							<SwiperSlide key={index} virtualIndex={index} className='w-full h-full'>
+								<BlogsSlider blogs={allBlogs.filter(blog => blog.author.username === username)} />
+							</SwiperSlide>
+						))}
+					</Swiper>
+				</>
+			) : (
+				<div className="py-[6.5rem] animate-[fadeIn_0.3s_ease-out] w-full h-full px-5">
+					<Skeleton className="rounded-[2rem] h-full w-full"/>
+				</div>
+			)}
 		</>
 	);
 }
