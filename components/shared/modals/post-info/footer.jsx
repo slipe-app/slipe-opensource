@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { DrawerFooter } from "@/components/ui/drawer";
 
-export default function Footer() {
+export default function Footer({ post }) {
 	const [isCopied, setIsCopied] = useState(false);
 	const [isReport, setIsReport] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -21,7 +21,7 @@ export default function Footer() {
 	};
 	return (
 		<DrawerFooter className='p-5 flex-row overflow-x-auto flex gap-5'>
-			<ReportModal open={isReport} setOpen={setIsReport}>
+			<ReportModal open={isReport} setOpen={setIsReport} post={post}>
 				<Button
 					data-active={isReport}
 					onClick={() => setIsReport(true)}
@@ -32,7 +32,7 @@ export default function Footer() {
 					<Svg icon={icons["flag"]} className='!w-8 !h-8' />
 				</Button>
 			</ReportModal>
-			<PostDeletingModal open={isDelete} setOpen={setIsDelete}>
+			<PostDeletingModal open={isDelete} setOpen={setIsDelete} post={post}>
 				<Button
 					data-active={isDelete}
 					onClick={() => setIsDelete(true)}
@@ -61,7 +61,7 @@ export default function Footer() {
 					className='absolute duration-200 data-[ispassword=true]:opacity-100 data-[ispassword=false]:opacity-0 data-[ispassword=false]:-translate-y-4 data-[ispassword=true]:translate-y-0 ease-out !w-7 !h-7'
 				/>
 			</Button>
-			<PostDownloadModal open={isDownload} setOpen={setIsDownload}>
+			<PostDownloadModal open={isDownload} setOpen={setIsDownload} post={post}>
 				<Button
 					data-active={isDownload}
 					onClick={() => setIsDownload(true)}

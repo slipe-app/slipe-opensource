@@ -19,15 +19,18 @@ export default function BlogsSlider({ blogs }) {
 	const { token, store } = useStorage();
 	const [isHolding, setIsHolding] = useState(false);
 	const [timer, setTimer] = useState();
+	const [currentTouchedPost, setCurrentTouchedPost] = useState(null);
 
-	const handleTouchStart = () => {
+	const handleTouchStart = (post) => {
 		const newTimer = setTimeout(() => {
+			setCurrentTouchedPost(post);
 			setIsHolding(true);
 		}, 1000);
 		setTimer(newTimer);
 	};
 
 	const handleTouchEnd = () => {
+		setCurrentTouchedPost(null);
 		clearTimeout(timer);
 		setIsHolding(false);
 	};
@@ -78,7 +81,7 @@ export default function BlogsSlider({ blogs }) {
 			>
 				{allBlogs?.map((blog, index) => (
 					<SwiperSlide
-						onMouseDown={handleTouchStart}
+						onMouseDown={() => handleTouchStart(blog)}
 						onMouseUp={handleTouchEnd}
 						key={index}
 						className={clsx("flex justify-center !overflow-visible", index == 0 || 5 ? "opacity-0" : "")}
@@ -95,7 +98,7 @@ export default function BlogsSlider({ blogs }) {
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<PostInfoModal open={isHolding} setOpen={setIsHolding} />
+			<PostInfoModal open={isHolding} setOpen={setIsHolding} post={currentTouchedPost} />
 		</>
 	);
 }
