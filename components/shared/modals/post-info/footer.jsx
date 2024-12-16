@@ -19,6 +19,7 @@ export default function Footer({ post }) {
 			setIsCopied(false);
 		}, 2500);
 	};
+
 	return (
 		<DrawerFooter className='p-5 flex-row overflow-x-auto flex gap-5'>
 			<ReportModal open={isReport} setOpen={setIsReport} post={post}>

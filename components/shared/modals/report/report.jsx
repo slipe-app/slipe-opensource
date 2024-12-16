@@ -6,6 +6,7 @@ import { useState } from "react";
 import ReportBlock from "./report-block";
 import sendReport from "@/lib/reports/send";
 import { useStorage } from "@/hooks/contexts/session";
+import { toast } from "sonner";
 
 export default function ReportModal({ children, open, setOpen, post }) {
 	const [choosenReport, setChoosenReport] = useState('');
@@ -27,7 +28,7 @@ export default function ReportModal({ children, open, setOpen, post }) {
 		setIsLoading(true);
 		await sendReport(choosenReport, "post", post?.id, token);
 		setIsLoading(false);
-
+		toast.info("Report succesfully sent", {className: "bg-card text-foreground"})
 		setChoosenReport('');
 		setOpen(false);
 	}
@@ -45,7 +46,7 @@ export default function ReportModal({ children, open, setOpen, post }) {
 					))}
 				</ul>
 				<DrawerFooter className="p-5 fixed w-full z-10 bg-modal bottom-0">
-					<Button onClick={send} disabled={isLoading} size='full'>Send report</Button>
+					<Button onClick={send} disabled={isLoading || choosenReport.length <= 1} size='full'>Send report</Button>
 				</DrawerFooter>
 			</DrawerContent>
 		</NestedDrawer>
