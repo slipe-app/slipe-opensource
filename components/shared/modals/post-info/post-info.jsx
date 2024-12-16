@@ -18,7 +18,7 @@ export default function PostInfoModal({ children, open, setOpen, post }) {
 					</div>
 					<div className='flex flex-col gap-1 px-5'>
 						<span className='text-lg text-foreground/50'>Name</span>
-						<span className='text-xl font-medium text-foreground'>{post?.name || "Untitled post"}</span>
+						<span className='text-xl font-medium text-foreground'>{post?.in_search || "Untitled post"}</span>
 					</div>
 					<div className='flex flex-col gap-1 px-5'>
 						<span className='text-lg text-foreground/50'>Publish date</span>
