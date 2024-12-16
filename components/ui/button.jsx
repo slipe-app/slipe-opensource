@@ -13,7 +13,9 @@ const buttonVariants = cva(
         secondary: "bg-foreground/[0.08] text-foreground hover:bg-foreground/[0.06]",
         semiTransparent: "bg-black/50 text-white hover:bg-black/30",
         whiteActive: "bg-white text-black hover:bg-white/90",
-        transparent: "text-foreground"
+        transparent: "text-foreground",
+        deleting: "bg-red-foreground/35 text-red-foreground hover:bg-red-foreground/30",
+        success: "bg-green-foreground/35 text-green-foreground hover:bg-green-foreground/30"
       },
       size: {
         default: "h-12 px-6 py-2 min-h-12",

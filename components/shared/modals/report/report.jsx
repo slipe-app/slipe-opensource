@@ -21,7 +21,7 @@ export default function ReportModal({ children, open, setOpen, post }) {
 	return (
 		<NestedDrawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className='bg-modal border-0 overflow-hidden'>
+			<DrawerContent className='bg-modal border-0'>
 				<DrawerHeader className='p-5'>
 					<DrawerTitle className='font-medium'>Report post</DrawerTitle>
 				</DrawerHeader>
