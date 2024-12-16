@@ -2,7 +2,7 @@ import { Drawer, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from
 import { Button } from "@/components/ui/button";
 import Svg from "@/components/ui/icons/svg";
 import icons from "@/components/ui/icons/icons";
-import ReportModal from "./report";
+import ReportModal from "../report/report";
 
 export default function PostInfoModal({ children, open, setOpen, post }) {
 	return (
@@ -12,7 +12,7 @@ export default function PostInfoModal({ children, open, setOpen, post }) {
 				<DrawerHeader className='p-3 z-20 fixed w-full justify-center'>
 					<span className='w-[3.25rem] h-1 rounded-full bg-white/75 block' />
 				</DrawerHeader>
-				<div className='w-full h-[31.5rem] overflow-y-scroll flex flex-col gap-4'>
+				<div className='w-full h-[32.5rem] overflow-y-scroll flex flex-col gap-4'>
 					<div className='relative w-full overflow-hidden aspect-[16/10] min-h-fit rounded-b-[1.25rem]'>
 						<img src='./static/test-assets/mango.jpg' className='w-full absolute -z-10 h-full object-cover' />
 						<span className='w-full h-full bg-gradient-to-b from-[#00000040] to-50% to-[#00000000] block' />
