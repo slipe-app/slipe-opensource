@@ -13,7 +13,7 @@ export default function PostInfoModal({ children, open, setOpen, post }) {
 				</DrawerHeader>
 				<div className='w-full h-[32.5rem] overflow-y-auto rounded-t-3xl flex flex-col gap-4'>
 					<div className='relative w-full overflow-hidden aspect-[16/10] min-h-fit rounded-b-[1.25rem]'>
-						<img src={cdn + "/posts/" + post?.image} className='w-full absolute -z-10 h-full object-cover' />
+						<img loading="lazy" src={cdn + "/posts/" + post?.image} className='w-full absolute -z-10 h-full object-cover' />
 						<span className='w-full h-full bg-gradient-to-b from-[#00000040] to-50% to-[#00000000] block' />
 					</div>
 					<div className='flex flex-col gap-1 px-5'>

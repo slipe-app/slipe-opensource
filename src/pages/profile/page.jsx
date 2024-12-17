@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import Banner from "@/components/shared/profile/banner";
+import User from "@/components/shared/profile/user";
 
 export default function Profile() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='w-screen h-screen flex justify-center items-center'>
-      {/* <Button size="lg" onClick={() => setCount((count) => count + 1)}>
-        Click {count}
-      </Button> */}
+    <div className='w-full h-full overflow-y-auto flex flex-col'>
+        <Banner user={{banner: true}}/>
+        <div className="w-full z-10 min-h-full flex flex-col gap-5 px-5">
+          <User/>
+        </div>
     </div>
   )
 }

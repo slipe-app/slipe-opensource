@@ -25,7 +25,7 @@ export default function UserCard({ user }) {
 	return (
 		<div onClick={followUser} className='rounded-3xl relative w-full aspect-square overflow-hidden'>
 			{user?.banner ? (
-				 <img src={`${cdn}/banners/${user?.banner}`} className="w-full absolute -z-10 h-full object-cover"/>
+				 <img loading="lazy" src={`${cdn}/banners/${user?.banner}`} className="w-full absolute -z-10 h-full object-cover"/>
 			) : (
 				<div className='grid grid-cols-7 grid-rows-7 absolute -z-10 h-full w-full'>
 					{ShufflePixels(user?.pixel_order)?.map((pixel, index) => (
@@ -36,7 +36,7 @@ export default function UserCard({ user }) {
            
 			<div className='w-full h-full items-center flex flex-col justify-center bg-black/50 gap-[0.375rem]'>
 				{user?.avatar ? (
-					<img src={cdn + `/avatars/${user?.avatar}`} className='aspect-square w-16 max-[384px]:w-14 min-[420px]:w-[4.5rem] rounded-full object-cover' />
+					<img loading="lazy" src={cdn + `/avatars/${user?.avatar}`} className='aspect-square w-16 max-[384px]:w-14 min-[420px]:w-[4.5rem] rounded-full object-cover' />
 				) : (
 					<PixelAvatar size={36} username={user?.username} pixels={user?.pixel_order} />
 				)}

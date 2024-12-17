@@ -51,7 +51,7 @@ export default function QuickReactions({ reactionClicked, setIsReactions, isReac
 									}}
 									className='flex justify-center items-center w-full data-[isactive=true]:!opacity-50'
 								>
-									<img className=' w-8 h-8' src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
+									<img loading="lazy" className=' w-8 h-8' src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
 								</motion.button>
 							) : null}
 						</>
