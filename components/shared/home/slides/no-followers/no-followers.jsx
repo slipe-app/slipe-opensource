@@ -4,11 +4,11 @@ import { Pagination, EffectCreative } from "swiper/modules";
 import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 import useSWR from "swr";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-creative";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function NoFollowers() {
 	const { data: users, isLoading, error } = useSWR(api.v1 + "/account/popular", async url => await fetcher(url, "get", null));

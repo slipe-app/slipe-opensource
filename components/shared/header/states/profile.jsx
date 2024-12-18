@@ -9,7 +9,7 @@ export default function StateProfile({ url }) {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const copyLink = () => {
-		toast.success("Post link copied!", { className: "bg-green text-green-foreground" });
+		toast.success("Profile link copied!", { className: "bg-green text-green-foreground" });
 		setIsCopied(true);
 		setTimeout(() => {
 			setIsCopied(false);
