@@ -1,4 +1,4 @@
-export default function Description() {
+export default function Description({ description }) {
     return(
         <div className="flex flex-col gap-2 w-full px-5">
             <div className="flex items-center">
@@ -6,7 +6,7 @@ export default function Description() {
                 <button className="text-xl text-primary font-medium">Edit</button>
             </div>
             <p className="text-foreground/50 break-words">
-                YOO TEST 🗑 YOO 🦕  TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST YOO TEST 
+                {description?.length > 0  ? description : "No description."}
             </p>
         </div>
     )
