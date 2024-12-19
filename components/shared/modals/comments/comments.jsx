@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect, useCallback } from "react";
 import { fetcher } from "@/lib/utils";
 import { toast } from "sonner";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import PixelAvatar from "../../pixels-avatar";
 import { useStorage } from "@/hooks/contexts/session";
 import { motion, AnimatePresence } from "motion/react";
@@ -26,11 +26,13 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 	const { token, storage } = useStorage();
 
 	const swrKey = open ? `${api.v1}/comment/get?post_id=${postId}&page=${page}` : null;
+	// const date = Date.now();
+	const { cache, ...extraConfig } = useSWRConfig()
 
 	const {
 		data: commentsRequest,
 		error,
-		isLoading,
+		isLoading, mutate
 	} = useSWR(swrKey, async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 	const {
 		data: user,
@@ -84,7 +86,7 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 	}, [commentsRequest, error]);
 
 	return (
-		<Drawer  open={open} onOpenChange={setOpen}>
+		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
 			<DrawerContent className='bg-modal border-0'>
 				<DrawerHeader
@@ -100,7 +102,7 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 				>
 					{comments?.length > 0 ? (
 						<InfiniteScroll hasMore={!isLoading} dataLength={commentsCount} next={() => setPage(page + 1)} scrollableTarget="commentsScroll" className="flex flex-col gap-4">
-							<AnimatePresence initial={false}>{console.log(comments)}
+							<AnimatePresence initial={false}>
 								{comments?.map((comment, index) => (
 									<motion.li
 										key={index}
@@ -117,6 +119,14 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 											likes={comment.likes}
 											liked={comment.liked}
 											date={comment.date}
+											mutate={async () => {
+												mutate(swrKey, (async () => {
+													const updatedData = await fetcher(swrKey, "get", null, { Authorization: "Bearer " + token });
+													setComments(updatedData?.success);
+													setCommentsCount(updatedData?.count);
+													return updatedData;
+												})(), true);
+											}}
 										/>
 									</motion.li>
 								))}
