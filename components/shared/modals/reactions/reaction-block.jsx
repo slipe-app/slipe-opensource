@@ -47,7 +47,7 @@ export default function ReactionBlock({ category, currentReaction, onReactionCli
 							size='iconLg'
 							className='w-full animate-[fadeInOpacity_3s_ease-out] max-[380px]:p-2 h-auto p-3 hover:bg-foreground/[0.12] bg-transparent data-[active=true]:bg-foreground/[0.12] min-h-0 min-w-0 aspect-square'
 						>
-							<img className='w-full aspect-square' src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
+							<img loading="lazy" className='w-full aspect-square' src={`emojis/new/${reaction.slice(0, 1)}/${reaction.slice(2)}.png`} />
 						</Button>
 					))}
 				</div>
@@ -61,7 +61,7 @@ export default function ReactionBlock({ category, currentReaction, onReactionCli
 							size='iconLg'
 							className='w-full h-auto p-3 hover:bg-foreground/[0.12] max-[380px]:p-2 bg-transparent data-[active=true]:bg-foreground/[0.12] min-h-0 min-w-0 aspect-square'
 						>
-							<img className='w-full aspect-square' src={`emojis/new/${category.id}/${index}.png`} />
+							<img loading="lazy" className='w-full aspect-square' src={`emojis/new/${category.id}/${index}.png`} />
 						</Button>
 					))}
 				</div>

@@ -145,7 +145,7 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 					{!error ? (
 						<>
 							{user?.success[0].avatar ? (
-								<img className='rounded-full min-w-12 object-cover bg-center w-12 h-12' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
+								<img loading="lazy" className='rounded-full min-w-12 object-cover bg-center w-12 h-12' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
 							) : (
 								<PixelAvatar size={48} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
 							)}

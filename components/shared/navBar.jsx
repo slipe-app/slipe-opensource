@@ -48,7 +48,7 @@ export default function NavBar() {
 							>
 								{!error ? (
 									<>{user?.success[0].avatar ? (
-										<img className='w-9 h-9 rounded-full' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
+										<img loading="lazy" className='w-9 h-9 rounded-full' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
 									) : (
 										<PixelAvatar size={36} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
 									)}</>

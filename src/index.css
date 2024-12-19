@@ -80,6 +80,14 @@
 	position: initial !important;
 }
 
+.pubs-swiper .swiper-slide-thumb-active {
+	transition: 0.2s ease-out;
+	opacity: 1;
+}
+.pubs-swiper .swiper-slide {
+	transition: 0.2s ease-out;
+}
+
 @layer base {
 	@font-face {
 		font-family: "Geist";
@@ -97,3 +105,4 @@
 ::-webkit-scrollbar {
 	display: none;
 }
+

@@ -48,7 +48,7 @@ export default function CategoriesSlide({ categoriesPack, setCategoriesPack }) {
 									style={{ "--start-gradient": gradients[index][0], "--end-gradient": gradients[index][1] }}
 									className='bg-gradient-to-br from-[--start-gradient] to-[--end-gradient] flex justify-center text-lg items-center flex-col gap-2 rounded-xl w-full h-full'
 								>
-									<img src={`/emojis/new/${category.emoji}`} alt={category.emoji} className='w-16 object-cover bg-center h-16' />
+									<img loading="lazy" src={`/emojis/new/${category.emoji}`} alt={category.emoji} className='w-16 object-cover bg-center h-16' />
 									{category.name}
 								</div>
 							))}
