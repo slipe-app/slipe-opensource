@@ -6,7 +6,13 @@ import "swiper/css/effect-creative";
 import { useState, useEffect } from "react";
 
 export default function Publications() {
+	const [swiper, setSwiper] = useState(null);
 	const [active, setActive] = useState(0);
+
+	const switcherButton = index => {
+		setActive(index);
+		swiper?.slideTo(index);
+	};
 
 	useEffect(() => {
 		document.getElementById("content-switcher")?.scrollTo({
@@ -18,21 +24,37 @@ export default function Publications() {
 
 	return (
 		<div className='flex flex-col gap-4'>
-			<div id="content-switcher" className='flex gap-6 text-white font-medium text-2xl px-5 overflow-x-auto'>
-				<button id="switcher-button-0" data-active={active === 0} className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'>
+			<div id='content-switcher' className='flex gap-6 text-white font-medium text-2xl px-5 overflow-x-auto'>
+				<button
+					onClick={() => switcherButton(0)}
+					id='switcher-button-0'
+					data-active={active === 0}
+					className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'
+				>
 					Publications
 				</button>
-				<button id="switcher-button-1" data-active={active === 1} className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'>
+				<button
+					onClick={() => switcherButton(1)}
+					id='switcher-button-1'
+					data-active={active === 1}
+					className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'
+				>
 					Comments
 				</button>
-				<button id="switcher-button-2" data-active={active === 2} className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'>
+				<button
+					onClick={() => switcherButton(2)}
+					id='switcher-button-2'
+					data-active={active === 2}
+					className='duration-200 ease-out data-[active=true]:opacity-100 opacity-50'
+				>
 					Reactions
 				</button>
 			</div>
 			<Swiper
+				onSwiper={setSwiper}
 				resistance={true}
 				resistanceRatio={0}
-				onSlideChange={slide => setActive(slide.activeIndex)}
+				onActiveIndexChange={slider => setActive(slider.activeIndex)}
 				creativeEffect={{
 					prev: {
 						opacity: 0,

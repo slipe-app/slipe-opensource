@@ -12,7 +12,7 @@ export default function User({ user }) {
 						src={cdn + "/avatars/" + user?.avatar}
 					/>					
 				) : (
-					<PixelAvatar size={36} username={user?.username} pixels={user?.pixel_order} />
+					<PixelAvatar size={128} username={user?.username} border pixels={user?.pixel_order} />
 				)}
 				<div className='h-1/2 flex items-center'>
 					<p className='text-lg font-medium'>

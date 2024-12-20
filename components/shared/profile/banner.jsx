@@ -8,7 +8,7 @@ export default function Banner({ banner, username, pixel_order }) {
 				{banner ? (
 					<img loading='lazy' src={cdn + "/banners/" + banner} className='w-full absolute -z-10 h-full object-cover' />
 				) : (
-					<div className='grid grid-cols-7 grid-rows-7 absolute -z-10 h-full w-full'>
+					<div className='grid grid-cols-7 grid-rows-1 absolute -z-10 h-full w-full'>
 						{ShufflePixels(pixel_order)?.map((pixel, index) => (
 							<span
 								key={index}
