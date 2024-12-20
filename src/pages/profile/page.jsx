@@ -13,7 +13,7 @@ export default function Profile() {
 	} = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 
   return (
-    <div className='w-full h-full overflow-y-auto pb-[6.5rem] flex flex-col'>
+    <div className='w-full h-full overflow-y-auto flex flex-col'>
         <Banner banner={user?.success[0]?.banner} username={user?.success[0]?.username} pixel_order={user?.success[0]?.pixel_order}/>
         <div className="w-full z-10 min-h-full flex flex-col gap-5">
           <User user={user?.success[0]}/>

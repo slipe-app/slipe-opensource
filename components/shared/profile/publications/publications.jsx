@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, FreeMode } from "swiper/modules";
-import { Publication } from "../profile";
+import { Publication, Comment, Reaction } from "../profile";
 import { useState, useEffect } from "react";
 
 import "swiper/css";
@@ -67,30 +67,30 @@ export default function Publications() {
 					},
 				}}
 				effect='creative'
-				className='w-full px-5'
+				className='w-full px-5 pb-[5.5rem]'
 				slidesPerView={1}
 				modules={[FreeMode, EffectCreative]}
 			>
-				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
+				<SwiperSlide className='grid grid-cols-2 h-fit gap-5'>
 					<Publication />
 					<Publication />
 					<Publication />
 					<Publication />
 					<Publication />
 				</SwiperSlide>
-				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
-					<Publication />
-					<Publication />
-					<Publication />
-					<Publication />
-					<Publication />
+				<SwiperSlide className='flex flex-col h-fit gap-5'>
+					<Comment user={{avatar: "./static/testa-assets/mango.jpg", nickname: "Mango men"}} content="Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo " />
+					<Comment user={{avatar: "./static/testa-assets/mango.jpg", nickname: "Mango men"}} content="Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo " />
+					<Comment user={{avatar: "./static/testa-assets/mango.jpg", nickname: "Mango men"}} content="Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo Yoooo " />
 				</SwiperSlide>
-				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
-					<Publication />
-					<Publication />
-					<Publication />
-					<Publication />
-					<Publication />
+				<SwiperSlide className='grid grid-cols-3 h-fit gap-5'>
+					<Reaction/>
+					<Reaction/>
+					<Reaction/>
+					<Reaction/>
+					<Reaction/>
+					<Reaction/>
+					<Reaction/>
 				</SwiperSlide>
 			</Swiper>
 		</div>
