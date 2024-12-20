@@ -1,7 +1,31 @@
 import { DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger, NestedDrawer } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { fetcher } from "@/lib/utils";
+import api from "@/constants/api";
+import { useStorage } from "@/hooks/contexts/session";
 
 export default function PostDeletingModal({ children, open, setOpen, post }) {
+	const { token, storage } = useStorage();
+
+	async function deletePost () {
+		const form_data = new FormData();
+		form_data.append("post_id", post?.id);
+
+		const request = await fetcher(api.v1 + "/post/delete", "post", form_data, {
+			"Authorization": "Bearer " + token
+		});
+
+		if (request?.success) {
+			//success toast
+			//request?.success
+		} else {
+			//error toast
+			//request?.error
+		}
+
+		setOpen(false);
+	}
+
 	return (
 		<NestedDrawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
@@ -20,7 +44,7 @@ export default function PostDeletingModal({ children, open, setOpen, post }) {
 					<Button variant='secondary' className='rounded-full' size='full'>
 						Cancel
 					</Button>
-					<Button variant='deleting' className='rounded-full font-semibold' size='full'>
+					<Button variant='deleting' className='rounded-full font-semibold' size='full' onClick={deletePost}>
 						Delete post
 					</Button>
 				</DrawerFooter>

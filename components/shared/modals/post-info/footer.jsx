@@ -5,12 +5,24 @@ import { ReportModal, PostDownloadModal, PostDeletingModal } from "../../modals"
 import { useState } from "react";
 import { toast } from "sonner";
 import { DrawerFooter } from "@/components/ui/drawer";
+import { useStorage } from "@/hooks/contexts/session";
+import useSWR from "swr";
+import api from "@/constants/api";
+import { fetcher } from "@/lib/utils";
 
 export default function Footer({ post }) {
 	const [isCopied, setIsCopied] = useState(false);
 	const [isReport, setIsReport] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
 	const [isDownload, setIsDownload] = useState(false);
+
+	const { token, storage } = useStorage();
+
+	const {
+		data: user,
+		userError,
+		isUserLoading,
+	} = useSWR(api.v1 + "/account/info/get", async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 
 	const copyLink = () => {
 		toast.success("Post link copied!", { className: "bg-green text-green-foreground" });
@@ -33,17 +45,19 @@ export default function Footer({ post }) {
 					<Svg icon={icons["flag"]} className='!w-8 !h-8' />
 				</Button>
 			</ReportModal>
-			<PostDeletingModal open={isDelete} setOpen={setIsDelete} post={post}>
-				<Button
-					data-active={isDelete}
-					onClick={() => setIsDelete(true)}
-					variant='secondary'
-					className='rounded-full data-[active=true]:bg-red-foreground data-[active=true]:text-white bg-red-foreground/35 text-red-foreground hover:bg-red-foreground/30'
-					size='icon'
-				>
-					<Svg icon={icons["trash"]} className='!w-8 !h-8' />
-				</Button>
-			</PostDeletingModal>
+			{user?.success[0].id === post?.author_id ? (
+				<PostDeletingModal open={isDelete} setOpen={setIsDelete} post={post}>
+					<Button
+						data-active={isDelete}
+						onClick={() => setIsDelete(true)}
+						variant='secondary'
+						className='rounded-full data-[active=true]:bg-red-foreground data-[active=true]:text-white bg-red-foreground/35 text-red-foreground hover:bg-red-foreground/30'
+						size='icon'
+					>
+						<Svg icon={icons["trash"]} className='!w-8 !h-8' />
+					</Button>
+				</PostDeletingModal>				
+			) : null}
 			<Button
 				data-copied={isCopied}
 				onClick={copyLink}
@@ -73,9 +87,11 @@ export default function Footer({ post }) {
 					<Svg icon={icons["download"]} className='!w-8 !h-8' />
 				</Button>
 			</PostDownloadModal>
-			<Button variant='secondary' className='rounded-full' size='icon'>
-				<Svg icon={icons["slashedEye"]} className='!w-8 !h-8' />
-			</Button>
+			{user?.success[0]?.admin ? (
+				<Button variant='secondary' className='rounded-full' size='icon'>
+					<Svg icon={icons["slashedEye"]} className='!w-8 !h-8' />
+				</Button>				
+			) : null}
 		</DrawerFooter>
 	);
 }
