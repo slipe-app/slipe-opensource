@@ -1,8 +1,10 @@
 import UserBlock from "./user-block";
 import ActionsBlock from "./actions-block";
 import cdn from "@/constants/cdn";
+import { useEffect, useState } from "react";
 
-export default function Post({ user, setUser, blog }) {
+export default function Post({ user, setUser, blog, isBlogDeleted }) {
+
 	return (
 		<div
 			className='flex bg-[#161616] w-[calc(200%-2.5rem)] absolute rounded-[2rem] justify-between h-full overflow-hidden items-center flex-col'

@@ -4,7 +4,7 @@ import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 import { useStorage } from "@/hooks/contexts/session";
 
-export default function PostDeletingModal({ children, open, setOpen, post }) {
+export default function PostDeletingModal({ children, open, setOpen, deleteBlog, post }) {
 	const { token, storage } = useStorage();
 
 	async function deletePost () {
@@ -16,6 +16,7 @@ export default function PostDeletingModal({ children, open, setOpen, post }) {
 		});
 
 		if (request?.success) {
+			deleteBlog(post?.id);
 			//success toast
 			//request?.success
 		} else {

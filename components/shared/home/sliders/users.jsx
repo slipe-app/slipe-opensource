@@ -7,7 +7,7 @@ import api from "@/constants/api";
 import { fetcher } from "@/lib/utils";
 
 import "swiper/css";
-import NoFollowers from "../slides/no-followers/no-followers";
+import NoFollows from "../slides/no-follows/no-follows";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function UsersSlider({ users, blogs, type }) {
@@ -57,7 +57,7 @@ export default function UsersSlider({ users, blogs, type }) {
 		<>
 			{allBlogs?.length === 0 && type === "follows" ? (
 				<>
-					<NoFollowers />
+					<NoFollows />
 				</>
 			) : null}
 			{allBlogs?.length > 0 ? (

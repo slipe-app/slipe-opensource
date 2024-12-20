@@ -13,6 +13,7 @@ import Post from "../slides/post/post";
 
 export default function BlogsSlider({ blogs }) {
 	const [allBlogs, setBlogs] = useState();
+	const [deletedBlogs, setDeletedBlogs] = useState([]);
 	const [user, setUser] = useState();
 	const { token, store } = useStorage();
 	const [isHolding, setIsHolding] = useState(false);
@@ -45,6 +46,12 @@ export default function BlogsSlider({ blogs }) {
 
 			setBlogs(oldValue => [...oldValue, ...reqBlogs?.success]);
 		}
+	}
+
+	async function deleteBlog (id) {
+		const post = blogs.find(post => post?.id === id);
+		
+		setDeletedBlogs(posts => [...posts, post]);
 	}
 
 	useEffect(() => {
@@ -85,11 +92,11 @@ export default function BlogsSlider({ blogs }) {
 						className={clsx("flex justify-center !overflow-visible", index == 0 || 5 ? "opacity-0" : "")}
 						virtualIndex={index}
 					>
-						<Post user={user} setUser={setUser} blog={blog}/>
+						<Post user={user} setUser={setUser} blog={blog} isBlogDeleted={deletedBlogs.includes(blog)}/>
 					</SwiperSlide>
 				))}
 			</Swiper>
-			<PostInfoModal open={isHolding} setOpen={setIsHolding} post={currentTouchedPost} />
+			<PostInfoModal open={isHolding} setOpen={setIsHolding} post={currentTouchedPost} deleteBlog={deleteBlog} />
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import Footer from "./footer";
 import { TimePassedFromDate } from "@/lib/utils";
 import cdn from "@/constants/cdn";
 
-export default function PostInfoModal({ children, open, setOpen, post }) {
+export default function PostInfoModal({ children, open, setOpen, post, deleteBlog }) {
 	return (
 		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
@@ -33,7 +33,7 @@ export default function PostInfoModal({ children, open, setOpen, post }) {
 						<span className='text-xl font-medium text-foreground'>{post?.category[0]?.toUpperCase() + post?.category?.slice(1) || "No category"}</span>
 					</div>
 				</div>
-				<Footer post={post}/>
+				<Footer post={post} deleteBlog={deleteBlog}/>
 			</DrawerContent>
 		</Drawer>
 	);

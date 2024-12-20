@@ -10,7 +10,7 @@ import useSWR from "swr";
 import api from "@/constants/api";
 import { fetcher } from "@/lib/utils";
 
-export default function Footer({ post }) {
+export default function Footer({ post, deleteBlog }) {
 	const [isCopied, setIsCopied] = useState(false);
 	const [isReport, setIsReport] = useState(false);
 	const [isDelete, setIsDelete] = useState(false);
@@ -46,7 +46,7 @@ export default function Footer({ post }) {
 				</Button>
 			</ReportModal>
 			{user?.success[0].id === post?.author_id ? (
-				<PostDeletingModal open={isDelete} setOpen={setIsDelete} post={post}>
+				<PostDeletingModal open={isDelete} setOpen={setIsDelete} post={post} deleteBlog={deleteBlog}>
 					<Button
 						data-active={isDelete}
 						onClick={() => setIsDelete(true)}
