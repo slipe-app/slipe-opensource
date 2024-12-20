@@ -5,7 +5,7 @@ export default function Description({ description }) {
                 <span className="text-2xl font-medium w-full">About me</span>
                 <button className="text-xl text-primary font-medium">Edit</button>
             </div>
-            <p className="text-foreground/50 break-words">
+            <p className="text-foreground/50 break-words text-lg">
                 {description?.length > 0  ? description : "No description."}
             </p>
         </div>

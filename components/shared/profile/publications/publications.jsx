@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, FreeMode } from "swiper/modules";
+import { Publication } from "../profile";
+import { useState, useEffect } from "react";
 
 import "swiper/css";
 import "swiper/css/effect-creative";
-import { useState, useEffect } from "react";
 
 export default function Publications() {
 	const [swiper, setSwiper] = useState(null);
@@ -70,14 +71,26 @@ export default function Publications() {
 				slidesPerView={1}
 				modules={[FreeMode, EffectCreative]}
 			>
-				<SwiperSlide className='w-full'>
-					<img src='https://swiperjs.com/demos/images/nature-1.jpg' />
+				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
 				</SwiperSlide>
-				<SwiperSlide className='w-full'>
-					<img src='https://swiperjs.com/demos/images/nature-2.jpg' />
+				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
 				</SwiperSlide>
-				<SwiperSlide className='w-full'>
-					<img src='https://swiperjs.com/demos/images/nature-3.jpg' />
+				<SwiperSlide className='w-full grid grid-cols-2 gap-5'>
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
+					<Publication />
 				</SwiperSlide>
 			</Swiper>
 		</div>
