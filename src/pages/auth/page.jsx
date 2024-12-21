@@ -2,7 +2,6 @@ import WelcomeFeaturesSlider from "@/components/shared/auth/welcome/slider";
 import { Button } from "@/components/ui/button";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { EffectCreative } from "swiper/modules";
-import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import SignUpSlider from "@/components/shared/auth/sign-up/slider";
 import LogInSlider from "@/components/shared/auth/log-in/log-in";
@@ -26,7 +25,6 @@ export default function Auth() {
 	const [displayname, setDisplayname] = useState("");
 	const [avatar, setAvatar] = useState("");
 	const [isContinue, setIsContinue] = useState(true);
-	const navigate = useNavigate()
 	const { token, store } = useStorage();
 
 	const swiperRef = useRef(null);
@@ -78,7 +76,7 @@ export default function Auth() {
 						setIsContinue(true);
 						newSlide();
 					} else {
-						navigate("/");
+						window.location.href = "/";
 					}
 				},
 				error => {

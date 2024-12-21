@@ -4,13 +4,10 @@ import { useState, useEffect, useContext } from "react";
 import UsersSlider from "@/components/shared/home/sliders/users";
 import { PagesContentTypeContext } from "@/hooks/contexts/posts-type";
 import { useStorage } from "@/hooks/contexts/session";
-import { useNavigate } from "react-router";
 
 export default function Home() {
-	const navigate = useNavigate()
 	const { token, store } = useStorage();
-	console.log(token)
-	if (!token) navigate("/auth");
+	if (!token) window.location.href = "/auth";
 
 	const [startData, setStartData] = useState();
 	const [isLoading, setIsLoading] = useState();
