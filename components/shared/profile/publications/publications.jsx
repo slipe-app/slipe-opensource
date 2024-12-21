@@ -102,9 +102,9 @@ export default function Publications({ user }) {
 				slidesPerView={1}
 				modules={[FreeMode, EffectCreative]}
 			>
-				<SwiperSlide className='grid grid-cols-2 h-fit gap-5'>
+				<SwiperSlide>
 					{publications?.length > 0 ? (
-						<InfiniteScroll hasMore={!isLoading} dataLength={Number(user?.postsCount)} next={() => setPage(page + 1)} scrollableTarget="contentScroll" className="flex flex-col gap-4">
+						<InfiniteScroll hasMore={!isLoading} dataLength={Number(user?.postsCount)} next={() => setPage(page + 1)} scrollableTarget="contentScroll" className="grid grid-cols-2 h-fit gap-5">
 							{publications?.map(post => (
 								<Publication key={post?.id} post={post}/>
 							))}
