@@ -104,7 +104,7 @@ export default function Publications({ user }) {
 			>
 				<SwiperSlide>
 					{publications?.length > 0 ? (
-						<InfiniteScroll hasMore={!isLoading} dataLength={Number(user?.postsCount)} next={() => setPage(page + 1)} scrollableTarget="contentScroll" className="grid grid-cols-2 h-fit gap-5">
+						<InfiniteScroll hasMore={!Number(user?.postsCount) < publications?.length} dataLength={Number(user?.postsCount)} next={() => setPage(page + 1)} scrollableTarget="contentScroll" className="grid grid-cols-2 h-fit gap-5">
 							{publications?.map(post => (
 								<Publication key={post?.id} post={post}/>
 							))}
