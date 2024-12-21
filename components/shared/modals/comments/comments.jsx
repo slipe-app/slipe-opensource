@@ -143,18 +143,18 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 													swrKey,
 													(async () => {
 														const updatedData = await fetcher(swrKey, "get", null, { Authorization: "Bearer " + token });
-														setComments(prev => {
-															let comments = prev;
-															const changed = comments.filter(comment => updatedData?.success?.map(comment => comment?.id).includes(comment?.id));
-															const changedIndexes = changed.map(comment => comments.indexOf(comment));
-															changedIndexes.map((index, _) => comments[index] = updatedData?.success[_])
-															return comments;
-														});
-														setCommentsCount(updatedData?.count);
 														return updatedData;
 													})(),
 													true
 												);
+											}}
+											updateComment={async (id, likes, liked) => {
+												const commentsLocal = comments;
+												const comment = commentsLocal.find(comment => comment?.id === id);
+												const commentIndex = commentsLocal.indexOf(comment);
+												commentsLocal[commentIndex].likes = likes;
+												commentsLocal[commentIndex].liked = liked;
+												setComments(commentsLocal);
 											}}
 										/>
 									</motion.li>

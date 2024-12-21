@@ -9,7 +9,7 @@ import { useStorage } from "@/hooks/contexts/session";
 import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 
-export default function CommentBlock({ id, user, content, likes, liked, date, mutate }) {
+export default function CommentBlock({ id, user, content, likes, liked, date, mutate, updateComment }) {
 	const [localLikes, setLikes] = useState();
 	const [localLiked, setLiked] = useState();
 	const { token, storage } = useStorage();
@@ -18,9 +18,11 @@ export default function CommentBlock({ id, user, content, likes, liked, date, mu
 		if (localLiked) {
 			setLikes(localLikes - 1);
 			setLiked(false);
+			updateComment(id, localLikes - 1, false);
 		} else {
 			setLikes(localLikes + 1);
 			setLiked(true);
+			updateComment(id, localLikes + 1, true);
 		}
 
 		const formData = new FormData();
