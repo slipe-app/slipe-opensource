@@ -1,19 +1,24 @@
-import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 import api from "@/constants/api";
 import { useState, useEffect, useContext } from "react";
 import UsersSlider from "@/components/shared/home/sliders/users";
-import { useStorage } from "@/hooks/contexts/session";
 import { PagesContentTypeContext } from "@/hooks/contexts/posts-type";
+import { useStorage } from "@/hooks/contexts/session";
+import { useNavigate } from "react-router";
 
 export default function Home() {
+	const navigate = useNavigate()
+	const { token, store } = useStorage();
+	console.log(token)
+	if (!token) navigate("/auth");
+
 	const [startData, setStartData] = useState();
 	const [isLoading, setIsLoading] = useState();
 	const [error, setError] = useState();
 
 	const [users, setUsers] = useState([]);
 	const [blogs, setBlogs] = useState([]);
-	const { token, store } = useStorage();
+
 	const { activeContent, setActiveContent } = useContext(PagesContentTypeContext);
 
 	useEffect(() => {
