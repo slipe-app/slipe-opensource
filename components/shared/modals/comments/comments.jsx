@@ -27,12 +27,13 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 
 	const swrKey = open ? `${api.v1}/comment/get?post_id=${postId}&page=${page}` : null;
 	// const date = Date.now();
-	const { cache, ...extraConfig } = useSWRConfig()
+	const { cache, ...extraConfig } = useSWRConfig();
 
 	const {
 		data: commentsRequest,
 		error,
-		isLoading, mutate
+		isLoading,
+		mutate,
 	} = useSWR(swrKey, async url => await fetcher(url, "get", null, { Authorization: "Bearer " + token }));
 	const {
 		data: user,
@@ -72,14 +73,26 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 		element.style.height = `${element.scrollHeight}px`;
 	}
 
+	function removeDuplicates(jsonArray) {
+		const uniqueArray = [];
+		const uniqueIds = new Set();
+	  
+		jsonArray.forEach(item => {
+		  if (!uniqueIds.has(item.id)) {
+			uniqueIds.add(item.id);
+			uniqueArray.push(item);
+		  }
+		});
+	  
+		return uniqueArray;
+	  }
+
 	useEffect(() => {
 		if (commentsRequest?.success && !error) {
-			const newComments = commentsRequest.success.filter(
-				(newComment) => !comments.some((existingComment) => existingComment.id === newComment.id)
-			);
+			const newComments = commentsRequest.success.filter(newComment => !comments.some(existingComment => existingComment.id === newComment.id));
 
 			if (newComments.length > 0) {
-				setComments((prev) => [...prev, ...newComments]);
+				setComments(prev => [...prev, ...newComments]);
 			}
 			setCommentsCount(Number(commentsRequest?.count));
 		}
@@ -96,12 +109,18 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 					<DrawerTitle className='font-medium'>{commentsCount ? commentsCount : 0} comments</DrawerTitle>
 				</DrawerHeader>
 				<ul
-					id="commentsScroll"
+					id='commentsScroll'
 					data-shadowed={inputFocus}
 					className='w-full duration-200 !h-[31.5rem] overflow-y-auto ease-out data-[shadowed=true]:opacity-40 px-5 relative pb-[5.5rem] flex flex-col gap-4'
 				>
 					{comments?.length > 0 ? (
-						<InfiniteScroll hasMore={!isLoading} dataLength={commentsCount} next={() => setPage(page + 1)} scrollableTarget="commentsScroll" className="flex flex-col gap-4">
+						<InfiniteScroll
+							hasMore={comments?.length < Number(commentsCount)}
+							dataLength={Number(commentsCount)}
+							next={() => setPage(page + 1)}
+							scrollableTarget='commentsScroll'
+							className='flex flex-col gap-4'
+						>
 							<AnimatePresence initial={false}>
 								{comments?.map((comment, index) => (
 									<motion.li
@@ -120,12 +139,16 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 											liked={comment.liked}
 											date={comment.date}
 											mutate={async () => {
-												mutate(swrKey, (async () => {
-													const updatedData = await fetcher(swrKey, "get", null, { Authorization: "Bearer " + token });
-													setComments(updatedData?.success);
-													setCommentsCount(updatedData?.count);
-													return updatedData;
-												})(), true);
+												mutate(
+													swrKey,
+													(async () => {
+														const updatedData = await fetcher(swrKey, "get", null, { Authorization: "Bearer " + token });
+														setComments(prev => removeDuplicates([...prev, ...updatedData?.success]));
+														setCommentsCount(updatedData?.count);
+														return updatedData;
+													})(),
+													true
+												);
 											}}
 										/>
 									</motion.li>
@@ -145,11 +168,16 @@ export default function CommentsModal({ children, postId, open, setOpen }) {
 					{!error ? (
 						<>
 							{user?.success[0].avatar ? (
-								<img loading="lazy" className='rounded-full min-w-12 object-cover bg-center w-12 h-12' src={`${cdn}/avatars/${user?.success[0]?.avatar}`} />
+								<img
+									loading='lazy'
+									className='rounded-full min-w-12 object-cover bg-center w-12 h-12'
+									src={`${cdn}/avatars/${user?.success[0]?.avatar}`}
+								/>
 							) : (
 								<PixelAvatar size={48} username={user?.success[0]?.username} pixels={user?.success[0]?.pixel_order} />
 							)}
-						</>) : null}
+						</>
+					) : null}
 					<Textarea
 						onFocus={() => setInputFocus(true)}
 						onBlur={() => setInputFocus(false)}
